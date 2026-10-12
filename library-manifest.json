@@ -50,9 +50,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c01-integration-as-decision.html"
       },
       "topics": [
-        "integration decision",
-        "technology architecture",
-        "evidence"
+        "integration decision / 통합 의사결정",
+        "technology architecture / 기술 아키텍처",
+        "evidence / 증거"
       ]
     },
     {
@@ -67,9 +67,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c02-requirements-to-architecture.html"
       },
       "topics": [
-        "requirements allocation",
-        "device portfolio",
-        "process architecture"
+        "requirements allocation / 요구사항 할당",
+        "device portfolio / 소자 포트폴리오",
+        "process architecture / 공정 아키텍처"
       ]
     },
     {
@@ -84,9 +84,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c03-sequence-interface-contracts.html"
       },
       "topics": [
-        "sequence dependency",
-        "interfaces",
-        "compatibility"
+        "sequence dependency / 순서 의존성",
+        "interfaces / 인터페이스",
+        "compatibility / 호환성"
       ]
     },
     {
@@ -101,9 +101,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c04-isolation-substrate-choices.html"
       },
       "topics": [
-        "isolation",
-        "substrate",
-        "parasitics"
+        "isolation / 절연",
+        "substrate / 기판",
+        "parasitics / 기생 성분"
       ]
     },
     {
@@ -118,9 +118,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c05-gate-stack-architecture.html"
       },
       "topics": [
-        "gate stack",
-        "process order",
-        "thermal compatibility"
+        "gate stack / 게이트 스택",
+        "process order / 공정 순서",
+        "thermal compatibility / 열적 호환성"
       ]
     },
     {
@@ -135,9 +135,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c06-junction-thermal-history.html"
       },
       "topics": [
-        "junction profile",
-        "thermal history",
-        "diffusion model"
+        "junction profile / 접합 프로파일",
+        "thermal history / 열 이력",
+        "diffusion model / 확산 모델"
       ]
     },
     {
@@ -152,9 +152,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c07-pattern-transfer-chain.html"
       },
       "topics": [
-        "lithography",
-        "etch transfer",
-        "planarization"
+        "lithography / 리소그래피",
+        "etch transfer / 식각 전사",
+        "planarization / 평탄화"
       ]
     },
     {
@@ -169,9 +169,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c08-contact-mol-interface.html"
       },
       "topics": [
-        "contact resistance",
-        "MOL",
-        "interface engineering"
+        "contact resistance / 콘택트 저항",
+        "MOL / MOL(중간 공정)",
+        "interface engineering / 인터페이스 엔지니어링"
       ]
     },
     {
@@ -186,9 +186,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c09-beol-compatibility.html"
       },
       "topics": [
-        "BEOL",
-        "materials compatibility",
-        "reliability"
+        "BEOL / BEOL(후공정 배선)",
+        "materials compatibility / 재료 호환성",
+        "reliability / 신뢰성"
       ]
     },
     {
@@ -203,9 +203,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c10-variation-propagation.html"
       },
       "topics": [
-        "variation propagation",
-        "sensitivity",
-        "evidence"
+        "variation propagation / 변동성 전파",
+        "sensitivity / 민감도",
+        "evidence / 증거"
       ]
     },
     {
@@ -220,9 +220,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c11-design-technology-cooptimization.html"
       },
       "topics": [
-        "DTCO",
-        "layout constraints",
-        "process window"
+        "DTCO / DTCO(설계-기술 공동 최적화)",
+        "layout constraints / 레이아웃 제약",
+        "process window / 공정 윈도"
       ]
     },
     {
@@ -237,9 +237,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c12-integration-learning-qualification.html"
       },
       "topics": [
-        "DOE",
-        "qualification",
-        "controlled change"
+        "DOE / DOE(실험계획법)",
+        "qualification / 품질 인증",
+        "controlled change / 변경 관리"
       ]
     },
     {
@@ -254,9 +254,9 @@
         "ko": "https://frbread7.github.io/processintegrationbook/ko/chapters/c13-public-platform-case.html"
       },
       "topics": [
-        "public technology case",
-        "literature interpretation",
-        "evidence limits"
+        "public technology case / 공개 기술 사례",
+        "literature interpretation / 문헌 해석",
+        "evidence limits / 증거의 한계"
       ]
     }
   ],

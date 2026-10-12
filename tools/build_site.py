@@ -37,9 +37,9 @@ TEXT = {
         "model_checked": "Analytically checked · model-limited", "qualitative": "Qualitative activity · no physical model", "synthetic": "Synthetic teaching scenario",
         "thermal_title": "Thermal history and a Gaussian junction estimate", "thermal_copy": "Accumulate a simple one-dimensional diffusion integral across constant-temperature holds. The output is a chemical-profile threshold crossing, not an activated or measured junction depth.",
         "profile_inputs": "Initial profile and background", "sigma0": "Initial sigma (nm)", "rp": "Projected range (nm)", "dose": "Areal dose (cm⁻²)", "background": "Background (cm⁻³)",
-        "holds": "Thermal holds", "temp": "Temperature (°C)", "duration": "Duration (s)", "remove": "Remove", "add_hold": "Add a hold", "reset": "Reset reference case",
+        "holds": "Thermal holds", "temp": "Temperature (°C)", "duration": "Duration (s)", "remove": "Remove", "add_hold": "Add a hold", "hold_limit": "Up to 30 holds; remove a hold to add another.", "reset": "Reset reference case",
         "results": "Model output", "sigma_final": "Final sigma", "peak": "Gaussian peak", "crossing": "Right-side crossing", "no_crossing": "No crossing", "chart_x": "Depth", "chart_y": "Relative chemical concentration", "chart_bg": "Dashed line is the uniform background threshold, when it intersects the profile.",
-        "model_status": "Illustrative model output. Not silicon validation or a process recipe.", "surface_warning": "Caution: Rp is less than three final sigmas; surface truncation may materially change the assumed profile.", "invalid_result": "No result: check each value and its stated range.",
+        "model_status": "Illustrative model output. Not silicon validation or a process recipe.", "surface_warning": "Caution: Rp is less than three final sigmas; surface truncation may materially change the assumed profile.", "concentration_warning": "Literature caution: concentration effects on boron diffusion have been reported above about 2 × 10¹⁹ cm⁻³ (Fair, 1975). This is not a universal cutoff; the calculation still uses constant dilute diffusivity.", "invalid_result": "No result: check each value and its stated range.",
         "dependency_title": "Process dependency explorer", "dependency_copy": "Select an integration question to highlight the interfaces worth reviewing. The map is qualitative bookkeeping, not a process simulator or recipe checker.",
         "choose_question": "Review focus", "gate_option": "Gate-stack choice", "contact_option": "Contact formation", "beol_option": "Interconnect compatibility",
         "node_device": "Device target", "node_gate": "Gate/material", "node_thermal": "Thermal history", "node_pattern": "Pattern transfer", "node_etch": "Etch interface", "node_contact": "Contact/MOL", "node_metal": "Interconnect", "node_reliability": "Reliability evidence",
@@ -79,9 +79,9 @@ TEXT = {
         "model_checked": "해석식 확인 · 모델 한정", "qualitative": "정성적 활동 · 물리 모델 없음", "synthetic": "합성 학습 시나리오",
         "thermal_title": "열 이력과 가우시안 접합 추정", "thermal_copy": "일정 온도 유지 구간에 대한 단순한 1차원 확산 적분을 누적합니다. 출력은 화학 농도 프로파일의 임계 교차점이며, 활성화 또는 실측 접합 깊이가 아닙니다.",
         "profile_inputs": "초기 프로파일과 배경 농도", "sigma0": "초기 시그마 (nm)", "rp": "투영 거리 (nm)", "dose": "면적 선량 (cm⁻²)", "background": "배경 농도 (cm⁻³)",
-        "holds": "열 유지 구간", "temp": "온도 (°C)", "duration": "시간 (s)", "remove": "삭제", "add_hold": "유지 구간 추가", "reset": "기준 사례로 초기화",
+        "holds": "열 유지 구간", "temp": "온도 (°C)", "duration": "시간 (s)", "remove": "삭제", "add_hold": "유지 구간 추가", "hold_limit": "유지 구간은 최대 30개입니다. 다른 구간을 추가하려면 기존 구간을 삭제하세요.", "reset": "기준 사례로 초기화",
         "results": "모델 출력", "sigma_final": "최종 시그마", "peak": "가우시안 최대값", "crossing": "오른쪽 교차점", "no_crossing": "교차 없음", "chart_x": "깊이", "chart_y": "상대 화학 농도", "chart_bg": "점선은 프로파일과 교차할 경우 균일 배경 농도 임계값을 나타냅니다.",
-        "model_status": "설명용 모델 결과입니다. 실리콘 검증이나 공정 레시피가 아닙니다.", "surface_warning": "주의: 투영 거리가 최종 시그마의 3배보다 작아 표면 잘림이 가정 프로파일을 크게 바꿀 수 있습니다.", "invalid_result": "결과가 없습니다. 각 값과 표시 범위를 확인하세요.",
+        "model_status": "설명용 모델 결과입니다. 실리콘 검증이나 공정 레시피가 아닙니다.", "surface_warning": "주의: 투영 거리가 최종 시그마의 3배보다 작아 표면 잘림이 가정 프로파일을 크게 바꿀 수 있습니다.", "concentration_warning": "문헌상 주의: 보론 확산의 농도 의존성이 약 2 × 10¹⁹ cm⁻³ 초과에서 보고되었습니다(Fair, 1975). 이는 보편적인 임계값이 아니며, 계산은 계속 일정한 희석 확산계수를 사용합니다.", "invalid_result": "결과가 없습니다. 각 값과 표시 범위를 확인하세요.",
         "dependency_title": "공정 의존성 탐색기", "dependency_copy": "통합 질문을 선택하면 검토할 인터페이스를 강조합니다. 물리적 공정 시뮬레이터나 레시피 검증기가 아니라 정성적 기록 도구입니다.",
         "choose_question": "검토 초점", "gate_option": "게이트 적층 선택", "contact_option": "콘택트 형성", "beol_option": "배선 호환성",
         "node_device": "소자 목표", "node_gate": "게이트·재료", "node_thermal": "열 이력", "node_pattern": "패턴 전사", "node_etch": "식각 인터페이스", "node_contact": "콘택트·MOL", "node_metal": "배선", "node_reliability": "신뢰성 증거",
@@ -163,6 +163,11 @@ def validate(manifest):
     for expected, chapter in enumerate(manifest["chapters"], 1):
         if chapter["id"] in ids or chapter["number"] in numbers: raise ValueError("duplicate chapter id or number")
         if chapter["number"] != expected: raise ValueError("chapter numbers must be ordered and contiguous")
+        if not isinstance(chapter.get("topics"), list) or not chapter["topics"]:
+            raise ValueError("each chapter must provide bilingual topics as 'English / 한국어' strings")
+        for topic in chapter["topics"]:
+            localized_topic(topic, "en")
+            localized_topic(topic, "ko")
         ids.add(chapter["id"]); numbers.add(chapter["number"])
         for lang in ("en", "ko"):
             fragment_path = ROOT / "content" / lang / "chapters" / (chapter["id"] + ".html")
@@ -191,6 +196,13 @@ def validate(manifest):
 
 def e(value):
     return html.escape(str(value), quote=True)
+
+
+def localized_topic(topic, lang):
+    english, separator, korean = topic.partition(" / ")
+    if not separator or not english.strip() or not korean.strip() or " / " in korean:
+        raise ValueError("chapter topics must use the Book Factory-compatible 'English / 한국어' string format")
+    return english.strip() if lang == "en" else korean.strip()
 
 
 def relative(current_file, target_file):
@@ -275,8 +287,9 @@ def render_home(manifest, lang):
         route = target.replace(manifest["productionUrl"], "")
         href = relative(current, route)
         title = chapter["title"][lang]
-        topics = " · ".join(chapter["topics"][:3])
-        cards.append('<article class="chapter-card" data-chapter-card data-search="' + e(title + " " + topics) + '"><span class="number">' + e(t["chapter"] + " " + str(chapter["number"]).zfill(2)) + '</span><h3>' + e(title) + '</h3><p>' + e(topics) + '</p><a class="card-link" href="' + e(href) + '">' + e(t["start"]) + ' →</a></article>')
+        topics = " · ".join(localized_topic(topic, lang) for topic in chapter["topics"][:3])
+        search_terms = " ".join(chapter["topics"]) + " " + " ".join(chapter["title"].values())
+        cards.append('<article class="chapter-card" data-chapter-card data-search="' + e(title + " " + search_terms) + '"><span class="number">' + e(t["chapter"] + " " + str(chapter["number"]).zfill(2)) + '</span><h3>' + e(title) + '</h3><p>' + e(topics) + '</p><a class="card-link" href="' + e(href) + '">' + e(t["start"]) + ' →</a></article>')
     cover = relative(current, "assets/covers/processintegrationbook.svg")
     body = '<section class="hero"><div class="hero-grid"><div><p class="eyebrow">' + e(t["eyebrow"]) + '</p><h1>' + e(t["hero_title"]) + '</h1><p>' + e(t["hero_copy"]) + '</p><div class="button-row"><a class="button primary" href="#chapters">' + e(t["start"]) + '</a><a class="button" href="' + e(relative(current, "lab.html" if lang == "en" else "ko/lab.html")) + '">' + e(t["open_lab"]) + '</a></div><div class="stats-row"><span class="stat-chip">' + str(manifest["chapterCount"]) + ' ' + e(t["chapter_count"]) + '</span><span class="stat-chip">2 ' + e(t["languages"]) + '</span><span class="stat-chip">' + e(t["model_checked"]) + '</span></div></div><img class="hero-cover" src="' + e(cover) + '" alt="' + e("Original cover illustration of connected semiconductor layers" if lang == "en" else "연결된 반도체 층을 그린 원본 표지 삽화") + '"></div></section>' + \
         '<section aria-labelledby="outcomes"><div class="section-heading"><div><p class="kicker">01 · ' + e(t["eyebrow"]) + '</p><h2 id="outcomes">' + e(t["outcomes"]) + '</h2></div><p>' + e(t["outcomes_copy"]) + '</p></div><div class="outcome-grid"><article class="outcome-card"><span class="card-mark">A</span><h3>' + e(t["outcome_1"]) + '</h3><p>' + e(t["outcome_1_copy"]) + '</p></article><article class="outcome-card"><span class="card-mark">B</span><h3>' + e(t["outcome_2"]) + '</h3><p>' + e(t["outcome_2_copy"]) + '</p></article><article class="outcome-card"><span class="card-mark">C</span><h3>' + e(t["outcome_3"]) + '</h3><p>' + e(t["outcome_3_copy"]) + '</p></article></div></section>' + \
@@ -316,13 +329,13 @@ def render_lab(manifest, lang):
     thermal = '<section id="thermal-lab" class="lab-card wide" data-thermal-lab ' + \
         'data-temp-label="' + e(t["temp"]) + '" data-time-label="' + e(t["duration"]) + '" data-remove-label="' + e(t["remove"]) + '" ' + \
         'data-sigma-label="' + e(t["sigma_final"]) + '" data-peak-label="' + e(t["peak"]) + '" data-crossing-label="' + e(t["crossing"]) + '" data-no-crossing-label="' + e(t["no_crossing"]) + '" ' + \
-        'data-surface-warning="' + e(t["surface_warning"]) + '" data-model-status="' + e(t["model_status"]) + '" data-invalid-result="' + e(t["invalid_result"]) + '" ' + \
+        'data-surface-warning="' + e(t["surface_warning"]) + '" data-concentration-warning="' + e(t["concentration_warning"]) + '" data-model-status="' + e(t["model_status"]) + '" data-invalid-result="' + e(t["invalid_result"]) + '" ' + \
         'data-chart-x-label="' + e(t["chart_x"]) + '" data-chart-y-label="' + e(t["chart_y"]) + '" data-background-label="' + e(t["chart_bg"]) + '">' + \
         '<span class="evidence-label">' + e(t["model_checked"]) + '</span><h2>' + e(t["thermal_title"]) + '</h2><p>' + e(t["thermal_copy"]) + '</p>' + \
         '<h3>' + e(t["profile_inputs"]) + '</h3><div class="lab-form">' + \
         field("sigma0Nm", t["sigma0"], 20, 0.5, 100, "0.5", "data-profile-input") + field("projectedRangeNm", t["rp"], 80, 0, 500, "1", "data-profile-input") + \
         field("doseCm2", t["dose"], 2e13, 1e11, 1e15, "1", "data-profile-input") + field("backgroundCm3", t["background"], 1e16, 1e14, 1e19, "1", "data-profile-input") + '</div>' + \
-        '<h3>' + e(t["holds"]) + '</h3><div class="hold-list" data-hold-list></div><div class="button-row"><button class="button" type="button" data-add-hold>' + e(t["add_hold"]) + '</button><button class="button" type="button" data-reset-thermal>' + e(t["reset"]) + '</button></div>' + \
+        '<h3>' + e(t["holds"]) + '</h3><div class="hold-list" data-hold-list></div><div class="button-row"><button class="button" type="button" data-add-hold aria-describedby="hold-limit-note">' + e(t["add_hold"]) + '</button><button class="button" type="button" data-reset-thermal>' + e(t["reset"]) + '</button></div><p class="status-line" id="hold-limit-note">' + e(t["hold_limit"]) + '</p>' + \
         '<h3>' + e(t["results"]) + '</h3><div class="result-grid" data-thermal-output aria-live="polite"></div><p class="status-line" data-thermal-status role="status"></p>' + \
         '<figure class="chart-wrap"><svg data-profile-chart role="img" aria-label="' + e(t["chart_y"]) + '" viewBox="0 0 720 260"></svg><figcaption class="chart-caption">' + e(t["chart_bg"]) + '</figcaption></figure>' + \
         '<p class="status-line">' + e(t["model_status"]) + ' <a href="' + e(relative(current, "references.html" if lang == "en" else "references.html")) + '">' + e(t["references"]) + '</a></p></section>'

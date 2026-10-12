@@ -11,6 +11,8 @@
   const EA_EV = 3.46;
   const SQRT_2_PI = Math.sqrt(2 * Math.PI);
   const CM_TO_NM = 1e7;
+  // Literature-based warning marker only; it is not a universal physical cutoff.
+  const CONCENTRATION_EFFECTS_CAUTION_CM3 = 2e19;
 
   function requireFinite(name, value, min, max) {
     if (typeof value !== "number" || !Number.isFinite(value) || value < min || value > max) {
@@ -62,7 +64,8 @@
       sigmaFinalNm: sigmaFinalNm,
       peakCm3: peakCm3,
       rightCrossingNm: crossingNm,
-      surfaceTruncationLikely: projectedRangeNm < 3 * sigmaFinalNm
+      surfaceTruncationLikely: projectedRangeNm < 3 * sigmaFinalNm,
+      highConcentrationCaution: peakCm3 > CONCENTRATION_EFFECTS_CAUTION_CM3
     };
   }
 
@@ -79,7 +82,12 @@
   }
 
   return Object.freeze({
-    constants: Object.freeze({ kBEvPerK: K_B_EV_PER_K, d0Cm2PerS: D0_CM2_PER_S, eaEv: EA_EV }),
+    constants: Object.freeze({
+      kBEvPerK: K_B_EV_PER_K,
+      d0Cm2PerS: D0_CM2_PER_S,
+      eaEv: EA_EV,
+      concentrationEffectsCautionCm3: CONCENTRATION_EFFECTS_CAUTION_CM3
+    }),
     diffusivityCm2PerS: diffusivityCm2PerS,
     calculate: calculate,
     concentrationAtNm: concentrationAtNm

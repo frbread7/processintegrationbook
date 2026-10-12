@@ -84,7 +84,12 @@
     };
     let serial = 0;
 
+    function updateHoldLimit() {
+      addButton.disabled = holdList.children.length >= 30;
+    }
+
     function makeHold(hold) {
+      if (holdList.children.length >= 30) return;
       serial += 1;
       const row = document.createElement("div");
       row.className = "hold-row";
@@ -97,9 +102,11 @@
       row.querySelectorAll("input").forEach(function (field) { field.addEventListener("input", calculate); });
       row.querySelector("[data-remove-hold]").addEventListener("click", function () {
         if (holdList.children.length > 1) row.remove();
+        updateHoldLimit();
         calculate();
       });
       holdList.appendChild(row);
+      updateHoldLimit();
     }
 
     function currentInput() {
@@ -124,11 +131,14 @@
           resultItem(rootEl.dataset.sigmaLabel, result.sigmaFinalNm.toFixed(3) + " nm") +
           resultItem(rootEl.dataset.peakLabel, formatScientific(result.peakCm3) + " cm⁻³") +
           resultItem(rootEl.dataset.crossingLabel, result.rightCrossingNm === null ? rootEl.dataset.noCrossingLabel : result.rightCrossingNm.toFixed(3) + " nm");
-        status.textContent = result.surfaceTruncationLikely ? rootEl.dataset.surfaceWarning : rootEl.dataset.modelStatus;
+        const notices = [];
+        if (result.surfaceTruncationLikely) notices.push(rootEl.dataset.surfaceWarning);
+        if (result.highConcentrationCaution) notices.push(rootEl.dataset.concentrationWarning);
+        status.textContent = [rootEl.dataset.modelStatus].concat(notices).join(" ");
         drawChart(chart, input, result, model, rootEl.dataset.chartXLabel, rootEl.dataset.chartYLabel, rootEl.dataset.backgroundLabel);
       } catch (error) {
         output.textContent = rootEl.dataset.invalidResult;
-        status.textContent = error.message;
+        status.textContent = document.documentElement.lang === "ko" ? rootEl.dataset.invalidResult : error.message;
         chart.replaceChildren();
       }
     }
@@ -143,7 +153,11 @@
     }
 
     rootEl.querySelectorAll("[data-profile-input]").forEach(function (field) { field.addEventListener("input", calculate); });
-    addButton.addEventListener("click", function () { makeHold({ tempC: 950, timeS: 10 }); calculate(); });
+    addButton.addEventListener("click", function () {
+      if (holdList.children.length >= 30) return;
+      makeHold({ tempC: 950, timeS: 10 });
+      calculate();
+    });
     rootEl.querySelector("[data-reset-thermal]").addEventListener("click", reset);
     defaults.holds.forEach(makeHold);
     calculate();
@@ -217,7 +231,7 @@
         text: rootEl.dataset.contactText
       },
       interconnect: {
-        active: ["thermal", "material", "metal", "reliability"],
+        active: ["thermal", "gate", "metal", "reliability"],
         text: rootEl.dataset.interconnectText
       }
     };

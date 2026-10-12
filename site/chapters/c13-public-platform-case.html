@@ -14,8 +14,8 @@
 
   <section aria-labelledby="c13-source">
     <h3 id="c13-source">What the cited paper reports</h3>
-    <p><strong>Publicly reported:</strong> The title and paper by K. Mistry et al. describe a 45 nm logic technology and explicitly identify high-k/metal-gate transistors, strained silicon, nine copper interconnect layers, 193 nm dry patterning, and lead-free packaging among its platform attributes. The cited disclosure is a 2007 IEDM paper. Those words establish the combination presented by the authors in that historical platform context; they do not disclose a generally reusable recipe or prove that each element caused a particular product metric. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007</a>.</p>
-    <p>The chapter uses the list as a prompt for questions, not as an asserted process sequence. The title alone does not tell us the exact ordering, interface specifications, process-window margins, complete electrical distributions, or qualification data. Any such claim requires inspection of the paper's full text and a directly supporting passage or figure. The DOI reference is the source; no figure or copyrighted text is reproduced here.</p>
+    <p><strong>Publicly reported:</strong> Figure 5 (pp. 247–248) of K. Mistry et al.'s 2007 IEDM paper labels the transistor integration as “high-k first, metal gate last.” Its flow places ALD Hf-based high-k dielectric and patterned dummy polysilicon before source/drain formation, Ni salicidation, and interlayer dielectric (ILD) deposition. It then shows ILD polish, dummy-poly removal, sequential PMOS and NMOS workfunction-metal deposition/patterning, Al trench fill/polish, and contact-etch-stop-layer deposition. The authors state that the flow was chosen to maintain metal-gate workfunction and identify a compatible thermal budget as an integration challenge. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007, Fig. 5</a>.</p>
+    <p>The abstract reports a 45 nm high-volume-manufacturing logic technology and demonstrations on SRAM arrays and multiple microprocessors. These are the authors' reported results in that historical platform context, not an independent replication or a claim that any one module caused a product metric. The paper is specific evidence for its disclosed sequence and stated motivation; it is not a generally reusable recipe.</p>
   </section>
 
   <section aria-labelledby="c13-integration-questions">
@@ -31,26 +31,31 @@
   </section>
 
   <section aria-labelledby="c13-worked">
-    <h3 id="c13-worked">Worked reading exercise: can this choice transfer?</h3>
-    <p><strong>Illustrative assumption:</strong> A team considers whether a metal-gate integration concept mentioned in a historical logic platform could inform a different device family. It has only the bibliographic record and platform description, not a complete evidence package for the new application.</p>
-    <p>First record the narrow public fact: Mistry et al. report a platform whose title includes high-k/metal-gate transistors. Then list the transfer question's missing conditions: target device architecture, material stack, full thermal and chemical history, geometry, electrical/reliability criteria, and evidence that the interfaces remain acceptable in the new context. A separate review such as Yeo's addresses material selection and process-integration issues for metal gates, but it is not a substitute for target-specific data. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
-    <p>The decision is “use the paper to formulate a candidate and test plan; do not claim the implementation transfers.” That boundary preserves the value of public literature without presenting it as confidential process knowledge or universal guidance.</p>
+    <h3 id="c13-worked">Worked integration decision: preserve workfunction through the flow</h3>
+    <p><strong>Decision constraint (reported):</strong> The team needed high-k scaling while preserving the selected metal workfunctions through the transistor process. Mistry et al. identify thermal-budget compatibility as a challenge and explicitly say the flow was chosen to maintain workfunction.</p>
+    <ol>
+      <li><strong>Chosen sequence (reported):</strong> Form the Hf-based high-k dielectric early, use patterned polysilicon as a temporary gate, complete source/drain and Ni-salicide processing, and deposit ILD. After polishing and removing the dummy poly, add and pattern the p- and n-type workfunction metals, then fill and planarize the gate trenches. This is the sequence shown in Fig. 5, not a reconstructed generic flow.</li>
+      <li><strong>Benefit targeted (reported):</strong> Delaying final workfunction-metal insertion addresses the paper's stated workfunction-preservation constraint. The paper reports the integrated platform's device and manufacturing results; it does not provide a controlled gate-first comparison that isolates the benefit of this sequence.</li>
+      <li><strong>Integration burden (engineering inference):</strong> The sequence shifts the compatibility question rather than removing it. The high-k dielectric must tolerate the earlier thermal and chemical history; the late gate module must support dummy removal, separate n/p workfunction materials, cavity fill, and planarization without unacceptable interface or device variation. The paper describes these modules but does not establish their margins for another platform.</li>
+      <li><strong>Decision boundary:</strong> For the disclosed platform, the source-supported decision is high-k first / metal gate last under the authors' workfunction and thermal-budget rationale. For a different target, treat that architecture as a candidate only. Compare target-specific thermal-history splits and measure effective workfunction or threshold voltage, gate leakage, reliability, and replacement-gate integrity before transferring the choice. These are proposed evidence needs, not results from the cited case.</li>
+    </ol>
+    <p>This is a worked decision because the reported constraint, chosen sequence, and remaining integration burden are connected explicitly. It does not conclude that gate-last is universally superior. Yeo's review provides broader metal-gate material and integration context, but it is not a substitute for the target platform's evidence. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
   </section>
 
   <section aria-labelledby="c13-evidence-limits">
     <h3 id="c13-evidence-limits">Evidence status and limits</h3>
     <dl>
-      <dt>Publicly reported</dt><dd>The technology descriptors named above are attributed to the paper title and its 2007 platform context. Detailed outcome claims are intentionally omitted here.</dd>
-      <dt>Illustrative assumption</dt><dd>The transfer scenario is hypothetical and specifies no process values or measured results.</dd>
-      <dt>Engineering inference</dt><dd>The interface questions are a review framework, not evidence of the authors' specific sequence or failure mechanisms.</dd>
+      <dt>Publicly reported</dt><dd>The gate sequence and the authors' stated workfunction/thermal-budget rationale are attributed to Figure 5 and its surrounding text; platform outcome claims remain attributed to those authors.</dd>
+      <dt>Illustrative assumption</dt><dd>The target-platform transfer question is hypothetical and specifies no recipe, process values, or measured results.</dd>
+      <dt>Engineering inference</dt><dd>The shifted integration burdens and proposed transfer checks are engineering reasoning, not reported failure mechanisms or a measured gate-first comparison.</dd>
     </dl>
     <p>Before using any more detailed result, inspect the full paper and cite the precise source passage. A historical public disclosure is not a current commercial specification, process recipe, independent replication, or proof of applicability to another node or product.</p>
   </section>
 
   <section class="knowledge-check" aria-labelledby="c13-check">
     <h3 id="c13-check">Knowledge check</h3>
-    <p>The paper title names several technologies in one platform. Does that establish their exact process order and prove that one caused the platform's performance?</p>
-    <details><summary>Answer and explanation</summary><p>No. The title supports that the authors presented those elements as attributes of the platform. Exact sequence or causality needs direct evidence in the paper, and transferring either conclusion needs evidence for the target process and product context.</p></details>
+    <p>In the cited 45 nm case, what did delaying workfunction-metal deposition until after source/drain and salicide processing address, and what did it leave to qualify?</p>
+    <details><summary>Answer and explanation</summary><p>The authors say their high-k-first/metal-gate-last flow was chosen to maintain workfunction under thermal-budget constraints. It still requires the high-k dielectric to tolerate earlier processing and the replacement-gate module to meet target-specific fill, interface, electrical, and reliability requirements. The paper does not establish suitability for a different platform.</p></details>
   </section>
 
   <section aria-labelledby="c13-reading">

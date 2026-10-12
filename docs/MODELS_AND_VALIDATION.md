@@ -36,13 +36,13 @@ x* = Rp + σf √(2 ln(Cpeak / NB)), where Cpeak = Q / (√(2π) σf).
 - Internal lengths are converted with 1 cm = 10⁷ nm. Θ has cm², and σf has cm before reporting in nm.
 - Supported UI ranges are 0.5 ≤ σ₀ ≤ 100 nm, 0 ≤ Rp ≤ 500 nm, 10¹¹ ≤ Q ≤ 10¹⁵ cm⁻², and 10¹⁴ ≤ NB ≤ 10¹⁹ cm⁻³.
 
-Inputs other than the cited Arrhenius parameterization are explicitly synthetic. If Rp < 3σf, the UI warns that surface truncation may matter. If Cpeak ≤ NB, the model returns no right-side crossing instead of fabricating a value.
+Inputs other than the cited Arrhenius parameterization are explicitly synthetic. If Rp < 3σf, the UI warns that surface truncation may matter. If Cpeak ≤ NB, the model returns no right-side crossing instead of fabricating a value. When the modeled peak is above about 2 × 10¹⁹ cm⁻³, the UI adds a separate literature caution: concentration effects on boron diffusion have been reported in this range (Fair, 1975). This is a prompt to question the model assumptions, not a universal physical cutoff or a sharp transition; the calculation still uses the same concentration-independent dilute Arrhenius diffusivity above and below it.
 
 ### Assumptions and limits
 
 The model treats each hold as a homogeneous, one-dimensional region with the same dopant and diffusivity law. It starts from a Gaussian chemical dopant distribution and compares that profile to a uniform background; it does not solve for electrically active carriers or depletion. Temperature ramps are absent; approximating a ramp with holds requires a sufficiently resolved and accurate temperature history.
 
-It omits implant damage and transient-enhanced diffusion, concentration- and charge-state-dependent transport, dopant activation and clustering, oxidation-driven point-defect injection, segregation and moving interfaces, surface boundary conditions, lateral geometry, strain, and any process-specific calibration. The selected parameter pair is not universal. Fair's model and later experimental/mechanism studies document the concentration, background, ambient, and point-defect dependence that motivates these limits.
+It omits implant damage and transient-enhanced diffusion, concentration- and charge-state-dependent transport, dopant activation and clustering, oxidation-driven point-defect injection, segregation and moving interfaces, surface boundary conditions, lateral geometry, strain, and any process-specific calibration. The selected parameter pair is not universal. Fair (1975) and later experimental/mechanism studies document the concentration, background, ambient, and point-defect dependence that motivates these limits. The approximate 2 × 10¹⁹ cm⁻³ UI warning marker is literature-informed and deliberately heuristic; it must not be used as a process limit or as evidence that the dilute model is valid below it.
 
 ### Analytical reference case
 

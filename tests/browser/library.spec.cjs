@@ -50,6 +50,11 @@ test("Korean routes provide translated navigation, chapter search, and a working
   await page.goto("./ko/");
   await expect(page.locator("html")).toHaveAttribute("lang", "ko");
   await expect(page.getByRole("navigation").getByRole("link", { name: "장 목록" })).toBeVisible();
+  const firstChapterCard = page.locator("[data-chapter-card]").first();
+  await expect(firstChapterCard.locator("p")).toContainText("통합 의사결정");
+  await expect(firstChapterCard.locator("p")).not.toContainText("integration decision");
+  await page.getByLabel("장 찾기").fill("통합 의사결정");
+  await expect(page.locator("[data-chapter-card]:visible")).toHaveCount(1);
   await page.getByLabel("장 찾기").fill("변동 전파");
   await expect(page.locator("[data-chapter-card]:visible")).toHaveCount(1);
   await page.getByRole("link", { name: "English" }).click();
@@ -80,8 +85,15 @@ test("desktop thermal lab returns the analytical reference case and rejects inva
   const errors = await collectBrowserErrors(page);
   await page.goto("./lab.html");
   const output = page.locator("[data-thermal-output]");
+  const status = page.locator("[data-thermal-status]");
   await expect(output).toContainText("24.523 nm");
   await expect(output).toContainText("163.413 nm");
+  await expect(status).not.toContainText("Literature caution");
+  await page.getByLabel("Initial sigma (nm)").fill("0.5");
+  await page.getByLabel("Areal dose (cm⁻²)").fill("1000000000000000");
+  await page.getByLabel("Temperature (°C)").fill("850");
+  await page.getByLabel("Duration (s)").fill("0.1");
+  await expect(status).toContainText("above about 2 × 10¹⁹ cm⁻³");
   await page.getByRole("button", { name: "Add a hold" }).click();
   await expect(page.locator("[data-hold-list] .hold-row")).toHaveCount(2);
   await page.locator("[data-hold-list] [data-remove-hold]").last().click();
@@ -90,12 +102,40 @@ test("desktop thermal lab returns the analytical reference case and rejects inva
   await expect(page.getByRole("status")).toContainText("850");
   await page.getByRole("button", { name: "Reset reference case" }).click();
   await expect(output).toContainText("24.523 nm");
+  await expect(status).not.toContainText("Literature caution");
+  const addHold = page.getByRole("button", { name: "Add a hold" });
+  await expect(page.locator("#hold-limit-note")).toContainText("Up to 30 holds");
+  for (let index = 0; index < 29; index += 1) await addHold.click();
+  await expect(page.locator("[data-hold-list] .hold-row")).toHaveCount(30);
+  await expect(addHold).toBeDisabled();
+  await page.locator("[data-hold-list] [data-remove-hold]").last().click();
+  await expect(page.locator("[data-hold-list] .hold-row")).toHaveCount(29);
+  await expect(addHold).toBeEnabled();
   expect(errors).toEqual([]);
+});
+
+test("Korean thermal lab localizes the concentration literature caution", async ({ page }) => {
+  await page.goto("./ko/lab.html");
+  const status = page.locator("[data-thermal-status]");
+  await expect(status).not.toContainText("문헌상 주의");
+  await page.getByLabel("초기 시그마 (nm)").fill("0.5");
+  await page.getByLabel("면적 선량 (cm⁻²)").fill("1000000000000000");
+  await page.getByLabel("온도 (°C)").fill("850");
+  await page.getByLabel("시간 (s)").fill("0.1");
+  await expect(status).toContainText("약 2 × 10¹⁹ cm⁻³ 초과");
+  await expect(status).toContainText("보편적인 임계값이 아니며");
+  await page.getByLabel("온도 (°C)").fill("849");
+  await expect(status).toContainText("결과가 없습니다");
+  await expect(status).not.toContainText("Temperature");
+  await expect(page.locator("[data-thermal-output]")).toContainText("결과가 없습니다");
 });
 
 test("qualitative integration activities respond with explicit reasoning limits", async ({ page }) => {
   const errors = await collectBrowserErrors(page);
   await page.goto("./lab.html");
+  await page.getByLabel("Review focus").selectOption("interconnect");
+  await expect(page.locator('[data-dependency-node="gate"]')).toHaveAttribute("data-active", "true");
+  await expect(page.locator('[data-dependency-node="reliability"]')).toHaveAttribute("data-active", "true");
   await page.getByLabel("Review focus").selectOption("contact");
   await expect(page.locator("[data-dependency-output]")).toContainText("pattern definition");
   await page.locator('[data-evidence-choice="c"]').click();
@@ -122,6 +162,7 @@ test("mobile navigation, theme toggle, and lab content fit a phone viewport", as
   await page.getByRole("button", { name: "Open navigation" }).click();
   await page.getByRole("navigation").getByRole("link", { name: "Lab" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Integration laboratory");
+  await page.waitForLoadState("load");
   await page.getByRole("button", { name: "Theme" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await expectNoOverflow(page);

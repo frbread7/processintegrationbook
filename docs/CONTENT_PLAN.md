@@ -24,11 +24,13 @@ The book teaches decisions across modules. It assumes, links, or briefly refresh
 | 10 | `c10-variation-propagation` | How integration choices propagate variation | 통합 선택에 따른 변동 전파 | How does a variation source cross module boundaries before becoming an electrical or product-level observation? |
 | 11 | `c11-design-technology-cooptimization` | Design-technology co-optimization | 설계-기술 공동 최적화 | How are device, layout, patterning, process-window, and circuit targets balanced together? |
 | 12 | `c12-integration-learning-qualification` | Learning, qualification, and controlled change | 학습·품질 인증·변경 관리 | What experiment and evidence gate can discriminate an integration hypothesis and qualify a controlled change? |
-| 13 | `c13-public-platform-case` | Reading a disclosed platform as an integration case | 공개 플랫폼을 통합 사례로 읽기 | What can—and cannot—be concluded from a public multi-module technology disclosure? |
+| 13 | `c13-public-platform-case` | Reading a disclosed platform as an integration case | 공개 플랫폼을 통합 사례로 읽기 | How does a disclosed high-k-first/metal-gate-last flow connect workfunction and thermal-budget constraints, and what evidence does that case not establish? |
 
 ## Editorial requirements for every chapter
 
 Each English/Korean pair must preserve the same concepts, caveats, and labels, while using natural engineering language in each language. A chapter needs a concrete decision question, stated learning objectives, a cross-module explanation, assumptions/limits where equations appear, at least one worked engineering example, a short knowledge check with an explanation, and traceable reading links. A chapter should connect an upstream choice to one or more downstream consequences, not merely inventory modules.
+
+Chapter topic metadata follows My Library's current Book Factory contract, where `topics` is a list of strings. Each topic is stored as `English / 한국어`; the site build validates this form, displays only the current locale, and keeps both terms searchable. This preserves the central JSON schema without adding unsupported manifest fields.
 
 Use three evidence labels consistently:
 

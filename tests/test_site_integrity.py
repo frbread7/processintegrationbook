@@ -80,6 +80,10 @@ class SiteIntegrityTest(unittest.TestCase):
         self.assertEqual([item["number"] for item in self.manifest["chapters"]], list(range(1, 14)))
         self.assertEqual(len({item["id"] for item in self.manifest["chapters"]}), 13)
         for chapter in self.manifest["chapters"]:
+            self.assertTrue(chapter["topics"], chapter["id"])
+            for topic in chapter["topics"]:
+                english, separator, korean = topic.partition(" / ")
+                self.assertTrue(separator and english.strip() and korean.strip(), (chapter["id"], topic))
             for lang in ("en", "ko"):
                 relative = chapter["urls"][lang].replace(self.manifest["productionUrl"], "")
                 self.assertTrue((SITE / relative).is_file(), relative)
@@ -145,6 +149,9 @@ class SiteIntegrityTest(unittest.TestCase):
             parser.feed((SITE / route).read_text(encoding="utf-8"))
             for anchor in ("thermal-lab", "dependency-explorer", "integration-review"):
                 self.assertIn(anchor, parser.ids)
+            html = (SITE / route).read_text(encoding="utf-8")
+            self.assertIn("data-concentration-warning=", html)
+            self.assertIn("hold-limit-note", html)
         self.assertEqual({item["kind"]["en"] for item in self.manifest["experiments"]}, {
             "Analytically checked, model-limited", "Qualitative constraint map", "Qualitative learning activity"
         })

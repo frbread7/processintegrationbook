@@ -101,6 +101,7 @@ h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 520; lette
 .button.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
 .button.primary:hover { filter: brightness(1.08); color: #fff; }
 .button:hover { border-color: var(--accent); color: var(--accent-ink); }
+.button:disabled { cursor: not-allowed; opacity: .58; }
 .stats-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
 .stat-chip { padding: .33rem .65rem; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: .82rem; }
 .section-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; margin: 3rem 0 1rem; }
