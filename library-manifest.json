@@ -42,8 +42,8 @@
       "id": "c01-integration-as-decision",
       "number": 1,
       "title": {
-        "en": "Integration as an engineering decision",
-        "ko": "엔지니어링 의사결정으로서의 공정 통합"
+        "en": "Integration as a technology decision",
+        "ko": "기술 의사결정으로서의 공정 통합"
       },
       "urls": {
         "en": "https://frbread7.github.io/processintegrationbook/chapters/c01-integration-as-decision.html",
@@ -127,8 +127,8 @@
       "id": "c06-junction-thermal-history",
       "number": 6,
       "title": {
-        "en": "Thermal history and junction evolution trade-offs",
-        "ko": "열 이력과 접합 진화의 절충"
+        "en": "Junction evolution under a shared thermal history",
+        "ko": "공유 열 이력에 따른 접합 변화"
       },
       "urls": {
         "en": "https://frbread7.github.io/processintegrationbook/chapters/c06-junction-thermal-history.html",
@@ -144,8 +144,8 @@
       "id": "c07-pattern-transfer-chain",
       "number": 7,
       "title": {
-        "en": "Pattern transfer across module boundaries",
-        "ko": "모듈 경계를 넘는 패턴 전사"
+        "en": "Pattern transfer across lithography, etch, and planarization",
+        "ko": "리소그래피·식각·평탄화 간 패턴 전사"
       },
       "urls": {
         "en": "https://frbread7.github.io/processintegrationbook/chapters/c07-pattern-transfer-chain.html",
@@ -161,8 +161,8 @@
       "id": "c08-contact-mol-interface",
       "number": 8,
       "title": {
-        "en": "Contact and MOL interface integration",
-        "ko": "콘택트와 MOL 인터페이스 통합"
+        "en": "The contact and middle-of-line interface",
+        "ko": "콘택트와 MOL 인터페이스"
       },
       "urls": {
         "en": "https://frbread7.github.io/processintegrationbook/chapters/c08-contact-mol-interface.html",
@@ -178,8 +178,8 @@
       "id": "c09-beol-compatibility",
       "number": 9,
       "title": {
-        "en": "BEOL compatibility with earlier devices",
-        "ko": "후속 소자와의 BEOL 호환성"
+        "en": "Back-end integration and material compatibility",
+        "ko": "배선 공정 통합과 재료 호환성"
       },
       "urls": {
         "en": "https://frbread7.github.io/processintegrationbook/chapters/c09-beol-compatibility.html",

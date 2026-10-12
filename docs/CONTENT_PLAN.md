@@ -12,7 +12,7 @@ The book teaches decisions across modules. It assumes, links, or briefly refresh
 
 | No. | Stable ID | English title | Korean title | Engineering question |
 |---:|---|---|---|---|
-| 1 | `c01-integration-as-decision` | Integration as a technology decision | 기술 통합은 의사결정이다 | How do requirements, architecture, constraints, evidence, and residual risk form one reviewable decision? |
+| 1 | `c01-integration-as-decision` | Integration as a technology decision | 기술 의사결정으로서의 공정 통합 | How do requirements, architecture, constraints, evidence, and residual risk form one reviewable decision? |
 | 2 | `c02-requirements-to-architecture` | From requirements to process architecture | 요구사항에서 공정 아키텍처까지 | How are device portfolios and system targets allocated into a feasible process architecture? |
 | 3 | `c03-sequence-interface-contracts` | Sequence dependencies and interface contracts | 공정 순서 의존성과 인터페이스 계약 | Which orderings, material states, and preconditions make two individually sound modules incompatible? |
 | 4 | `c04-isolation-substrate-choices` | Isolation and substrate as shared interfaces | 공통 인터페이스로서의 절연과 기판 | How do substrate and isolation choices constrain neighboring device modules, parasitics, area, and later processing? |

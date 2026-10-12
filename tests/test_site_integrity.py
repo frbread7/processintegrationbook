@@ -17,11 +17,14 @@ class PageParser(HTMLParser):
         self.ids = set()
         self.duplicate_ids = []
         self.h1_count = 0
+        self.h1_text = []
+        self.in_h1 = False
         self.html_lang = None
         self.buttons_without_label = []
         self.in_button = False
         self.button_stack = []
         self.inputs = []
+        self.label_targets = set()
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -29,6 +32,9 @@ class PageParser(HTMLParser):
             self.html_lang = attrs.get("lang")
         if tag == "h1":
             self.h1_count += 1
+            self.in_h1 = True
+        if tag == "label" and attrs.get("for"):
+            self.label_targets.add(attrs["for"])
         if attrs.get("id"):
             if attrs["id"] in self.ids:
                 self.duplicate_ids.append(attrs["id"])
@@ -42,10 +48,14 @@ class PageParser(HTMLParser):
             self.inputs.append((attrs.get("id"), attrs.get("aria-label")))
 
     def handle_data(self, data):
+        if self.in_h1:
+            self.h1_text.append(data)
         if self.button_stack:
             self.button_stack[-1]["text"] += data.strip()
 
     def handle_endtag(self, tag):
+        if tag == "h1":
+            self.in_h1 = False
         if tag == "button" and self.button_stack:
             button = self.button_stack.pop()
             if not button["labelled"] and not button["text"]:
@@ -74,6 +84,21 @@ class SiteIntegrityTest(unittest.TestCase):
                 relative = chapter["urls"][lang].replace(self.manifest["productionUrl"], "")
                 self.assertTrue((SITE / relative).is_file(), relative)
                 self.assertTrue(chapter["title"][lang])
+
+    def test_chapter_manifest_titles_are_rendered_and_inputs_have_labels(self):
+        for chapter in self.manifest["chapters"]:
+            for lang in ("en", "ko"):
+                relative = chapter["urls"][lang].replace(self.manifest["productionUrl"], "")
+                parsed = PageParser()
+                parsed.feed((SITE / relative).read_text(encoding="utf-8"))
+                self.assertEqual("".join(parsed.h1_text).strip(), chapter["title"][lang], relative)
+        for page in self.pages:
+            parsed = PageParser()
+            parsed.feed(page.read_text(encoding="utf-8"))
+            self.assertTrue(
+                all(label or input_id in parsed.label_targets for input_id, label in parsed.inputs),
+                page.relative_to(SITE).as_posix(),
+            )
 
     def test_every_internal_link_asset_and_fragment_resolves(self):
         self.assertGreaterEqual(len(self.pages), 34)
