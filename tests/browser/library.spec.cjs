@@ -31,7 +31,9 @@ async function expectNoOverflow(page) {
 
 test("English home, searchable chapter guide, and source pages load without browser errors", async ({ page }) => {
   const errors = await collectBrowserErrors(page);
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto("./");
+  await expect(page.getByRole("button", { name: "Open navigation" })).toBeHidden();
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Technology is decided");
   await expect(page.locator("[data-chapter-card]")).toHaveCount(13);
   await page.getByLabel("Find a chapter").fill("thermal history");

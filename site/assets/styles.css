@@ -71,7 +71,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .main-nav a[aria-current="page"], .main-nav a:hover, .nav-action:hover { color: var(--ink); background: var(--surface-2); }
 .nav-actions { display: flex; gap: .25rem; }
-.menu-toggle { display: none; }
+.button.menu-toggle { display: none; }
 .container { width: min(1120px, calc(100% - 2rem)); margin-inline: auto; }
 .page-main { min-height: 72vh; padding: 2rem 0 5rem; }
 .hero {
@@ -204,7 +204,7 @@ h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 520; lette
 }
 @media (max-width: 720px) {
   .nav-wrap { flex-wrap: wrap; }
-  .menu-toggle { display: inline-flex; margin-left: auto; }
+  .button.menu-toggle { display: inline-flex; margin-left: auto; }
   .main-nav { display: none; flex-basis: 100%; order: 3; align-items: stretch; flex-direction: column; padding: .35rem 0 .5rem; }
   .main-nav[data-open="true"] { display: flex; }
   .main-nav a { padding: .62rem .7rem; font-size: .98rem; }
