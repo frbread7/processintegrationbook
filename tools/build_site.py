@@ -39,7 +39,7 @@ TEXT = {
         "profile_inputs": "Initial profile and background", "sigma0": "Initial sigma (nm)", "rp": "Projected range (nm)", "dose": "Areal dose (cm⁻²)", "background": "Background (cm⁻³)",
         "holds": "Thermal holds", "temp": "Temperature (°C)", "duration": "Duration (s)", "remove": "Remove", "add_hold": "Add a hold", "hold_limit": "Up to 30 holds; remove a hold to add another.", "reset": "Reset reference case",
         "results": "Model output", "sigma_final": "Final sigma", "peak": "Gaussian peak", "crossing": "Right-side crossing", "no_crossing": "No crossing", "chart_x": "Depth", "chart_y": "Relative chemical concentration", "chart_bg": "Dashed line is the uniform background threshold, when it intersects the profile.",
-        "model_status": "Illustrative model output. Not silicon validation or a process recipe.", "surface_warning": "Caution: Rp is less than three final sigmas; surface truncation may materially change the assumed profile.", "concentration_warning": "Literature caution: concentration effects on boron diffusion have been reported above about 2 × 10¹⁹ cm⁻³ (Fair, 1975). This is not a universal cutoff; the calculation still uses constant dilute diffusivity.", "invalid_result": "No result: check each value and its stated range.",
+        "model_status": "Illustrative model output. Not silicon validation or a process recipe.", "surface_warning": "Caution: Rp is less than three final sigmas; surface truncation may materially change the assumed profile.", "concentration_warning": "Literature caution: Fair (1975) reports concentration-dependent profiles for high-concentration boron diffusions (> about 2 × 10¹⁹ cm⁻³) in neutral ambients. This is only a heuristic trigger; this synthetic scenario does not reproduce those conditions and still uses constant dilute diffusivity.", "invalid_result": "No result: check each value and its stated range.",
         "dependency_title": "Process dependency explorer", "dependency_copy": "Select an integration question to highlight the interfaces worth reviewing. The map is qualitative bookkeeping, not a process simulator or recipe checker.",
         "choose_question": "Review focus", "gate_option": "Gate-stack choice", "contact_option": "Contact formation", "beol_option": "Interconnect compatibility",
         "node_device": "Device target", "node_gate": "Gate/material", "node_thermal": "Thermal history", "node_pattern": "Pattern transfer", "node_etch": "Etch interface", "node_contact": "Contact/MOL", "node_metal": "Interconnect", "node_reliability": "Reliability evidence",
@@ -81,7 +81,7 @@ TEXT = {
         "profile_inputs": "초기 프로파일과 배경 농도", "sigma0": "초기 시그마 (nm)", "rp": "투영 거리 (nm)", "dose": "면적 선량 (cm⁻²)", "background": "배경 농도 (cm⁻³)",
         "holds": "열 유지 구간", "temp": "온도 (°C)", "duration": "시간 (s)", "remove": "삭제", "add_hold": "유지 구간 추가", "hold_limit": "유지 구간은 최대 30개입니다. 다른 구간을 추가하려면 기존 구간을 삭제하세요.", "reset": "기준 사례로 초기화",
         "results": "모델 출력", "sigma_final": "최종 시그마", "peak": "가우시안 최대값", "crossing": "오른쪽 교차점", "no_crossing": "교차 없음", "chart_x": "깊이", "chart_y": "상대 화학 농도", "chart_bg": "점선은 프로파일과 교차할 경우 균일 배경 농도 임계값을 나타냅니다.",
-        "model_status": "설명용 모델 결과입니다. 실리콘 검증이나 공정 레시피가 아닙니다.", "surface_warning": "주의: 투영 거리가 최종 시그마의 3배보다 작아 표면 잘림이 가정 프로파일을 크게 바꿀 수 있습니다.", "concentration_warning": "문헌상 주의: 보론 확산의 농도 의존성이 약 2 × 10¹⁹ cm⁻³ 초과에서 보고되었습니다(Fair, 1975). 이는 보편적인 임계값이 아니며, 계산은 계속 일정한 희석 확산계수를 사용합니다.", "invalid_result": "결과가 없습니다. 각 값과 표시 범위를 확인하세요.",
+        "model_status": "설명용 모델 결과입니다. 실리콘 검증이나 공정 레시피가 아닙니다.", "surface_warning": "주의: 투영 거리가 최종 시그마의 3배보다 작아 표면 잘림이 가정 프로파일을 크게 바꿀 수 있습니다.", "concentration_warning": "문헌상 주의: Fair(1975)는 중성 분위기의 고농도 보론 확산(약 2 × 10¹⁹ cm⁻³ 초과)에서 농도 의존 프로파일을 보고했습니다. 이 시나리오는 해당 조건을 재현하지 않으며, 이 값은 휴리스틱 경고 기준일 뿐입니다. 계산은 계속 일정한 희석 확산계수를 사용합니다.", "invalid_result": "결과가 없습니다. 각 값과 표시 범위를 확인하세요.",
         "dependency_title": "공정 의존성 탐색기", "dependency_copy": "통합 질문을 선택하면 검토할 인터페이스를 강조합니다. 물리적 공정 시뮬레이터나 레시피 검증기가 아니라 정성적 기록 도구입니다.",
         "choose_question": "검토 초점", "gate_option": "게이트 적층 선택", "contact_option": "콘택트 형성", "beol_option": "배선 호환성",
         "node_device": "소자 목표", "node_gate": "게이트·재료", "node_thermal": "열 이력", "node_pattern": "패턴 전사", "node_etch": "식각 인터페이스", "node_contact": "콘택트·MOL", "node_metal": "배선", "node_reliability": "신뢰성 증거",
@@ -368,13 +368,16 @@ def choice(key, label, feedback):
 
 
 REFERENCES = [
-    ("Fair (1975)", "Boron diffusion dependence on concentration, background, and orientation", "https://doi.org/10.1149/1.2134326"),
-    ("Bracht et al. (2007)", "Silicon diffusion measurements and native point-defect contributions", "https://doi.org/10.1103/PhysRevB.75.035211"),
-    ("Sadigh et al. (1999)", "Atomistic and kinetic Monte Carlo study of boron diffusion mechanism", "https://doi.org/10.1103/PhysRevLett.83.4341"),
-    ("Yeo (2004)", "Metal-gate material selection and process-integration issues", "https://doi.org/10.1016/j.tsf.2004.05.039"),
-    ("Aitken et al. (2016)", "Predictive technology and design-technology co-optimization", "https://doi.org/10.1049/iet-cdt.2015.0210"),
-    ("Mistry et al. (IEDM 2007)", "Publicly reported 45 nm platform feature list; source-limited case in chapter 13", "https://doi.org/10.1109/IEDM.2007.4418914"),
-    ("Sze and Ng (2007)", "General semiconductor-device reference and conventional teaching parameterization", "https://doi.org/10.1002/0470068329"),
+    ("Fair (1975)", "Boron diffusion: concentration, orientation, background, and profile estimation", "https://doi.org/10.1149/1.2134326", "DOI / publisher", "DOI / 출판사"),
+    ("Bracht et al. (2007)", "Silicon diffusion measurements and native point-defect contributions", "https://doi.org/10.1103/PhysRevB.75.035211", "DOI / publisher", "DOI / 출판사"),
+    ("Sadigh et al. (1999)", "Atomistic and kinetic Monte Carlo study of boron diffusion mechanism", "https://doi.org/10.1103/PhysRevLett.83.4341", "DOI / publisher", "DOI / 출판사"),
+    ("Yeo (2004)", "Metal-gate material selection and process-integration issues", "https://doi.org/10.1016/j.tsf.2004.05.039", "DOI / publisher", "DOI / 출판사"),
+    ("Aitken et al. (2016)", "Predictive technology and design-technology co-optimization", "https://doi.org/10.1049/iet-cdt.2015.0210", "DOI / publisher", "DOI / 출판사"),
+    ("Mistry et al. (IEDM 2007)", "Publicly reported 45 nm platform feature list; source-limited case in chapter 13", "https://doi.org/10.1109/IEDM.2007.4418914", "DOI / publisher", "DOI / 출판사"),
+    ("Esser et al. (2004)", "Public calculation reproducing the boron Arrhenius pair; cites Sze (1983) as the historical source", "https://doi.org/10.1149/1.1731558", "DOI / publisher", "DOI / 출판사"),
+    ("Mostafa and Medraj (2017)", "Review reproducing the intrinsic boron diffusivity equation and units", "https://doi.org/10.3390/ma10060676", "DOI / full text", "DOI / 원문"),
+    ("Sze, ed. (1983)", "VLSI Technology; historical source cited by Esser et al., without an independently verified page locator", "https://openlibrary.org/books/OL3504531M/VLSI_technology", "Catalog record", "도서관 서지 기록"),
+    ("Sze and Ng (2007)", "General semiconductor-device reference; not used as the source for the selected Arrhenius pair", "https://doi.org/10.1002/0470068329", "Publisher record", "출판사 서지 기록"),
 ]
 
 
@@ -382,7 +385,7 @@ def render_references(manifest, lang):
     t = TEXT[lang]
     current = "references.html" if lang == "en" else "ko/references.html"
     source_titles = ["Public papers and technical background", "공개 논문 및 기술 배경"]
-    list_html = "".join('<li><strong>' + e(author) + '</strong> — ' + e(note) + '. <a href="' + e(url) + '" rel="noopener">DOI / publisher</a>.</li>' for author, note, url in REFERENCES)
+    list_html = "".join('<li><strong>' + e(author) + '</strong> — ' + e(note) + '. <a href="' + e(url) + '" rel="noopener">' + e(link_en if lang == "en" else link_ko) + '</a>.</li>' for author, note, url, link_en, link_ko in REFERENCES)
     scope_names = ["Independent books used for scope comparison", "범위 비교에 사용한 독립 교재"]
     items = [
         ("ProcessBook", "https://github.com/geniuskey/processbook/tree/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed"),

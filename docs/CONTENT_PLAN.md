@@ -48,15 +48,8 @@ Do not equate an internal reviewer-agent pass with professional certification, T
 
 Do not add extra numerical “physics” merely to make the lab look richer. The simulator labels should say `Analytically checked · model-limited` until independent implementation and boundary tests pass. There is no basis here for an `Externally reference-checked` or `silicon validated` label.
 
-## Citation set to verify before release
+## Citation verification evidence
 
-These papers are a starting bibliography, not blanket evidence for every chapter claim. Verify exact title, authors, year, DOI, and claim-to-source match in `docs/REFERENCES.md` before publication:
+The citation-by-citation metadata and claim audit was completed before release and is recorded in [`CITATION_AUDIT.md`](CITATION_AUDIT.md). The audit records source availability, exact titles/authors/year/venue/DOI, the chapter claims each source supports, relevant page or section locations, and limits on inference. It also records the Arrhenius attribution correction: values are sourced to Esser et al.'s accessible calculation, which cites Sze's edited *VLSI Technology* (1983); no unverified Sze-book page/table locator is claimed. Sze and Ng (2007) is retained as general background only.
 
-- K. Mistry et al., “A 45nm Logic Technology with High-k + Metal Gate Transistors, Strained Silicon, 9 Cu Interconnect Layers, 193nm Dry Patterning, and 100% Pb-free Packaging,” IEDM 2007, DOI `10.1109/IEDM.2007.4418914`.
-- Y.-C. Yeo, “Metal gate technology for nanoscale transistors—material selection and process integration issues,” *Thin Solid Films* 462–463 (2004), DOI `10.1016/j.tsf.2004.05.039`.
-- H. Bracht, H. H. Silvestri, I. D. Sharp, and E. E. Haller, “Self- and foreign-atom diffusion in semiconductor isotope heterostructures. II. Experimental results for silicon,” *Physical Review B* 75, 035211 (2007), DOI `10.1103/PhysRevB.75.035211`.
-- B. Sadigh et al., “Mechanism of Boron Diffusion in Silicon: An Ab Initio and Kinetic Monte Carlo Study,” *Physical Review Letters* 83 (1999), DOI `10.1103/PhysRevLett.83.4341`.
-- R. Aitken et al., “Predicting future complementary metal–oxide–semiconductor technology – challenges and approaches,” *IET Computers & Digital Techniques* 10 (2016), DOI `10.1049/iet-cdt.2015.0210`.
-- S. M. Sze and K. K. Ng, *Physics of Semiconductor Devices*, 3rd ed. (2007), publisher DOI `10.1002/0470068329`; use only for the conventional tabulated diffusion parameterization and general background, and pair the simplified model discussion with experimental/mechanism literature.
-
-Other sources may be added only after direct verification. A DOI is a bibliography pointer, not permission to reproduce copyrighted figures or tables.
+The sources are not blanket support for every chapter claim. Synthetic scenarios and engineering inferences are identified as such. A DOI is a bibliography pointer, not permission to reproduce copyrighted figures or tables. The audit distinguishes a public paper's reported claim from this project's interpretation and does not treat reviewer-agent approval as external professional or laboratory validation.

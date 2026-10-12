@@ -93,7 +93,9 @@ test("desktop thermal lab returns the analytical reference case and rejects inva
   await page.getByLabel("Areal dose (cm⁻²)").fill("1000000000000000");
   await page.getByLabel("Temperature (°C)").fill("850");
   await page.getByLabel("Duration (s)").fill("0.1");
-  await expect(status).toContainText("above about 2 × 10¹⁹ cm⁻³");
+  await expect(status).toContainText("Fair (1975) reports concentration-dependent profiles");
+  await expect(status).toContainText("neutral ambients");
+  await expect(status).toContainText("does not reproduce those conditions");
   await page.getByRole("button", { name: "Add a hold" }).click();
   await expect(page.locator("[data-hold-list] .hold-row")).toHaveCount(2);
   await page.locator("[data-hold-list] [data-remove-hold]").last().click();
@@ -122,8 +124,8 @@ test("Korean thermal lab localizes the concentration literature caution", async 
   await page.getByLabel("면적 선량 (cm⁻²)").fill("1000000000000000");
   await page.getByLabel("온도 (°C)").fill("850");
   await page.getByLabel("시간 (s)").fill("0.1");
-  await expect(status).toContainText("약 2 × 10¹⁹ cm⁻³ 초과");
-  await expect(status).toContainText("보편적인 임계값이 아니며");
+  await expect(status).toContainText("중성 분위기의 고농도 보론 확산");
+  await expect(status).toContainText("해당 조건을 재현하지 않으며");
   await page.getByLabel("온도 (°C)").fill("849");
   await expect(status).toContainText("결과가 없습니다");
   await expect(status).not.toContainText("Temperature");
