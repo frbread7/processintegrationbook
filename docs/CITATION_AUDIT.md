@@ -2,7 +2,7 @@
 
 **Audit date:** 2026-10-12  
 **Scope:** Every scholarly source in `docs/REFERENCES.md` and every source-specific technical claim in the English/Korean chapters, especially the thermal-history model and the public high-k/metal-gate case.  
-**Disposition:** Claim support is documented for this candidate, with original parameter provenance explicitly unresolved. Independent targeted review is required before formal release. This audit is not professional certification, process calibration, or silicon validation.
+**Disposition:** Claim support is documented for this candidate, with original parameter provenance explicitly unresolved. Targeted technical, documentation/release, and security reviews found no actionable findings at commit `7b3cf641c619f9a7d65344ef490ff80e0dcbdaad`; the original Sze/Scotten page or table remains unverified. This audit is not professional certification, process calibration, or silicon validation.
 
 ## Method and decision rules
 
