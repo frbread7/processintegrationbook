@@ -206,6 +206,28 @@ def language_target(current_file, lang, kind, chapter_id=None):
     return relative(current_file, target)
 
 
+def page_context(current_file):
+    if current_file.startswith("chapters/"):
+        return "chapter", posixpath.basename(current_file)[:-5]
+    if current_file.startswith("ko/chapters/"):
+        return "chapter", posixpath.basename(current_file)[:-5]
+    local = current_file[3:] if current_file.startswith("ko/") else current_file
+    kind = {"index.html": "home", "lab.html": "lab", "references.html": "references", "license.html": "license"}.get(local)
+    if kind is None:
+        raise ValueError("unknown localized page route: " + current_file)
+    return kind, None
+
+
+def production_page_url(manifest, lang, kind, chapter_id=None):
+    if kind == "chapter":
+        route = ("chapters/" if lang == "en" else "ko/chapters/") + chapter_id + ".html"
+    else:
+        route = {"home": "" if lang == "en" else "ko/", "lab": "lab.html" if lang == "en" else "ko/lab.html",
+                 "references": "references.html" if lang == "en" else "ko/references.html",
+                 "license": "license.html" if lang == "en" else "ko/license.html"}[kind]
+    return manifest["productionUrl"] + route
+
+
 def shell(manifest, lang, current_file, page_title, description, active, body, extra_scripts=()):
     t = TEXT[lang]
     home = language_target(current_file, lang, "home")
@@ -214,15 +236,15 @@ def shell(manifest, lang, current_file, page_title, description, active, body, e
     refs = language_target(current_file, lang, "references")
     license_url = language_target(current_file, lang, "license")
     other_lang = "ko" if lang == "en" else "en"
-    lang_target = language_target(current_file, other_lang, "home")
+    context_kind, chapter_id = page_context(current_file)
+    lang_target = language_target(current_file, other_lang, context_kind, chapter_id)
     assets_css = relative(current_file, "assets/styles.css")
     assets_js = relative(current_file, "assets/site.js")
     cover_path = relative(current_file, "assets/covers/processintegrationbook.svg")
-    canonical = manifest["productionUrl"] + ("" if current_file == "index.html" else current_file)
-    if current_file in {"ko/index.html", "ko/lab.html", "ko/references.html", "ko/license.html"}:
-        canonical = manifest["productionUrl"] + current_file
-    if current_file.endswith("/index.html"):
-        canonical = manifest["productionUrl"] + current_file[:-len("index.html")]
+    route = "" if current_file == "index.html" else current_file[:-len("index.html")] if current_file.endswith("index.html") else current_file
+    canonical = manifest["productionUrl"] + route
+    alternate_en = production_page_url(manifest, "en", context_kind, chapter_id)
+    alternate_ko = production_page_url(manifest, "ko", context_kind, chapter_id)
     scripts = "".join('<script defer src="' + e(relative(current_file, path)) + '"></script>' for path in extra_scripts)
     nav_items = [
         ("home", t["home"], home),
@@ -235,7 +257,7 @@ def shell(manifest, lang, current_file, page_title, description, active, body, e
     theme_button = '<button class="nav-action" type="button" data-theme-toggle data-dark-label="' + e(t["dark"]) + '" data-light-label="' + e(t["light"]) + '" aria-label="' + e(t["theme"]) + '"><span data-theme-label>' + e(t["dark"]) + '</span></button>'
     return '<!doctype html>\n' + '<html lang="' + lang + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' + \
         '<meta name="description" content="' + e(description) + '"><meta name="theme-color" content="#f5f4ef">' + \
-        '<link rel="canonical" href="' + e(canonical) + '"><link rel="alternate" hreflang="en" href="' + e(manifest["productionUrl"]) + '"><link rel="alternate" hreflang="ko" href="' + e(manifest["productionUrl"] + "ko/") + '">' + \
+        '<link rel="canonical" href="' + e(canonical) + '"><link rel="alternate" hreflang="en" href="' + e(alternate_en) + '"><link rel="alternate" hreflang="ko" href="' + e(alternate_ko) + '">' + \
         '<meta property="og:type" content="website"><meta property="og:title" content="' + e(page_title) + '"><meta property="og:description" content="' + e(description) + '"><meta property="og:image" content="' + e(manifest["productionUrl"] + manifest["cover"]) + '">' + \
         '<title>' + e(page_title) + '</title><link rel="icon" href="' + e(cover_path) + '" type="image/svg+xml"><link rel="stylesheet" href="' + e(assets_css) + '">' + scripts + '<script defer src="' + e(assets_js) + '"></script></head><body>' + \
         '<a class="skip-link" href="#main">' + e(t["skip"]) + '</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="' + e(home) + '"><img src="' + e(cover_path) + '" alt=""><span>ProcessIntegrationBook</span></a>' + \

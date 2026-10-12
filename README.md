@@ -16,16 +16,19 @@ The website is built from the site directory. Chapter source fragments are in th
 
 ## Develop locally
 
-Requirements: Python 3.11 or newer and Node.js 20 or newer. No runtime package dependencies are required.
+Requirements: Python 3.11 or newer and Node.js 24 (see `.nvmrc`). No runtime package dependencies are required.
 
 ~~~sh
+npm ci
+npx playwright install chromium
 python3 tools/build_site.py
-python3 -m unittest discover -s tests -p 'test_*.py'
-node --test tests/*.test.cjs
+npm test
 python3 -m http.server 8000 --directory site
 ~~~
 
 Then open <http://localhost:8000/>. Check both languages, chapter links, theme toggle, chapter search, knowledge checks, and laboratory controls at desktop and narrow mobile sizes.
+
+`npm test` checks generated routes, internal links and assets, manifest/title consistency, accessible form labels, analytical thermal-model reference cases in JavaScript and Python, and the Playwright journeys at desktop, tablet, and mobile widths. GitHub Actions runs the same gate before every Pages deployment.
 
 ## Technical evidence
 
