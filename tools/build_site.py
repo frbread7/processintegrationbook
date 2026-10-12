@@ -375,7 +375,7 @@ REFERENCES = [
     ("Aitken et al. (2016)", "Predictive technology and design-technology co-optimization", "https://doi.org/10.1049/iet-cdt.2015.0210", "DOI / publisher", "DOI / 출판사"),
     ("Mistry et al. (IEDM 2007)", "Publicly reported 45 nm platform feature list; source-limited case in chapter 13", "https://doi.org/10.1109/IEDM.2007.4418914", "DOI / publisher", "DOI / 출판사"),
     ("Esser et al. (2004)", "Public calculation reproducing the boron Arrhenius pair; cites Sze (1983) as the historical source", "https://doi.org/10.1149/1.1731558", "DOI / publisher", "DOI / 출판사"),
-    ("Mostafa and Medraj (2017)", "Review reproducing the intrinsic boron diffusivity equation and units", "https://doi.org/10.3390/ma10060676", "DOI / full text", "DOI / 원문"),
+    ("Mostafa and Medraj (2017)", "Review reproducing the intrinsic boron diffusivity equation and units; cites Scotten (2000), whose source page was not independently checked", "https://doi.org/10.3390/ma10060676", "DOI / full text", "DOI / 원문"),
     ("Sze, ed. (1983)", "VLSI Technology; historical source cited by Esser et al., without an independently verified page locator", "https://openlibrary.org/books/OL3504531M/VLSI_technology", "Catalog record", "도서관 서지 기록"),
     ("Sze and Ng (2007)", "General semiconductor-device reference; not used as the source for the selected Arrhenius pair", "https://doi.org/10.1002/0470068329", "Publisher record", "출판사 서지 기록"),
 ]

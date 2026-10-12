@@ -6,7 +6,7 @@
 
 ### Model
 
-For each constant-temperature hold i, use a conventional dilute boron-in-silicon Arrhenius parameterization. Esser, Hobart, and Kub reproduce the selected prefactor and activation energy in their 2004 calculation (p. G387) and cite S. M. Sze's edited *VLSI Technology* (1983) as the historical source. Mostafa and Medraj's 2017 review independently prints the intrinsic-diffusivity equation with the same pair. The model uses those values as an illustrative historical starting point; it does not rely on an independently verified page/table locator in Sze, and the pair is not universal or calibrated for a process:
+For each constant-temperature hold i, use a conventional dilute boron-in-silicon Arrhenius parameterization. Esser, Hobart, and Kub print the selected prefactor and activation energy in their 2004 calculation (p. G387) and cite S. M. Sze's edited *VLSI Technology* (1983). Mostafa and Medraj's 2017 review also prints the intrinsic-diffusivity equation and cites W. J. Scotten's *Diffusion in Silicon* (2000). Neither historical source's original page/table was independently verified, so the original provenance remains unresolved. The model uses the values reported by these accessible publications as an illustrative historical starting point; the pair is not universal or calibrated for a process:
 
 ~~~text
 D(Tᵢ) = D₀ exp(−Eₐ / (kB Tᵢ))

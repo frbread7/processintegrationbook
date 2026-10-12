@@ -64,6 +64,7 @@ test("Korean routes provide translated navigation, chapter search, and a working
 
 test("chapter locale links preserve the selected chapter and advertise matching alternates", async ({ page }) => {
   await page.goto("./chapters/c06-junction-thermal-history.html");
+  await expect(page.locator("main")).toContainText("Neither historical source's original page or table was independently verified");
   await expect(page.locator('link[hreflang="en"]')).toHaveAttribute(
     "href",
     "https://frbread7.github.io/processintegrationbook/chapters/c06-junction-thermal-history.html"
@@ -76,6 +77,7 @@ test("chapter locale links preserve the selected chapter and advertise matching 
   await expect(page.locator("html")).toHaveAttribute("lang", "ko");
   await expect(page).toHaveURL(/\/ko\/chapters\/c06-junction-thermal-history\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("접합");
+  await expect(page.locator("main")).toContainText("두 역사적 자료의 원문 쪽수나 표는 독립적으로 확인하지 않았으므로");
   await page.getByRole("link", { name: "English" }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page).toHaveURL(/\/chapters\/c06-junction-thermal-history\.html$/);
