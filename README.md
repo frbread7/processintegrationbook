@@ -7,7 +7,7 @@ ProcessIntegrationBook focuses on the decisions that connect process modules. It
 
 ## Read the book
 
-- Production candidate: <https://frbread7.github.io/processintegrationbook/>
+- Released textbook v1.0.0: <https://frbread7.github.io/processintegrationbook/>
 - Korean edition: <https://frbread7.github.io/processintegrationbook/ko/>
 - Interactive laboratory: <https://frbread7.github.io/processintegrationbook/lab.html>
 - Scope and overlap audit: [docs/OVERLAP_AUDIT.md](docs/OVERLAP_AUDIT.md)
