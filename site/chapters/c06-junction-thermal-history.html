@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="An engineering textbook on cross-module dependencies, integration architecture, cumulative process budgets, and evidence-led technology trade-offs."><meta name="theme-color" content="#f5f4ef"><link rel="canonical" href="https://frbread7.github.io/processintegrationbook/chapters/c06-junction-thermal-history.html"><link rel="alternate" hreflang="en" href="https://frbread7.github.io/processintegrationbook/"><link rel="alternate" hreflang="ko" href="https://frbread7.github.io/processintegrationbook/ko/"><meta property="og:type" content="website"><meta property="og:title" content="Thermal history and junction evolution trade-offs · ProcessIntegrationBook"><meta property="og:description" content="An engineering textbook on cross-module dependencies, integration architecture, cumulative process budgets, and evidence-led technology trade-offs."><meta property="og:image" content="https://frbread7.github.io/processintegrationbook/assets/covers/processintegrationbook.svg"><title>Thermal history and junction evolution trade-offs · ProcessIntegrationBook</title><link rel="icon" href="../assets/covers/processintegrationbook.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles.css"><script defer src="../assets/site.js"></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><img src="../assets/covers/processintegrationbook.svg" alt=""><span>ProcessIntegrationBook</span></a><button class="button menu-toggle" type="button" data-menu-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="Open navigation">☰</button><nav id="main-navigation" class="main-nav" aria-label="Overview"><a href="../index.html">Overview</a><a href="../index.html#chapters" aria-current="page">Chapters</a><a href="../lab.html">Lab</a><a href="../references.html">References</a></nav><div class="nav-actions"><a class="nav-action" href="../ko/index.html" hreflang="ko" lang="ko" aria-label="한국어">KO</a><button class="nav-action" type="button" data-theme-toggle data-dark-label="Dark theme" data-light-label="Light theme" aria-label="Theme"><span data-theme-label>Dark theme</span></button></div></div></header><main id="main" class="page-main"><div class="container"><p class="breadcrumb"><a href="../index.html#chapters">Chapters</a> / Chapter 06</p><div class="chapter-layout"><article class="chapter-content"><p class="eyebrow">Chapter 06</p><h1>Thermal history and junction evolution trade-offs</h1><section class="learning-objectives" aria-labelledby="c06-objectives">
+  <h2 id="c06-objectives">Learning objectives</h2>
+  <ul>
+    <li>Accumulate the diffusion exposure from several process holds without reducing a non-isothermal flow to its peak temperature.</li>
+    <li>Interpret the result of a one-dimensional Gaussian-profile estimate with correct units.</li>
+    <li>Identify physical effects that make a simple equilibrium Arrhenius model unreliable after implant or at a moving interface.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>A shared history is an integration constraint</h2>
+  <p>A junction is affected by the thermal sequence that follows dopant introduction, not by one anneal considered in isolation. A later oxidation, contact treatment, or material cure can add diffusion exposure; the same step can also serve another module's purpose. Integration therefore asks two linked questions: what profile change does the accumulated history permit, and what other device or material constraints limit a change to that history?</p>
+  <p>The thermal-history laboratory below is a deliberately narrow calculation. It combines diffusion from a selected initial Gaussian profile. Its inputs are synthetic teaching values except for the cited reference Arrhenius pair. The result is a scenario estimate, not a production recipe or a calibrated silicon prediction.</p>
+</section>
+
+<section>
+  <h2>Accumulate diffusivity over time</h2>
+  <p>For a dilute equilibrium species in a homogeneous region, an Arrhenius approximation is</p>
+  <div class="equation" role="math" aria-label="D of T equals D zero times exponential of negative activation energy divided by Boltzmann constant times absolute temperature">
+    <code>D(T) = D₀ exp(−Eₐ / (kB T))</code>
+  </div>
+  <p>Here <code>D₀</code> is in cm²/s, <code>Eₐ</code> in eV, <code>kB = 8.617333262 × 10⁻⁵ eV/K</code>, and <code>T</code> must be absolute temperature in kelvin. Celsius input is converted by adding 273.15. For holds indexed by <code>i</code>, the one-dimensional diffusion integral is</p>
+  <div class="equation" role="math" aria-label="Theta equals the sum of diffusivity times duration for each hold">
+    <code>Θ = Σᵢ D(Tᵢ) tᵢ</code>
+  </div>
+  <p><code>Θ</code> has units of cm². Under Fickian diffusion with concentration-independent <code>D</code>, an initially Gaussian profile with standard deviation <code>σ₀</code> broadens to <code>σf² = σ₀² + 2Θ</code>. The factor of two is the one-dimensional variance relation; it is not a three-dimensional radial distance.</p>
+</section>
+
+<section>
+  <h2>From a profile to a threshold crossing</h2>
+  <p>For the laboratory's assumed implanted profile, the initial areal dose <code>Q</code> is Gaussian about projected range <code>Rp</code>. It uses a uniform opposite-type background <code>NB</code> and assumes the dose is far enough below the surface that truncation at the silicon surface is small:</p>
+  <div class="equation" role="math" aria-label="Gaussian concentration profile and right hand background crossing">
+    <code>C(x) = Q / (√(2π) σf) · exp(−(x − Rp)² / (2σf²))</code><br>
+    <code>x* = Rp + σf √(2 ln(Cpeak / NB)), when Cpeak &gt; NB</code>
+  </div>
+  <p>Use <code>Q</code> in cm⁻², <code>Rp</code> and <code>σf</code> in cm inside the equation, and <code>NB</code> in cm⁻³. The page accepts and reports lengths in nanometers. <code>x*</code> is the right-side crossing in this assumed concentration profile. It is <strong>not</strong> a measured or electrically activated junction depth: activation, compensation, profile asymmetry, surface boundary conditions, and device electrostatics are omitted.</p>
+</section>
+
+<section>
+  <h2>Reference calculation and interpretation</h2>
+  <p>The calculator's default <code>D₀ = 0.76 cm²/s</code> and <code>Eₐ = 3.46 eV</code> are the conventional intrinsic boron-in-silicon parameter pair tabulated in Sze and Ng (2007). They are a historical dilute-equilibrium starting point, not universal constants. Independent diffusion studies emphasize that point defects, implant damage, concentration, and boundary conditions can change observed transport; Bracht et al. measured boron, phosphorus, and arsenic diffusion across 850–1100 °C, while Sadigh et al. discuss an interstitial-mediated boron mechanism. See the linked references for scope.</p>
+  <p><strong>Illustrative check:</strong> with <code>σ₀ = 20 nm</code>, <code>Rp = 80 nm</code>, <code>Q = 2 × 10¹³ cm⁻²</code>, <code>NB = 10¹⁶ cm⁻³</code>, and one 1050 °C, 20 s hold, the model gives <code>D ≈ 5.0343 × 10⁻¹⁴ cm²/s</code>, <code>σf ≈ 24.5229 nm</code>, and <code>x* ≈ 163.413 nm</code>. The independent reference test reproduces these values from the displayed equations. All profile inputs in this example are synthetic.</p>
+</section>
+
+<section class="callout caution">
+  <h2>What this model cannot decide</h2>
+  <ul>
+    <li>It assumes one diffusivity law and one material region throughout every hold. Do not combine holds that change the dopant, ambient, phase, or dominant mechanism under one parameter set.</li>
+    <li>It omits implantation damage and transient-enhanced diffusion, point-defect injection during oxidation, concentration- and charge-state-dependent transport, clustering, activation, segregation, moving interfaces, and two-dimensional geometry.</li>
+    <li>Temperature ramps are not modeled; breaking a ramp into holds is an approximation that requires an adequately resolved temperature history.</li>
+    <li>The laboratory's profile crossing is not a process window or a junction measurement. A real decision needs calibrated profiles and electrical structures under the target stack and sequence.</li>
+  </ul>
+  <p>Use this estimate to ask which later thermal steps deserve attention. Use TCADBook for detailed diffusion/implant physics, WATBook for measurement conditions and uncertainty, and the relevant integration team data to test the actual device.</p>
+</section>
+
+<section class="knowledge-check" data-quiz data-correct-message="Correct. Read the explanation and connect the answer back to the chapter&#x27;s stated assumptions." data-incorrect-message="Review the explanation, then reconsider which assumptions and interfaces matter.">
+  <h2>Knowledge check</h2>
+  <div class="quiz-question">
+    <p>Two holds use the same dopant and material model. The second hold is cooler but much longer. Which conclusion is justified?</p>
+    <button type="button" data-correct="false">The cooler hold contributes no diffusion because it is below the peak temperature.</button>
+    <button type="button" data-correct="true">Its contribution is <code>D(T)t</code>; temperature sensitivity and duration both matter, and the model still needs a valid shared mechanism.</button>
+    <button type="button" data-correct="false">The two holds must always be equivalent to one hold at their arithmetic mean temperature.</button>
+    <p class="quiz-explanation" hidden>For this model the accumulated variance change is twice the sum of <code>D(Tᵢ)tᵢ</code>. Arrhenius dependence makes a mean temperature generally wrong, and changes in mechanism or interfaces invalidate simply summing one coefficient.</p>
+  </div>
+</section>
+<nav class="chapter-footer" aria-label="Chapters"><a href="c05-gate-stack-architecture.html">← Previous chapter: Gate-stack architecture and process order</a><a href="c07-pattern-transfer-chain.html">Next chapter: Pattern transfer across module boundaries →</a></nav></article><aside class="chapter-aside"><details><summary>All chapters</summary><nav aria-label="All chapters"><a href="c01-integration-as-decision.html">01 · Integration as an engineering decision</a><a href="c02-requirements-to-architecture.html">02 · From requirements to process architecture</a><a href="c03-sequence-interface-contracts.html">03 · Sequence dependencies and interface contracts</a><a href="c04-isolation-substrate-choices.html">04 · Isolation and substrate as shared interfaces</a><a href="c05-gate-stack-architecture.html">05 · Gate-stack architecture and process order</a><a href="c06-junction-thermal-history.html" aria-current="page">06 · Thermal history and junction evolution trade-offs</a><a href="c07-pattern-transfer-chain.html">07 · Pattern transfer across module boundaries</a><a href="c08-contact-mol-interface.html">08 · Contact and MOL interface integration</a><a href="c09-beol-compatibility.html">09 · BEOL compatibility with earlier devices</a><a href="c10-variation-propagation.html">10 · How integration choices propagate variation</a><a href="c11-design-technology-cooptimization.html">11 · Design-technology co-optimization</a><a href="c12-integration-learning-qualification.html">12 · Learning, qualification, and controlled change</a><a href="c13-public-platform-case.html">13 · Reading a disclosed platform as an integration case</a></nav></details></aside></div></div></main><footer class="site-footer"><div class="container footer-wrap"><p>An independent engineering textbook in the My Library collection.</p><p>Related independent textbooks: <a href="https://frbread7.github.io/pmicbook/">PMICBook</a> · <a href="https://frbread7.github.io/watbook/">WATBook</a></p><p class="license-note"><a href="../license.html">License</a> · 0.1.0</p></div></footer></body></html>

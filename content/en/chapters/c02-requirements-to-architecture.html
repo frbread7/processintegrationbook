@@ -1,0 +1,70 @@
+<section aria-labelledby="architecture-question">
+  <h2 id="architecture-question">The engineering question</h2>
+  <p>How can system and device targets be translated into a process architecture without prematurely committing to a familiar flow? The answer begins by separating <em>what the technology must do</em> from <em>how a candidate architecture might make it do so</em>. Requirements belong to a device portfolio and operating context; architecture allocates those requirements to structures, materials, interfaces, masks, and process capabilities.</p>
+</section>
+
+<section aria-labelledby="objectives">
+  <h2 id="objectives">Learning objectives</h2>
+  <ul>
+    <li>Translate system-level needs into measurable device and manufacturing requirements.</li>
+    <li>Represent multiple device families as shared resources and conflicts, not isolated module lists.</li>
+    <li>Compare architecture candidates against hard constraints, evidence gaps, and lifecycle needs.</li>
+    <li>Keep public platform examples within their stated scope and distinguish reported fact from inference.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="requirements-stack">
+  <h2 id="requirements-stack">Build a requirements stack before choosing modules</h2>
+  <p>Requirements should flow through explicit levels. A system need (for example, energy efficiency, voltage range, density, or lifetime) constrains circuit behavior; circuit behavior constrains device characteristics and operating conditions; devices constrain geometries, materials, interfaces, and variability; manufacturing constraints then determine whether a proposed architecture can be controlled and qualified.</p>
+  <p>For every requirement, record the quantity, units, conditions, acceptance method, and owner. A statement such as “low leakage” is not yet an engineering requirement unless bias, temperature, device population, and limit are defined. This book does not supply product specifications. They must come from the actual design and program authority.</p>
+  <p>Next classify constraints:</p>
+  <ul>
+    <li><strong>Hard constraints:</strong> must be satisfied for the intended product or platform, such as voltage compatibility, isolation, thermal limits, or reliability qualification.</li>
+    <li><strong>Tradeable objectives:</strong> can be balanced, such as area, performance, power, process complexity, or design flexibility.</li>
+    <li><strong>Evidence gates:</strong> unresolved questions that require measurement, modeling, or qualification before selection.</li>
+  </ul>
+  <p>This classification avoids combining incomparable goals into a single invented score. If teams use a weighted score, the weights and sensitivity to them should be visible; a score does not replace hard constraints or evidence.</p>
+</section>
+
+<section aria-labelledby="architecture-portfolio">
+  <h2 id="architecture-portfolio">Allocate a device portfolio into shared architecture</h2>
+  <p>A technology may need devices with different voltage, leakage, drive, matching, noise, or reliability needs. Their requirements can compete for substrate and isolation choices, gate-stack options, thermal budget, contact formation, routing resources, and design rules. A portfolio matrix makes shared dependencies visible:</p>
+  <ul>
+    <li>For each device family, state its required operating conditions and electrical/reliability outcomes.</li>
+    <li>Identify which physical or process resources it shares with other families.</li>
+    <li>Mark where a shared choice is beneficial, neutral, or potentially constraining, with evidence status.</li>
+    <li>Record which layout and mask requirements follow from the architecture.</li>
+  </ul>
+  <p><strong>Publicly reported:</strong> Mistry et al. describe a specific 45 nm logic platform that integrated high-k/metal-gate transistors, strained silicon, multiple copper interconnect layers, and other platform elements. The paper documents one platform at one point in time; it does not prescribe the requirements or architecture for a different product. <a href="https://doi.org/10.1109/IEDM.2007.4418914">IEDM 2007 paper</a>.</p>
+  <p><strong>Engineering inference:</strong> When a device family introduces a material or thermal constraint shared by other devices, the portfolio should be re-evaluated as a whole. The specific impact must be tested using the target process conditions and device structures; a family-level matrix identifies the question but does not answer it.</p>
+</section>
+
+<section aria-labelledby="worked-architecture">
+  <h2 id="worked-architecture">Worked architecture comparison</h2>
+  <p><strong>Illustrative assumption:</strong> A team is planning a mixed-voltage platform with a core logic device and a second device class that has a distinct operating-voltage requirement. This scenario asserts no particular voltages, process modules, or product performance.</p>
+  <p>Start by writing separate operating and reliability requirements for both device classes. Then form at least two architecture candidates. One candidate may favor a shared device platform with additional design or device options; another may isolate more of the special-device requirements in a distinct module path. These are architecture hypotheses, not instructions for a real flow.</p>
+  <p>Compare them using a constraint ledger: device behavior; isolation and parasitics; gate/interface compatibility; thermal history; contact and interconnect needs; mask/layout implications; process-window evidence; qualification effort; and unresolved risks. For each cell, indicate “supported,” “open,” or “not applicable,” and link the supporting source or planned experiment. Do not assign a numeric probability to an unmeasured compatibility concern.</p>
+  <p>The next useful action is the experiment that best distinguishes candidates at a critical interface. For example, if the uncertainty concerns whether a shared thermal history changes a device target, define a split that isolates thermal history and measure the relevant device outputs under controlled conditions. WATBook explains measurement validity and interpretation; this book owns the architecture question and the evidence plan, not the monitor-design tutorial.</p>
+</section>
+
+<section aria-labelledby="architecture-limits">
+  <h2 id="architecture-limits">Assumptions and limits</h2>
+  <p>Architecture comparison is not a substitute for device simulation, process integration experiments, design-rule development, reliability qualification, or manufacturing capability analysis. A public paper provides evidence for its reported implementation, not an unqualified transfer function to another platform. A qualitative ledger can organize unknowns; it cannot predict yield or process probability.</p>
+</section>
+
+<section aria-labelledby="knowledge-check">
+  <h2 id="knowledge-check">Knowledge check</h2>
+  <ol>
+    <li><strong>Why should a requirement include conditions and an acceptance method?</strong><br><strong>Answer:</strong> Device outcomes depend on conditions, and different teams may interpret qualitative targets differently. Defined units, operating conditions, populations, and acceptance measurements make a requirement testable.</li>
+    <li><strong>A public platform paper reports a successful architecture. Does that establish feasibility for your portfolio?</strong><br><strong>Answer:</strong> No. It is evidence about the disclosed platform and context. The new portfolio still needs requirements mapping and evidence for its own device families, interfaces, and process constraints.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="further-reading">
+  <h2 id="further-reading">Further reading</h2>
+  <ul>
+    <li><a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007</a> — a disclosed multi-element logic platform, useful for practicing scoped interpretation.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/advanced.html">ProcessBook, advanced technology overview</a> — concise background on technology examples; use this chapter for requirement allocation and comparison.</li>
+    <li><a href="https://github.com/frbread7/pmicbook/blob/da37b183c559d35fcb7f6471c86c513b104a7020/chapters/integration.html">PMICBook, BCD integration</a> — a product-specific integration example, not a template for other portfolios.</li>
+  </ul>
+</section>

@@ -1,0 +1,48 @@
+<section aria-labelledby="chapter-title">
+  <h2 id="chapter-title">Isolation and substrate as shared interfaces</h2>
+  <p><strong>Decision question.</strong> Given a device portfolio and a sequence of later modules, what isolation and substrate architecture provides adequate electrical separation while preserving the required area, body behavior, parasitics, and process compatibility?</p>
+
+  <h3>Learning objectives</h3>
+  <ul>
+    <li>Translate isolation needs into explicit interface requirements rather than selecting a structure by name alone.</li>
+    <li>Trace how substrate choice and isolation geometry can affect neighboring devices, routing, thermal history, and characterization.</li>
+    <li>Separate reported platform facts from engineering inference and identify the evidence needed to decide between alternatives.</li>
+  </ul>
+
+  <h3>Isolation is an integration boundary</h3>
+  <p>Isolation partitions active regions, but its engineering function is broader than preventing a direct conductive path. The design must specify which terminals can couple, the voltage and temperature conditions of interest, allowed leakage, body or well connections, latch-up-related constraints where applicable, and how isolation is formed and exposed to later operations. These requirements differ across logic, high-voltage, memory, and sensor devices. A structure that is sufficient for one device family cannot be presumed sufficient for every device sharing the substrate.</p>
+  <p>Shallow-trench isolation (STI) is a common planar CMOS isolation approach: a patterned trench is filled with dielectric and planarized. The integration decision is not simply “use STI.” It includes trench placement and depth, corner and interface behavior, fill and planarization compatibility, active-area definition, and the subsequent thermal and cleaning history. LOCOS and other isolation approaches remain useful historical or specialized comparisons, but their suitability is platform- and generation-dependent. This chapter does not prescribe dimensions, materials, or a production sequence.</p>
+  <p>Substrate and well architecture set additional shared conditions. A bulk substrate permits body and well engineering but couples devices through finite substrate impedance and shared processing. A more electrically isolated substrate architecture can reduce some coupling paths, yet may impose different cost, thermal, mechanical, or integration constraints. These are categories of trade-off, not universal rankings: quantify the product's actual isolation and parasitic budgets before claiming one architecture is superior.</p>
+
+  <h3>Make interfaces reviewable</h3>
+  <p>For each neighboring module, record an interface contract: incoming material and geometry; allowed voltage and thermal exposure; required cleanliness or surface condition; the feature that defines alignment; electrical acceptance observables; and the owner of each assumption. For isolation, include at least active-area dimensions, well/substrate bias conditions, isolation leakage/coupling observables, topography limits for the next patterning step, and the test structure that can reveal edge or substrate effects.</p>
+  <p>A useful dependency chain is: substrate and well definition → active-area boundary → isolation formation and planarization → gate and junction placement → contact/routing geometry → electrical isolation and parasitic measurements. Each arrow is a question to resolve, not proof of causality. For instance, a changed isolation edge may alter local layout or device perimeter; whether that changes an electrical parameter materially depends on geometry, process details, and measurement context.</p>
+
+  <h3>Worked decision example</h3>
+  <p><strong>Illustrative assumption:</strong> a fictional platform must place a low-voltage logic device beside a higher-voltage device. No numerical voltage rating, trench dimension, leakage limit, or foundry capability is assumed. Candidate A uses one shared bulk/well architecture with an isolation design intended to serve both device classes. Candidate B separates the high-voltage region using a distinct well/substrate strategy and its own isolation constraints.</p>
+  <ol>
+    <li>Translate the requirement into checks: maximum differential bias, leakage and coupling limits, substrate-current path, permitted area, and required device spacing.</li>
+    <li>Map downstream dependencies: which masks define active and well boundaries; whether later thermal steps change junction placement; whether the isolation topography and surface condition remain acceptable for gate formation and contact processing.</li>
+    <li>Compare evidence burden: test structures should distinguish junction leakage, edge-related behavior, and substrate coupling under the relevant bias and temperature conditions. A single room-temperature DC measurement is not evidence for every operating condition.</li>
+    <li>Keep residual risk visible: if the candidate architectures cannot yet be compared on the same extraction method or geometry, the decision is provisional and the missing experiment is part of the record.</li>
+  </ol>
+  <p><strong>Engineering inference:</strong> Candidate B may improve controllability of some high-voltage interactions at the expense of area and additional interface complexity. This is a hypothesis, not a general property of all separated-well designs; compare extracted electrical observables and layout cost on representative test structures.</p>
+
+  <h3>Evidence labels and limits</h3>
+  <ul>
+    <li><strong>Publicly reported:</strong> the audited ProcessBook treats representative integration, isolation, and module sequencing as related topics; consult it for module-level background, not as evidence for a particular production platform.</li>
+    <li><strong>Illustrative assumption:</strong> the adjacent low-voltage/high-voltage example is fictional and supplies no recipe or specification.</li>
+    <li><strong>Engineering inference:</strong> the proposed coupling among geometry, substrate path, topography, and downstream measurements is a set of testable integration hypotheses. It requires platform-specific layout, process, and electrical evidence.</li>
+  </ul>
+
+  <h3>Knowledge check</h3>
+  <p><strong>Question:</strong> A team observes increased isolation leakage after changing an isolation module. Is the isolation module itself established as the cause?</p>
+  <p><strong>Answer:</strong> No. The observation is associated with the change, but causality is not established. Confirm comparable structures and measurement conditions, inspect relevant interfaces and thermal history, then use discriminating structures or split experiments to separate edge, junction, surface, and substrate paths. WATBook's chapters on measurement validity and bounded electrical hypotheses provide complementary guidance.</p>
+
+  <h3>Further reading</h3>
+  <ul>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/integration.html">ProcessBook, integration chapter (audited revision)</a> — representative flow and selected ordering effects.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/advanced.html">ProcessBook, advanced integration chapter (audited revision)</a> — platform context and architectural examples.</li>
+    <li><a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken et al. (2016), “Predicting future complementary metal–oxide–semiconductor technology – challenges and approaches”</a> — technology scaling context, not a source for the fictional example.</li>
+  </ul>
+</section>

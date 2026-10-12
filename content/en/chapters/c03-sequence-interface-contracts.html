@@ -1,0 +1,63 @@
+<section aria-labelledby="sequence-question">
+  <h2 id="sequence-question">The engineering question</h2>
+  <p>Two modules may each be technically sound and still fail when placed in the same sequence. Which orderings and interface conditions must be true for the combined flow to remain compatible? The key is to describe modules by the state they require and the state they leave behind—not only by their names.</p>
+</section>
+
+<section aria-labelledby="objectives">
+  <h2 id="objectives">Learning objectives</h2>
+  <ul>
+    <li>Distinguish a strict process precedence from a preference or a conditional dependency.</li>
+    <li>Write interface contracts for material, geometry, surface, contamination, thermal history, and metrology.</li>
+    <li>Trace a sequence change to its downstream acceptance tests and evidence gaps.</li>
+    <li>Represent uncertainty without turning an untested concern into a claimed failure probability.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="state-contracts">
+  <h2 id="state-contracts">Describe each module by entry and exit state</h2>
+  <p>For an integration review, a module is more useful as a state transformation than as a box labeled “etch” or “deposition.” Its interface contract should identify:</p>
+  <ul>
+    <li><strong>Entry state:</strong> incoming materials, stack and geometry, surface condition, pattern definition, and known prior history.</li>
+    <li><strong>Operation boundary:</strong> what must be controlled or monitored, at what locations or structures, and which variables remain unknown.</li>
+    <li><strong>Exit state:</strong> resulting geometry and material state, possible damage or residues, topography, and measurement evidence.</li>
+    <li><strong>Compatibility conditions:</strong> downstream tolerances, thermal and chemical exposure limits, contamination controls, and any clean or queue constraints.</li>
+  </ul>
+  <p>These are documentation categories, not universal numeric specifications. Real acceptance limits must come from validated process and product requirements. A contract that says “clean surface” is incomplete until the relevant surface property and verification method are defined.</p>
+</section>
+
+<section aria-labelledby="dependency-types">
+  <h2 id="dependency-types">Build a dependency graph with typed edges</h2>
+  <p>Represent the candidate sequence as a directed graph, but label each relationship. A <em>precedence</em> edge means one operation must occur before another under the stated architecture. A <em>compatibility</em> edge means two modules must meet a shared condition. A <em>budget</em> edge records consumption of a cumulative resource such as thermal exposure or remaining thickness. A <em>measurement</em> edge specifies what evidence is needed before proceeding or deciding.</p>
+  <p>For each edge, record the condition, source, owner, evidence status, and consequence if violated. Separate established constraints from proposed hypotheses. Where order is flexible, record what makes it conditional rather than depicting one sequence as universally required.</p>
+  <p><strong>Publicly reported:</strong> Mistry et al. report a platform that integrated high-k/metal gate transistors with a particular technology context. The paper supports studying material choice and process integration together; the DOI citation alone does not establish any specific sequence contract for another platform. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al. (2007)</a>.</p>
+</section>
+
+<section aria-labelledby="worked-sequence">
+  <h2 id="worked-sequence">Worked sequence review: an interface condition, not a recipe</h2>
+  <p><strong>Illustrative assumption:</strong> A proposed architecture places a sensitive material stack before a later operation whose thermal and chemical compatibility has not yet been established. The stack and operation are intentionally unspecified; this example provides no process parameters.</p>
+  <p>First state the uncertainty as a testable question: does the later operation leave the material/interface state within the downstream device and reliability requirements? Map the potential path: material properties before exposure → state after exposure → measurable device/interface response → acceptance decision. Mark every arrow as reported evidence, model result, or hypothesis.</p>
+  <p>Then compare options: retain the order and characterize the resulting interface; change the order if architecture permits; or select a different material/sequence candidate. For each, document new compatibility questions introduced by the change, including patterning, surface preparation, contact formation, and reliability. The evidence plan should include a control and a measurement sensitive to the suspected mechanism. If a simple model is used, document its valid range and calibrate it for the relevant materials before using it as a decision basis.</p>
+  <p>Yeo's review discusses metal-gate material selection and process-integration issues and can orient the reader to the coupled nature of such decisions. It is not evidence that a given stack will tolerate a particular undisclosed thermal or chemical exposure. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
+</section>
+
+<section aria-labelledby="sequence-limits">
+  <h2 id="sequence-limits">Limits of a sequence graph</h2>
+  <p>A graph exposes logical dependencies; it does not calculate diffusion, reaction, contamination, defectivity, device shift, or yield. A missing edge is not proof of compatibility. Reviewers should look for unrecorded shared resources and ask whether each consequential edge has traceable evidence, an explicit owner, and a test. Detailed module mechanisms belong in the specialist references; the integration task is to connect their outputs to neighboring entry conditions.</p>
+</section>
+
+<section aria-labelledby="knowledge-check">
+  <h2 id="knowledge-check">Knowledge check</h2>
+  <ol>
+    <li><strong>A proposed sequence diagram places module A before B. What must be added for the diagram to support an engineering decision?</strong><br><strong>Answer:</strong> State whether the ordering is mandatory or conditional, define the interface state B requires from A, identify the evidence and source for the constraint, and record downstream acceptance and residual risk.</li>
+    <li><strong>A graph contains no incompatibility edge between two modules. Can the team conclude they are compatible?</strong><br><strong>Answer:</strong> No. Absence of a recorded constraint can mean the interface has not been evaluated. Compatibility needs evidence under the relevant materials, sequence, and operating conditions.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="further-reading">
+  <h2 id="further-reading">Further reading</h2>
+  <ul>
+    <li><a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo, “Metal gate technology for nanoscale transistors—material selection and process integration issues” (2004)</a> — material-selection and sequence-integration background.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/integration.html">ProcessBook, integration overview</a> — representative ordering examples; this chapter adds explicit, typed interface contracts.</li>
+    <li><a href="https://github.com/geniuskey/etchbook/blob/0881e61ba16003a1fe4579a8372dad2d63d2dcfb/chapters/selectivity.html">EtchBook, selectivity and layer budgets</a> — specialist background for one module interface.</li>
+  </ul>
+</section>

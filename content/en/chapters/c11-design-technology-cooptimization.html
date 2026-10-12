@@ -1,0 +1,53 @@
+<section aria-labelledby="dtco">
+  <h2 id="dtco">Design-technology co-optimization</h2>
+  <p>A process architecture is useful only insofar as the circuits and layouts built with it can meet their goals. Design-technology co-optimization (DTCO) makes that dependence explicit: device options, patterning capability, layout rules, parasitics, variability, and circuit objectives are evaluated as a connected system. This is a decision framework, not a promise that a process change improves a design metric.</p>
+
+  <section aria-labelledby="c11-objectives">
+    <h3 id="c11-objectives">Learning objectives</h3>
+    <ul>
+      <li>Translate a circuit-level target into device, geometry, patterning, and process constraints.</li>
+      <li>Compare candidate technology options using a common workload and explicit uncertainty.</li>
+      <li>Identify where a claimed design benefit depends on a process-window or layout assumption.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c11-loop">
+    <h3 id="c11-loop">The co-optimization loop</h3>
+    <ol>
+      <li>Define the product objective and operating conditions (for example, timing at a stated supply, power limit, and temperature range).</li>
+      <li>Allocate requirements to device characteristics, interconnect, cell architecture, and layout constraints.</li>
+      <li>Check that the layout patterns and dimensions are manufacturable with margin, including relevant overlay, line-edge, contact, and density constraints.</li>
+      <li>Propagate characterized device and parasitic variation into circuit evaluation, retaining model and sampling uncertainty.</li>
+      <li>Revisit the architecture or design rules when a bottleneck moves; document the new trade-off and evidence gate.</li>
+    </ol>
+    <p><strong>Publicly reported:</strong> Aitken et al. discuss prediction challenges and approaches for future CMOS technology, including the need to connect technology assumptions with design outcomes. That supports the co-optimization framing; it does not validate a particular candidate process or circuit result. <a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken et al. (2016)</a>.</p>
+    <p><strong>Engineering inference:</strong> A layout simplification that improves one patterning margin can increase cell area or alter parasitic loading. Conversely, aggressive density may reduce area while narrowing process margin. These are trade-off hypotheses to test with the applicable design rules, extraction, patterning models, and manufacturing evidence—not universal directional laws.</p>
+  </section>
+
+  <section aria-labelledby="c11-worked">
+    <h3 id="c11-worked">Worked decision: minimum pitch or robust cell?</h3>
+    <p><strong>Illustrative assumption:</strong> Two fictional standard-cell layouts target the same logic function. Layout A is denser but uses a tighter contact-to-gate relationship. Layout B is larger and gives that interface more geometric margin. No dimensions, process capability, or measured performance are specified.</p>
+    <p>Do not rank the options from layout area alone. First evaluate both against the same electrical models, workload, and operating corner. Then compare area, delay, power, routing impact, and sensitivity to the relevant patterning/contact variation. Ask whether the tighter layout is inside a demonstrated process window and whether the model uncertainty is smaller than the claimed benefit. If not, the defensible outcome is a targeted patterning split or a design-rule review, not a numerical winner.</p>
+    <p>The integration team owns the interface conditions and evidence that make a geometry manufacturable; design owns the circuit context and acceptable trade-off. Neither side can establish a product benefit in isolation.</p>
+  </section>
+
+  <section aria-labelledby="c11-limits">
+    <h3 id="c11-limits">Scope and limits</h3>
+    <p>This chapter introduces no compact-model parameters, design rules, or process capability values. Such values are technology-specific and must be sourced and validated for their intended use. A paper's reported platform illustrates an approach, not transferable design rules. Use LithoBook for patterning fundamentals, ProcessBook for module primers, and the product's qualified PDK and characterization for actual design decisions.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c11-check">
+    <h3 id="c11-check">Knowledge check</h3>
+    <p>A candidate cell is 4% smaller in a simulation, but its critical contact geometry is outside the demonstrated process window. Is the cell the better technology choice?</p>
+    <details><summary>Answer and explanation</summary><p>Not on this evidence. The simulated area benefit is conditional on a geometry that has not passed the manufacturability gate. Seek a supported layout/process option or test the margin and uncertainty; only then compare area with circuit behavior on a common basis.</p></details>
+  </section>
+
+  <section aria-labelledby="c11-reading">
+    <h3 id="c11-reading">Further reading</h3>
+    <ul>
+      <li><a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken et al., “Predicting future CMOS technology – challenges and approaches” (2016)</a>.</li>
+      <li><a href="https://github.com/geniuskey/lithobook/blob/5a4fa0a5b79f3d5581af140caa0e7831ccf88a05/README.md">LithoBook (audited revision)</a> — patterning scope and learning material.</li>
+      <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/README.md">ProcessBook (audited revision)</a> — process-module foundations.</li>
+    </ul>
+  </section>
+</section>

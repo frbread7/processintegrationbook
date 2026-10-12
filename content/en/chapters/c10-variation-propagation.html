@@ -1,0 +1,55 @@
+<section aria-labelledby="variation-propagation">
+  <h2 id="variation-propagation">How integration choices propagate variation</h2>
+  <p>A process variation source becomes a product concern through a chain of interfaces. The useful question is not only “which module varies?” but “what state does that variation create, which later operation transforms it, and which electrical or design observable can distinguish it?” This chapter follows that chain without replacing WATBook's treatment of measurement or YieldBook's treatment of yield and spatial signatures.</p>
+
+  <section aria-labelledby="c10-objectives">
+    <h3 id="c10-objectives">Learning objectives</h3>
+    <ul>
+      <li>Trace a variation source across at least two module boundaries to an electrical observable.</li>
+      <li>Separate a physical mechanism, a measurement artifact, and a statistical association.</li>
+      <li>Specify a discriminating experiment and the uncertainty it must resolve.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c10-chain">
+    <h3 id="c10-chain">A chain of states, not a list of module sigmas</h3>
+    <p>Represent a proposed cause as a directed chain: <em>source</em> → <em>material or geometric state</em> → <em>downstream transformation</em> → <em>device parameter</em> → <em>circuit or product response</em>. For example, a patterning displacement can alter the geometry presented to etch; etch and subsequent liner/fill steps can transform that geometry into a contact-interface condition; the contact path can contribute to a measured resistance; and circuit timing may respond to the resistance together with transistor drive and interconnect parasitics. Each arrow is a hypothesis requiring evidence at that interface.</p>
+    <p><strong>Engineering inference:</strong> If an upstream change affects several downstream structures, covariance across those structures may help discriminate a shared cause from an isolated monitor defect. This is a test strategy, not proof of a common physical mechanism. Instrument range, probe contact, temperature, sampling, and data joins can create or obscure the same apparent pattern; consult WATBook for measurement controls and YieldBook for map/signature analysis.</p>
+    <p>A first-order local sensitivity model can organize a test plan:</p>
+    <div class="equation" role="math" aria-label="delta y is approximately the sum over inputs of partial y by partial x i times delta x i">
+      <code>Δy ≈ Σᵢ (∂y/∂xᵢ) Δxᵢ</code>
+    </div>
+    <p>Here <code>xᵢ</code> are explicitly defined process or geometry variables and <code>y</code> is a selected response. The derivatives must come from a justified model or designed perturbation near a specified operating point. The expression omits nonlinear interactions and does not assign production distributions. Correlated inputs also require covariance terms when estimating response variance.</p>
+  </section>
+
+  <section aria-labelledby="c10-worked">
+    <h3 id="c10-worked">Worked decision: contact-resistance shift or transistor shift?</h3>
+    <p><strong>Illustrative assumption:</strong> A synthetic split shows a small increase in a logic-path delay proxy and a larger shift in a Kelvin contact-chain monitor after a pattern-transfer adjustment. No numeric values or real process are implied.</p>
+    <p>Two hypotheses remain: the adjustment changed contact geometry/interface and therefore series resistance, or a concurrent device change altered transistor drive. First check that the measurements share wafer, structure, temperature, and time provenance. Then compare an independent transistor monitor, contact structures with different geometries, and the sequence/interface records. If contact-chain resistance shifts while transistor observables remain within their characterized uncertainty, the first hypothesis gains support; it is not established until the structure is sensitive to the suspected contact mechanism and repeatability is adequate.</p>
+    <p>The integration decision is therefore to hold broad attribution, preserve the split, and request a geometry-sensitive cross-check before changing a downstream module. A correlation between the delay proxy and contact monitor alone does not establish causality.</p>
+  </section>
+
+  <section aria-labelledby="c10-evidence">
+    <h3 id="c10-evidence">Evidence and limits</h3>
+    <dl>
+      <dt>Illustrative assumption</dt><dd>The contact/delay scenario is synthetic and has no foundry recipe, measured values, or claimed process outcome.</dd>
+      <dt>Engineering inference</dt><dd>Cross-structure covariance can guide discrimination only when data lineage, measurement capability, and competing mechanisms are checked.</dd>
+    </dl>
+    <p>This chain method does not calculate yield, infer root cause automatically, or replace calibrated process/device simulation. A module-level model may be appropriate for a specific arrow, but its calibration domain and uncertainty must be stated. For diffusion physics see TCADBook; for electrical measurement and uncertainty see WATBook; for yield signatures see YieldBook.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c10-check">
+    <h3 id="c10-check">Knowledge check</h3>
+    <p>A wafer-level association appears between a patterning monitor and a device parameter. What is the strongest immediate conclusion?</p>
+    <details><summary>Answer and explanation</summary><p>The association nominates a hypothesis; it does not establish causality. Confirm data/measurement provenance, identify the physical interface and predicted downstream observable, and choose an independent structure or controlled split that can distinguish it from competing causes.</p></details>
+  </section>
+
+  <section aria-labelledby="c10-reading">
+    <h3 id="c10-reading">Further reading</h3>
+    <ul>
+      <li><a href="https://github.com/geniuskey/tcadbook/blob/56d3c14f757a55caed574e720069cfdf2b7a2bf6/README.md">TCADBook (audited revision)</a> — process/device modeling and its own scope.</li>
+      <li><a href="https://github.com/frbread7/watbook">WATBook</a> — measurement-to-decision and wafer-level electrical evidence.</li>
+      <li><a href="https://github.com/geniuskey/yieldbook/blob/2acd8844633274ebea91e808c4a22ed4035549b8/README.md">YieldBook (audited revision)</a> — yield and signature analysis.</li>
+    </ul>
+  </section>
+</section>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta name="theme-color" content="#f5f4ef"><link rel="canonical" href="https://frbread7.github.io/processintegrationbook/ko/chapters/c04-isolation-substrate-choices.html"><link rel="alternate" hreflang="en" href="https://frbread7.github.io/processintegrationbook/"><link rel="alternate" hreflang="ko" href="https://frbread7.github.io/processintegrationbook/ko/"><meta property="og:type" content="website"><meta property="og:title" content="공통 인터페이스로서의 절연과 기판 · ProcessIntegrationBook"><meta property="og:description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta property="og:image" content="https://frbread7.github.io/processintegrationbook/assets/covers/processintegrationbook.svg"><title>공통 인터페이스로서의 절연과 기판 · ProcessIntegrationBook</title><link rel="icon" href="../../assets/covers/processintegrationbook.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><script defer src="../../assets/site.js"></script></head><body><a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><img src="../../assets/covers/processintegrationbook.svg" alt=""><span>ProcessIntegrationBook</span></a><button class="button menu-toggle" type="button" data-menu-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="탐색 메뉴 열기">☰</button><nav id="main-navigation" class="main-nav" aria-label="책 소개"><a href="../index.html">책 소개</a><a href="../index.html#chapters" aria-current="page">장 목록</a><a href="../lab.html">실습실</a><a href="../references.html">참고 문헌</a></nav><div class="nav-actions"><a class="nav-action" href="../../index.html" hreflang="en" lang="en" aria-label="English">EN</a><button class="nav-action" type="button" data-theme-toggle data-dark-label="다크 테마" data-light-label="라이트 테마" aria-label="테마"><span data-theme-label>다크 테마</span></button></div></div></header><main id="main" class="page-main"><div class="container"><p class="breadcrumb"><a href="../index.html#chapters">장 목록</a> / 장 04</p><div class="chapter-layout"><article class="chapter-content"><p class="eyebrow">장 04</p><h1>공통 인터페이스로서의 절연과 기판</h1><section aria-labelledby="chapter-title">
+  <h2 id="chapter-title">공통 인터페이스로서의 절연과 기판</h2>
+  <p><strong>의사결정 질문.</strong> 소자 구성과 후속 모듈 순서가 주어졌을 때, 필요한 전기적 분리를 확보하면서 면적, 바디 동작, 기생 성분, 공정 호환성을 만족하는 절연 및 기판 아키텍처는 무엇인가?</p>
+
+  <h3>학습 목표</h3>
+  <ul>
+    <li>구조 이름만 선택하는 대신 절연 요구사항을 명시적인 인터페이스 조건으로 변환한다.</li>
+    <li>기판 선택과 절연 형상이 인접 소자, 배선, 열 이력, 특성 평가에 미치는 영향을 추적한다.</li>
+    <li>공개된 사실과 공학적 추론을 구분하고 대안 선택에 필요한 증거를 식별한다.</li>
+  </ul>
+
+  <h3>절연은 통합 경계다</h3>
+  <p>절연은 활성 영역을 나누지만, 그 공학적 기능은 직접적인 전도 경로를 막는 데 그치지 않는다. 어떤 단자 사이의 결합을 제한할지, 관심 전압과 온도 조건, 허용 누설, 바디 또는 웰 연결, 해당되는 경우 래치업 관련 조건, 그리고 절연 형성 후 노출될 후속 공정까지 정의해야 한다. 이러한 요구는 로직, 고전압, 메모리, 센서 소자마다 다르다. 한 소자군에 충분한 구조라고 해서 같은 기판을 공유하는 모든 소자에 충분하다고 가정할 수 없다.</p>
+  <p>얕은 트렌치 절연(STI)은 평면 CMOS의 일반적인 절연 방식이다. 패턴된 트렌치를 유전체로 채우고 평탄화한다. 통합 의사결정은 단순히 “STI를 사용한다”로 끝나지 않는다. 트렌치 위치와 깊이, 모서리와 계면 거동, 충전 및 평탄화 호환성, 활성 영역 정의, 후속 열 이력과 세정 이력을 함께 고려한다. LOCOS 및 기타 절연 방식은 역사적 비교 또는 특정 용도에서 여전히 참고할 수 있지만, 적합성은 플랫폼과 세대에 따라 달라진다. 이 장은 치수, 재료 또는 양산 순서를 처방하지 않는다.</p>
+  <p>기판과 웰 아키텍처는 공통 조건을 추가한다. 벌크 기판은 바디와 웰 설계를 가능하게 하지만, 유한한 기판 임피던스와 공유 공정에 의해 소자 간 결합이 생길 수 있다. 전기적으로 더 분리된 기판 아키텍처는 일부 결합 경로를 줄일 수 있지만, 비용, 열, 기계 또는 통합 측면의 다른 제약을 가질 수 있다. 이는 절충 항목의 범주이지 보편적인 우열이 아니다. 한 아키텍처가 우수하다고 주장하기 전에 제품의 실제 절연 및 기생 성분 예산을 정량화해야 한다.</p>
+
+  <h3>인터페이스를 검토 가능한 형태로 만들기</h3>
+  <p>각 인접 모듈에 대해 인터페이스 계약을 기록한다. 유입 재료와 형상, 허용 전압 및 열 노출, 필요한 청정도 또는 표면 상태, 정렬 기준이 되는 형상, 전기적 합격 관측값, 각 가정의 담당자를 명시한다. 절연에는 최소한 활성 영역 치수, 웰·기판 바이어스 조건, 절연 누설·결합 관측값, 다음 패터닝 단계의 평탄도 한계, 가장자리 또는 기판 효과를 드러낼 테스트 구조를 포함한다.</p>
+  <p>유용한 의존 사슬은 기판 및 웰 정의 → 활성 영역 경계 → 절연 형성 및 평탄화 → 게이트와 접합 배치 → 콘택트·배선 형상 → 전기적 절연 및 기생 성분 측정이다. 각 화살표는 해결해야 할 질문이지 인과관계의 증명이 아니다. 예를 들어 절연 가장자리 변경은 국부 레이아웃이나 소자 둘레에 영향을 줄 수 있다. 실제 전기 파라미터에 유의미한 변화가 있는지는 형상, 공정 세부조건, 측정 맥락에 달려 있다.</p>
+
+  <h3>의사결정 예제</h3>
+  <p><strong>설명용 가정:</strong> 가상의 플랫폼이 저전압 로직 소자를 고전압 소자 옆에 배치해야 한다. 구체적인 전압 정격, 트렌치 치수, 누설 한계 또는 파운드리 능력은 가정하지 않는다. 후보 A는 두 소자군에 모두 적용하도록 설계된 절연을 포함해 하나의 벌크·웰 아키텍처를 사용한다. 후보 B는 별도의 웰·기판 전략과 고유한 절연 조건으로 고전압 영역을 분리한다.</p>
+  <ol>
+    <li>요구사항을 검증 항목으로 바꾼다. 최대 차동 바이어스, 누설 및 결합 한계, 기판 전류 경로, 허용 면적, 필요한 소자 간격을 정한다.</li>
+    <li>후속 의존성을 표시한다. 활성 및 웰 경계를 정의하는 마스크, 후속 열 단계에 따른 접합 위치 변화, 게이트 형성 및 콘택트 공정에 허용되는 절연 평탄도와 표면 상태를 확인한다.</li>
+    <li>필요한 증거를 비교한다. 테스트 구조는 관련 바이어스와 온도 조건에서 접합 누설, 가장자리 거동, 기판 결합을 구별할 수 있어야 한다. 상온 직류 측정 하나로 모든 동작 조건의 근거를 대신할 수 없다.</li>
+    <li>잔여 위험을 기록한다. 후보 아키텍처를 동일한 추출 방법이나 형상으로 비교할 수 없다면 의사결정은 잠정적이다. 필요한 실험도 의사결정 기록에 포함한다.</li>
+  </ol>
+  <p><strong>공학적 추론:</strong> 후보 B는 일부 고전압 상호작용을 제어하기 쉬워질 수 있지만 면적과 인터페이스 복잡성이 커질 수 있다. 이는 모든 분리 웰 설계에 적용되는 일반 법칙이 아니라 검증할 가설이다. 대표 테스트 구조의 전기적 관측값과 레이아웃 비용을 비교해야 한다.</p>
+
+  <h3>증거 표기와 한계</h3>
+  <ul>
+    <li><strong>공개 보고:</strong> 검토된 ProcessBook은 대표적인 통합, 절연, 모듈 순서를 연관된 주제로 다룬다. 모듈 배경을 참고하되 특정 양산 플랫폼의 증거로 간주하지 않는다.</li>
+    <li><strong>설명용 가정:</strong> 저전압·고전압 인접 배치 예제는 가상이며 공정 레시피나 사양을 제공하지 않는다.</li>
+    <li><strong>공학적 추론:</strong> 형상, 기판 경로, 평탄도, 후속 측정 간의 연관성은 검증 가능한 통합 가설이다. 플랫폼별 레이아웃, 공정, 전기적 증거가 필요하다.</li>
+  </ul>
+
+  <h3>이해도 점검</h3>
+  <p><strong>질문:</strong> 절연 모듈을 변경한 뒤 절연 누설이 증가했다. 절연 모듈이 원인이라고 확정할 수 있는가?</p>
+  <p><strong>답:</strong> 아니다. 변경과 관측의 연관성은 있지만 인과관계는 확정되지 않았다. 구조와 측정 조건이 비교 가능한지 확인하고 관련 인터페이스와 열 이력을 점검한다. 그런 다음 가장자리, 접합, 표면, 기판 경로를 구별하는 구조 또는 분할 실험을 설계한다. 보완 지침은 WATBook의 측정 유효성 및 제한된 전기적 가설 장을 참고한다.</p>
+
+  <h3>더 읽기</h3>
+  <ul>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/integration.html">ProcessBook 통합 장(감사한 리비전)</a> — 대표 공정 흐름과 선택된 순서 효과.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/advanced.html">ProcessBook 첨단 통합 장(감사한 리비전)</a> — 플랫폼 맥락과 아키텍처 사례.</li>
+    <li><a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken 외(2016), “Predicting future complementary metal–oxide–semiconductor technology – challenges and approaches”</a> — 기술 스케일링 맥락. 가상 예제의 근거는 아니다.</li>
+  </ul>
+</section>
+<nav class="chapter-footer" aria-label="장 목록"><a href="c03-sequence-interface-contracts.html">← 이전 장: 공정 순서 의존성과 인터페이스 계약</a><a href="c05-gate-stack-architecture.html">다음 장: 게이트 스택 아키텍처와 공정 순서 →</a></nav></article><aside class="chapter-aside"><details><summary>전체 장</summary><nav aria-label="전체 장"><a href="c01-integration-as-decision.html">01 · 엔지니어링 의사결정으로서의 공정 통합</a><a href="c02-requirements-to-architecture.html">02 · 요구사항에서 공정 아키텍처까지</a><a href="c03-sequence-interface-contracts.html">03 · 공정 순서 의존성과 인터페이스 계약</a><a href="c04-isolation-substrate-choices.html" aria-current="page">04 · 공통 인터페이스로서의 절연과 기판</a><a href="c05-gate-stack-architecture.html">05 · 게이트 스택 아키텍처와 공정 순서</a><a href="c06-junction-thermal-history.html">06 · 열 이력과 접합 진화의 절충</a><a href="c07-pattern-transfer-chain.html">07 · 모듈 경계를 넘는 패턴 전사</a><a href="c08-contact-mol-interface.html">08 · 콘택트와 MOL 인터페이스 통합</a><a href="c09-beol-compatibility.html">09 · 후속 소자와의 BEOL 호환성</a><a href="c10-variation-propagation.html">10 · 통합 선택에 따른 변동 전파</a><a href="c11-design-technology-cooptimization.html">11 · 설계-기술 공동 최적화</a><a href="c12-integration-learning-qualification.html">12 · 학습·품질 인증·변경 관리</a><a href="c13-public-platform-case.html">13 · 공개 플랫폼을 통합 사례로 읽기</a></nav></details></aside></div></div></main><footer class="site-footer"><div class="container footer-wrap"><p>My Library 컬렉션의 독립 공학 교재입니다.</p><p>관련 독립 교재: <a href="https://frbread7.github.io/pmicbook/">PMICBook</a> · <a href="https://frbread7.github.io/watbook/">WATBook</a></p><p class="license-note"><a href="../license.html">라이선스</a> · 0.1.0</p></div></footer></body></html>

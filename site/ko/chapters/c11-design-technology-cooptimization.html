@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta name="theme-color" content="#f5f4ef"><link rel="canonical" href="https://frbread7.github.io/processintegrationbook/ko/chapters/c11-design-technology-cooptimization.html"><link rel="alternate" hreflang="en" href="https://frbread7.github.io/processintegrationbook/"><link rel="alternate" hreflang="ko" href="https://frbread7.github.io/processintegrationbook/ko/"><meta property="og:type" content="website"><meta property="og:title" content="설계-기술 공동 최적화 · ProcessIntegrationBook"><meta property="og:description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta property="og:image" content="https://frbread7.github.io/processintegrationbook/assets/covers/processintegrationbook.svg"><title>설계-기술 공동 최적화 · ProcessIntegrationBook</title><link rel="icon" href="../../assets/covers/processintegrationbook.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><script defer src="../../assets/site.js"></script></head><body><a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><img src="../../assets/covers/processintegrationbook.svg" alt=""><span>ProcessIntegrationBook</span></a><button class="button menu-toggle" type="button" data-menu-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="탐색 메뉴 열기">☰</button><nav id="main-navigation" class="main-nav" aria-label="책 소개"><a href="../index.html">책 소개</a><a href="../index.html#chapters" aria-current="page">장 목록</a><a href="../lab.html">실습실</a><a href="../references.html">참고 문헌</a></nav><div class="nav-actions"><a class="nav-action" href="../../index.html" hreflang="en" lang="en" aria-label="English">EN</a><button class="nav-action" type="button" data-theme-toggle data-dark-label="다크 테마" data-light-label="라이트 테마" aria-label="테마"><span data-theme-label>다크 테마</span></button></div></div></header><main id="main" class="page-main"><div class="container"><p class="breadcrumb"><a href="../index.html#chapters">장 목록</a> / 장 11</p><div class="chapter-layout"><article class="chapter-content"><p class="eyebrow">장 11</p><h1>설계-기술 공동 최적화</h1><section aria-labelledby="dtco">
+  <h2 id="dtco">설계-기술 공동 최적화</h2>
+  <p>공정 아키텍처의 가치는 그 기술로 구현한 회로와 레이아웃이 목표를 달성할 수 있는지에 달려 있습니다. 설계-기술 공동 최적화(DTCO)는 소자 선택, 패터닝 능력, 레이아웃 규칙, 기생 성분, 변동성, 회로 목표를 하나의 연결된 시스템으로 평가합니다. 이는 의사결정 프레임워크이지, 공정 변경이 설계 지표를 개선한다는 보장은 아닙니다.</p>
+
+  <section aria-labelledby="c11-objectives">
+    <h3 id="c11-objectives">학습 목표</h3>
+    <ul>
+      <li>회로 수준의 목표를 소자, 형상, 패터닝, 공정 제약으로 변환한다.</li>
+      <li>동일한 워크로드와 명시적 불확실성을 사용해 후보 기술을 비교한다.</li>
+      <li>주장된 설계 이점이 공정 윈도우 또는 레이아웃 가정에 의존하는 지점을 찾는다.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c11-loop">
+    <h3 id="c11-loop">공동 최적화 반복 과정</h3>
+    <ol>
+      <li>제품 목표와 동작 조건을 정의합니다. 예를 들어 정해진 전압, 전력 한도, 온도 범위에서의 타이밍입니다.</li>
+      <li>요구사항을 소자 특성, 배선, 셀 아키텍처, 레이아웃 제약에 배분합니다.</li>
+      <li>오버레이, 선폭 에지, 콘택트, 밀도 등 관련 제약과 마진을 포함해 레이아웃 패턴 및 치수가 제조 가능한지 확인합니다.</li>
+      <li>특성화된 소자 및 기생 성분의 변동을 모델과 샘플링 불확실성을 유지한 채 회로 평가에 전달합니다.</li>
+      <li>병목이 이동하면 아키텍처나 설계 규칙을 다시 검토하고, 새로운 상충 관계와 증거 기준을 기록합니다.</li>
+    </ol>
+    <p><strong>공개 보고:</strong> Aitken 등은 미래 CMOS 기술 예측의 어려움과 접근법을 논의하며, 기술 가정과 설계 결과의 연계 필요성을 다룹니다. 이는 공동 최적화 관점을 뒷받침할 뿐 특정 공정 후보나 회로 결과를 검증하지는 않습니다. <a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken 등 (2016)</a>.</p>
+    <p><strong>엔지니어링 추론:</strong> 패터닝 마진을 개선하는 레이아웃 단순화가 셀 면적을 늘리거나 기생 부하를 바꿀 수 있습니다. 반대로 높은 밀도는 면적을 줄이는 대신 공정 마진을 좁힐 수 있습니다. 이는 적용 가능한 설계 규칙, 기생 추출, 패터닝 모델, 제조 증거로 시험할 상충 관계 가설이지 보편적인 방향 법칙은 아닙니다.</p>
+  </section>
+
+  <section aria-labelledby="c11-worked">
+    <h3 id="c11-worked">의사결정 예제: 최소 피치인가, 견고한 셀인가?</h3>
+    <p><strong>설명용 가정:</strong> 가상의 표준 셀 두 개가 같은 논리 기능을 구현합니다. 레이아웃 A는 더 조밀하지만 콘택트와 게이트의 간격이 더 좁습니다. 레이아웃 B는 더 크고 해당 인터페이스의 형상 마진이 넓습니다. 치수, 공정 능력, 측정 성능은 제시하지 않습니다.</p>
+    <p>셀 면적만으로 순위를 정하지 마십시오. 두 안을 동일한 전기 모델, 워크로드, 동작 조건에서 먼저 평가합니다. 이어 면적, 지연, 전력, 배선 영향 및 관련 패터닝·콘택트 변동에 대한 민감도를 비교합니다. 더 좁은 레이아웃이 입증된 공정 윈도우 안에 있는지, 모델 불확실성이 주장된 이점보다 작은지 확인합니다. 그렇지 않다면 타당한 결론은 판별력 있는 패터닝 분할 실험이나 설계 규칙 검토를 요청하는 것이지 수치상의 승자를 고르는 것이 아닙니다.</p>
+    <p>통합팀은 형상이 제조 가능하도록 하는 인터페이스 조건 및 증거를 책임집니다. 설계팀은 회로 맥락과 허용 가능한 상충 관계를 책임집니다. 어느 한쪽만으로 제품 이점을 입증할 수는 없습니다.</p>
+  </section>
+
+  <section aria-labelledby="c11-limits">
+    <h3 id="c11-limits">범위와 한계</h3>
+    <p>이 장은 컴팩트 모델 파라미터, 설계 규칙, 공정 능력값을 제시하지 않습니다. 이러한 값은 기술별로 다르며 용도에 맞게 출처 확인과 검증이 필요합니다. 논문에 보고된 플랫폼은 접근법의 사례일 뿐, 그대로 적용할 수 있는 설계 규칙은 아닙니다. 패터닝 기초는 LithoBook에서, 공정 모듈 입문은 ProcessBook에서, 실제 설계 결정은 해당 제품의 적격 PDK 및 특성 데이터를 참조하십시오.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c11-check">
+    <h3 id="c11-check">확인 문제</h3>
+    <p>한 후보 셀은 시뮬레이션에서 면적이 4% 작지만, 핵심 콘택트 형상이 입증된 공정 윈도우 밖에 있습니다. 이 셀이 더 나은 기술 선택입니까?</p>
+    <details><summary>답과 설명</summary><p>현재 증거만으로는 그렇지 않습니다. 시뮬레이션의 면적 이점은 제조 가능성 기준을 통과하지 않은 형상에 의존합니다. 지원되는 레이아웃·공정 선택지를 찾거나 마진과 불확실성을 시험한 다음, 공통된 기준으로 면적과 회로 동작을 비교해야 합니다.</p></details>
+  </section>
+
+  <section aria-labelledby="c11-reading">
+    <h3 id="c11-reading">더 읽을거리</h3>
+    <ul>
+      <li><a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken 등, “Predicting future CMOS technology – challenges and approaches” (2016)</a>.</li>
+      <li><a href="https://github.com/geniuskey/lithobook/blob/5a4fa0a5b79f3d5581af140caa0e7831ccf88a05/README.md">LithoBook (감사한 리비전)</a> — 패터닝 범위와 학습 자료.</li>
+      <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/README.md">ProcessBook (감사한 리비전)</a> — 공정 모듈 기초.</li>
+    </ul>
+  </section>
+</section>
+<nav class="chapter-footer" aria-label="장 목록"><a href="c10-variation-propagation.html">← 이전 장: 통합 선택에 따른 변동 전파</a><a href="c12-integration-learning-qualification.html">다음 장: 학습·품질 인증·변경 관리 →</a></nav></article><aside class="chapter-aside"><details><summary>전체 장</summary><nav aria-label="전체 장"><a href="c01-integration-as-decision.html">01 · 엔지니어링 의사결정으로서의 공정 통합</a><a href="c02-requirements-to-architecture.html">02 · 요구사항에서 공정 아키텍처까지</a><a href="c03-sequence-interface-contracts.html">03 · 공정 순서 의존성과 인터페이스 계약</a><a href="c04-isolation-substrate-choices.html">04 · 공통 인터페이스로서의 절연과 기판</a><a href="c05-gate-stack-architecture.html">05 · 게이트 스택 아키텍처와 공정 순서</a><a href="c06-junction-thermal-history.html">06 · 열 이력과 접합 진화의 절충</a><a href="c07-pattern-transfer-chain.html">07 · 모듈 경계를 넘는 패턴 전사</a><a href="c08-contact-mol-interface.html">08 · 콘택트와 MOL 인터페이스 통합</a><a href="c09-beol-compatibility.html">09 · 후속 소자와의 BEOL 호환성</a><a href="c10-variation-propagation.html">10 · 통합 선택에 따른 변동 전파</a><a href="c11-design-technology-cooptimization.html" aria-current="page">11 · 설계-기술 공동 최적화</a><a href="c12-integration-learning-qualification.html">12 · 학습·품질 인증·변경 관리</a><a href="c13-public-platform-case.html">13 · 공개 플랫폼을 통합 사례로 읽기</a></nav></details></aside></div></div></main><footer class="site-footer"><div class="container footer-wrap"><p>My Library 컬렉션의 독립 공학 교재입니다.</p><p>관련 독립 교재: <a href="https://frbread7.github.io/pmicbook/">PMICBook</a> · <a href="https://frbread7.github.io/watbook/">WATBook</a></p><p class="license-note"><a href="../license.html">라이선스</a> · 0.1.0</p></div></footer></body></html>

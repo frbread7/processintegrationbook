@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta name="theme-color" content="#f5f4ef"><link rel="canonical" href="https://frbread7.github.io/processintegrationbook/ko/chapters/c10-variation-propagation.html"><link rel="alternate" hreflang="en" href="https://frbread7.github.io/processintegrationbook/"><link rel="alternate" hreflang="ko" href="https://frbread7.github.io/processintegrationbook/ko/"><meta property="og:type" content="website"><meta property="og:title" content="통합 선택에 따른 변동 전파 · ProcessIntegrationBook"><meta property="og:description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta property="og:image" content="https://frbread7.github.io/processintegrationbook/assets/covers/processintegrationbook.svg"><title>통합 선택에 따른 변동 전파 · ProcessIntegrationBook</title><link rel="icon" href="../../assets/covers/processintegrationbook.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><script defer src="../../assets/site.js"></script></head><body><a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><img src="../../assets/covers/processintegrationbook.svg" alt=""><span>ProcessIntegrationBook</span></a><button class="button menu-toggle" type="button" data-menu-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="탐색 메뉴 열기">☰</button><nav id="main-navigation" class="main-nav" aria-label="책 소개"><a href="../index.html">책 소개</a><a href="../index.html#chapters" aria-current="page">장 목록</a><a href="../lab.html">실습실</a><a href="../references.html">참고 문헌</a></nav><div class="nav-actions"><a class="nav-action" href="../../index.html" hreflang="en" lang="en" aria-label="English">EN</a><button class="nav-action" type="button" data-theme-toggle data-dark-label="다크 테마" data-light-label="라이트 테마" aria-label="테마"><span data-theme-label>다크 테마</span></button></div></div></header><main id="main" class="page-main"><div class="container"><p class="breadcrumb"><a href="../index.html#chapters">장 목록</a> / 장 10</p><div class="chapter-layout"><article class="chapter-content"><p class="eyebrow">장 10</p><h1>통합 선택에 따른 변동 전파</h1><section aria-labelledby="variation-propagation">
+  <h2 id="variation-propagation">통합 선택에 따른 변동 전파</h2>
+  <p>공정 변동 원인은 인터페이스를 거치며 제품 문제로 이어집니다. 중요한 질문은 “어느 모듈이 변동하는가?”에 그치지 않습니다. 그 변동이 다음 모듈에 어떤 상태를 만들고, 후속 공정이 이를 어떻게 바꾸며, 어떤 전기적 또는 설계 관측값이 원인을 구분할 수 있는지를 물어야 합니다. 이 장은 그 경로를 다루며, 측정을 다루는 WATBook이나 수율 및 공간 시그니처를 다루는 YieldBook을 대체하지 않습니다.</p>
+
+  <section aria-labelledby="c10-objectives">
+    <h3 id="c10-objectives">학습 목표</h3>
+    <ul>
+      <li>변동 원인을 두 개 이상의 모듈 경계를 넘어 전기적 관측값까지 추적한다.</li>
+      <li>물리적 메커니즘, 측정 아티팩트, 통계적 연관성을 구분한다.</li>
+      <li>구분력 있는 실험과 그 실험이 해소해야 할 불확실성을 정의한다.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c10-chain">
+    <h3 id="c10-chain">모듈별 시그마 목록이 아닌 상태 전파 경로</h3>
+    <p>원인 가설을 방향이 있는 경로로 표현합니다. <em>원인</em> → <em>재료 또는 형상 상태</em> → <em>후속 변환</em> → <em>소자 파라미터</em> → <em>회로 또는 제품 응답</em>의 순서입니다. 예를 들어 패터닝 위치 오차는 식각에 전달되는 형상을 바꿀 수 있습니다. 식각과 이후 라이너·충전 공정은 그 형상을 콘택트 계면 상태로 바꿀 수 있고, 전류 경로의 저항 측정에 영향을 줄 수 있습니다. 회로 지연은 트랜지스터 구동력 및 배선 기생 성분과 함께 그 저항에 반응할 수 있습니다. 각 화살표는 해당 인터페이스에서 증거를 필요로 하는 가설입니다.</p>
+    <p><strong>엔지니어링 추론:</strong> 상위 변경이 여러 하위 구조에 영향을 준다면, 구조 간 공변성이 공통 원인과 모니터 단독 결함을 구분하는 데 도움이 될 수 있습니다. 이는 검증 전략이지 공통 물리 메커니즘의 증명은 아닙니다. 계측 범위, 프로브 접촉, 온도, 샘플링, 데이터 결합 방식도 같은 겉보기 패턴을 만들거나 가릴 수 있습니다. 측정 통제는 WATBook에서, 맵과 시그니처 분석은 YieldBook에서 확인합니다.</p>
+    <p>1차 근사 민감도 모델은 시험 계획을 구성하는 데 쓸 수 있습니다.</p>
+    <div class="equation" role="math" aria-label="델타 y는 각 입력 x i 에 대한 y의 편미분과 델타 x i 곱의 합으로 근사됩니다">
+      <code>Δy ≈ Σᵢ (∂y/∂xᵢ) Δxᵢ</code>
+    </div>
+    <p><code>xᵢ</code>는 명시적으로 정의한 공정 또는 형상 변수이고 <code>y</code>는 선택한 응답입니다. 편미분은 지정된 동작점 부근의 타당한 모델이나 설계된 섭동에서 얻어야 합니다. 이 식은 비선형 상호작용을 생략하며 생산 분포를 정하지 않습니다. 입력 간 상관이 있다면 응답 분산을 추정할 때 공분산 항도 필요합니다.</p>
+  </section>
+
+  <section aria-labelledby="c10-worked">
+    <h3 id="c10-worked">의사결정 예제: 콘택트 저항 변화인가, 트랜지스터 변화인가?</h3>
+    <p><strong>설명용 가정:</strong> 합성된 분할 실험에서 패턴 전사 조정 후 로직 경로 지연 대용값이 소폭 증가하고, 켈빈 콘택트 체인 모니터는 더 크게 이동했습니다. 특정 수치나 실제 공정 결과를 뜻하지 않습니다.</p>
+    <p>두 가설이 남습니다. 조정으로 콘택트 형상·계면이 바뀌어 직렬 저항이 증가했거나, 동시에 발생한 소자 변경이 트랜지스터 구동력을 바꿨을 수 있습니다. 먼저 측정 데이터가 웨이퍼, 구조, 온도, 시점 측면에서 비교 가능한지 확인합니다. 그다음 독립적인 트랜지스터 모니터, 형상이 다른 콘택트 구조, 순서 및 인터페이스 기록을 비교합니다. 콘택트 체인 저항은 변했지만 트랜지스터 관측값이 특성화된 불확실성 범위 안에 있다면 첫 가설이 더 타당해집니다. 그러나 구조가 의심되는 콘택트 메커니즘에 민감하고 반복성이 충분하다는 점을 확인하기 전에는 확정할 수 없습니다.</p>
+    <p>따라서 통합 결론은 원인을 성급히 단정하지 않고 분할을 유지하며, 하위 모듈을 변경하기 전에 형상 민감도가 있는 교차 검증을 요청하는 것입니다. 지연 대용값과 콘택트 모니터의 상관만으로 인과관계를 입증할 수 없습니다.</p>
+  </section>
+
+  <section aria-labelledby="c10-evidence">
+    <h3 id="c10-evidence">증거와 한계</h3>
+    <dl>
+      <dt>설명용 가정</dt><dd>콘택트와 지연 시나리오는 합성 사례이며, 팹 레시피·측정값·실제 공정 결과를 주장하지 않습니다.</dd>
+      <dt>엔지니어링 추론</dt><dd>구조 간 공변성은 데이터 계보, 측정 능력, 경쟁 메커니즘을 확인할 때에만 원인 구분을 안내할 수 있습니다.</dd>
+    </dl>
+    <p>이 경로 분석법은 수율을 계산하거나 근본 원인을 자동 추론하지 않으며, 보정된 공정·소자 시뮬레이션을 대신하지도 않습니다. 특정 경로에 모듈별 모델을 적용한다면 보정 범위와 불확실성을 명시해야 합니다. 확산 물리는 TCADBook에서, 전기 측정과 불확실성은 WATBook에서, 수율 시그니처는 YieldBook에서 확인합니다.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c10-check">
+    <h3 id="c10-check">확인 문제</h3>
+    <p>웨이퍼 단위 데이터에서 패터닝 모니터와 소자 파라미터 사이의 연관성이 보입니다. 즉시 내릴 수 있는 가장 강한 결론은 무엇입니까?</p>
+    <details><summary>답과 설명</summary><p>이 연관성은 가설을 제시할 뿐 인과관계를 입증하지 않습니다. 데이터와 측정의 출처를 확인하고, 물리적 인터페이스 및 예상되는 하위 관측값을 정한 뒤, 경쟁 원인을 구분할 수 있는 독립 구조 또는 통제된 분할 실험을 선택해야 합니다.</p></details>
+  </section>
+
+  <section aria-labelledby="c10-reading">
+    <h3 id="c10-reading">더 읽을거리</h3>
+    <ul>
+      <li><a href="https://github.com/geniuskey/tcadbook/blob/56d3c14f757a55caed574e720069cfdf2b7a2bf6/README.md">TCADBook (감사한 리비전)</a> — 공정·소자 모델링과 해당 범위.</li>
+      <li><a href="https://github.com/frbread7/watbook">WATBook</a> — 측정에서 의사결정으로 이어지는 웨이퍼 전기 증거.</li>
+      <li><a href="https://github.com/geniuskey/yieldbook/blob/2acd8844633274ebea91e808c4a22ed4035549b8/README.md">YieldBook (감사한 리비전)</a> — 수율 및 시그니처 분석.</li>
+    </ul>
+  </section>
+</section>
+<nav class="chapter-footer" aria-label="장 목록"><a href="c09-beol-compatibility.html">← 이전 장: 후속 소자와의 BEOL 호환성</a><a href="c11-design-technology-cooptimization.html">다음 장: 설계-기술 공동 최적화 →</a></nav></article><aside class="chapter-aside"><details><summary>전체 장</summary><nav aria-label="전체 장"><a href="c01-integration-as-decision.html">01 · 엔지니어링 의사결정으로서의 공정 통합</a><a href="c02-requirements-to-architecture.html">02 · 요구사항에서 공정 아키텍처까지</a><a href="c03-sequence-interface-contracts.html">03 · 공정 순서 의존성과 인터페이스 계약</a><a href="c04-isolation-substrate-choices.html">04 · 공통 인터페이스로서의 절연과 기판</a><a href="c05-gate-stack-architecture.html">05 · 게이트 스택 아키텍처와 공정 순서</a><a href="c06-junction-thermal-history.html">06 · 열 이력과 접합 진화의 절충</a><a href="c07-pattern-transfer-chain.html">07 · 모듈 경계를 넘는 패턴 전사</a><a href="c08-contact-mol-interface.html">08 · 콘택트와 MOL 인터페이스 통합</a><a href="c09-beol-compatibility.html">09 · 후속 소자와의 BEOL 호환성</a><a href="c10-variation-propagation.html" aria-current="page">10 · 통합 선택에 따른 변동 전파</a><a href="c11-design-technology-cooptimization.html">11 · 설계-기술 공동 최적화</a><a href="c12-integration-learning-qualification.html">12 · 학습·품질 인증·변경 관리</a><a href="c13-public-platform-case.html">13 · 공개 플랫폼을 통합 사례로 읽기</a></nav></details></aside></div></div></main><footer class="site-footer"><div class="container footer-wrap"><p>My Library 컬렉션의 독립 공학 교재입니다.</p><p>관련 독립 교재: <a href="https://frbread7.github.io/pmicbook/">PMICBook</a> · <a href="https://frbread7.github.io/watbook/">WATBook</a></p><p class="license-note"><a href="../license.html">라이선스</a> · 0.1.0</p></div></footer></body></html>

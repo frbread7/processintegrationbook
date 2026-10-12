@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="An engineering textbook on cross-module dependencies, integration architecture, cumulative process budgets, and evidence-led technology trade-offs."><meta name="theme-color" content="#f5f4ef"><link rel="canonical" href="https://frbread7.github.io/processintegrationbook/chapters/c13-public-platform-case.html"><link rel="alternate" hreflang="en" href="https://frbread7.github.io/processintegrationbook/"><link rel="alternate" hreflang="ko" href="https://frbread7.github.io/processintegrationbook/ko/"><meta property="og:type" content="website"><meta property="og:title" content="Reading a disclosed platform as an integration case · ProcessIntegrationBook"><meta property="og:description" content="An engineering textbook on cross-module dependencies, integration architecture, cumulative process budgets, and evidence-led technology trade-offs."><meta property="og:image" content="https://frbread7.github.io/processintegrationbook/assets/covers/processintegrationbook.svg"><title>Reading a disclosed platform as an integration case · ProcessIntegrationBook</title><link rel="icon" href="../assets/covers/processintegrationbook.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/styles.css"><script defer src="../assets/site.js"></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><img src="../assets/covers/processintegrationbook.svg" alt=""><span>ProcessIntegrationBook</span></a><button class="button menu-toggle" type="button" data-menu-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="Open navigation">☰</button><nav id="main-navigation" class="main-nav" aria-label="Overview"><a href="../index.html">Overview</a><a href="../index.html#chapters" aria-current="page">Chapters</a><a href="../lab.html">Lab</a><a href="../references.html">References</a></nav><div class="nav-actions"><a class="nav-action" href="../ko/index.html" hreflang="ko" lang="ko" aria-label="한국어">KO</a><button class="nav-action" type="button" data-theme-toggle data-dark-label="Dark theme" data-light-label="Light theme" aria-label="Theme"><span data-theme-label>Dark theme</span></button></div></div></header><main id="main" class="page-main"><div class="container"><p class="breadcrumb"><a href="../index.html#chapters">Chapters</a> / Chapter 13</p><div class="chapter-layout"><article class="chapter-content"><p class="eyebrow">Chapter 13</p><h1>Reading a disclosed platform as an integration case</h1><section aria-labelledby="public-platform-case">
+  <h2 id="public-platform-case">Reading a disclosed platform as an integration case</h2>
+  <p>A public technology paper is a bounded evidence source. It can show that authors reported a particular combination of modules and can help readers ask integration questions. It rarely publishes every interface condition, process order, distribution, failure mode, or qualification criterion needed to reproduce or generalize the platform. This chapter practices disciplined reading rather than reconstructing a proprietary flow.</p>
+
+  <section aria-labelledby="c13-objectives">
+    <h3 id="c13-objectives">Learning objectives</h3>
+    <ul>
+      <li>Extract only claims directly supported by a public platform disclosure.</li>
+      <li>Separate a paper's stated implementation from engineering inferences about cross-module dependencies.</li>
+      <li>Identify which missing evidence would be needed before transferring a reported choice to another technology.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c13-source">
+    <h3 id="c13-source">What the cited paper reports</h3>
+    <p><strong>Publicly reported:</strong> The title and paper by K. Mistry et al. describe a 45 nm logic technology and explicitly identify high-k/metal-gate transistors, strained silicon, nine copper interconnect layers, 193 nm dry patterning, and lead-free packaging among its platform attributes. The cited disclosure is a 2007 IEDM paper. Those words establish the combination presented by the authors in that historical platform context; they do not disclose a generally reusable recipe or prove that each element caused a particular product metric. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007</a>.</p>
+    <p>The chapter uses the list as a prompt for questions, not as an asserted process sequence. The title alone does not tell us the exact ordering, interface specifications, process-window margins, complete electrical distributions, or qualification data. Any such claim requires inspection of the paper's full text and a directly supporting passage or figure. The DOI reference is the source; no figure or copyrighted text is reproduced here.</p>
+  </section>
+
+  <section aria-labelledby="c13-integration-questions">
+    <h3 id="c13-integration-questions">Turn a platform list into integration questions</h3>
+    <p>A platform inventory becomes an integration case only when dependencies and decision evidence are made explicit. The following are <strong>engineering inferences</strong> to investigate, not claims that Mistry et al. reported these specific interactions:</p>
+    <ul>
+      <li>For high-k/metal gate and strained-silicon choices, which thermal, chemical, and patterning interfaces would have to remain compatible? What device and reliability evidence would bound the trade-off?</li>
+      <li>For 193 nm dry patterning and the reported device geometries, what pattern-transfer, overlay, and design-rule evidence would support manufacturable layout choices?</li>
+      <li>For copper interconnect and lead-free packaging, what thermal and materials compatibility requirements span back-end and package assembly? Which are paper-reported and which remain questions for another source?</li>
+      <li>What characterization, variability, and qualification evidence would connect the module choices to the intended logic product requirements?</li>
+    </ul>
+    <p>These questions identify evidence needs across process, device, design, interconnect, and assembly boundaries. They do not authorize an inferred flow order or causal explanation. A rigorous review keeps “paper reports” and “reviewer infers” in separate columns.</p>
+  </section>
+
+  <section aria-labelledby="c13-worked">
+    <h3 id="c13-worked">Worked reading exercise: can this choice transfer?</h3>
+    <p><strong>Illustrative assumption:</strong> A team considers whether a metal-gate integration concept mentioned in a historical logic platform could inform a different device family. It has only the bibliographic record and platform description, not a complete evidence package for the new application.</p>
+    <p>First record the narrow public fact: Mistry et al. report a platform whose title includes high-k/metal-gate transistors. Then list the transfer question's missing conditions: target device architecture, material stack, full thermal and chemical history, geometry, electrical/reliability criteria, and evidence that the interfaces remain acceptable in the new context. A separate review such as Yeo's addresses material selection and process-integration issues for metal gates, but it is not a substitute for target-specific data. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
+    <p>The decision is “use the paper to formulate a candidate and test plan; do not claim the implementation transfers.” That boundary preserves the value of public literature without presenting it as confidential process knowledge or universal guidance.</p>
+  </section>
+
+  <section aria-labelledby="c13-evidence-limits">
+    <h3 id="c13-evidence-limits">Evidence status and limits</h3>
+    <dl>
+      <dt>Publicly reported</dt><dd>The technology descriptors named above are attributed to the paper title and its 2007 platform context. Detailed outcome claims are intentionally omitted here.</dd>
+      <dt>Illustrative assumption</dt><dd>The transfer scenario is hypothetical and specifies no process values or measured results.</dd>
+      <dt>Engineering inference</dt><dd>The interface questions are a review framework, not evidence of the authors' specific sequence or failure mechanisms.</dd>
+    </dl>
+    <p>Before using any more detailed result, inspect the full paper and cite the precise source passage. A historical public disclosure is not a current commercial specification, process recipe, independent replication, or proof of applicability to another node or product.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c13-check">
+    <h3 id="c13-check">Knowledge check</h3>
+    <p>The paper title names several technologies in one platform. Does that establish their exact process order and prove that one caused the platform's performance?</p>
+    <details><summary>Answer and explanation</summary><p>No. The title supports that the authors presented those elements as attributes of the platform. Exact sequence or causality needs direct evidence in the paper, and transferring either conclusion needs evidence for the target process and product context.</p></details>
+  </section>
+
+  <section aria-labelledby="c13-reading">
+    <h3 id="c13-reading">Further reading</h3>
+    <ul>
+      <li><a href="https://doi.org/10.1109/IEDM.2007.4418914">K. Mistry et al., “A 45nm Logic Technology with High-k + Metal Gate Transistors, Strained Silicon, 9 Cu Interconnect Layers, 193nm Dry Patterning, and 100% Pb-free Packaging” (IEDM 2007)</a>.</li>
+      <li><a href="https://doi.org/10.1016/j.tsf.2004.05.039">Y.-C. Yeo, “Metal gate technology for nanoscale transistors—material selection and process integration issues” (2004)</a>.</li>
+    </ul>
+  </section>
+</section>
+<nav class="chapter-footer" aria-label="Chapters"><a href="c12-integration-learning-qualification.html">← Previous chapter: Learning, qualification, and controlled change</a><a href="../index.html#chapters">Chapter guide</a></nav></article><aside class="chapter-aside"><details><summary>All chapters</summary><nav aria-label="All chapters"><a href="c01-integration-as-decision.html">01 · Integration as an engineering decision</a><a href="c02-requirements-to-architecture.html">02 · From requirements to process architecture</a><a href="c03-sequence-interface-contracts.html">03 · Sequence dependencies and interface contracts</a><a href="c04-isolation-substrate-choices.html">04 · Isolation and substrate as shared interfaces</a><a href="c05-gate-stack-architecture.html">05 · Gate-stack architecture and process order</a><a href="c06-junction-thermal-history.html">06 · Thermal history and junction evolution trade-offs</a><a href="c07-pattern-transfer-chain.html">07 · Pattern transfer across module boundaries</a><a href="c08-contact-mol-interface.html">08 · Contact and MOL interface integration</a><a href="c09-beol-compatibility.html">09 · BEOL compatibility with earlier devices</a><a href="c10-variation-propagation.html">10 · How integration choices propagate variation</a><a href="c11-design-technology-cooptimization.html">11 · Design-technology co-optimization</a><a href="c12-integration-learning-qualification.html">12 · Learning, qualification, and controlled change</a><a href="c13-public-platform-case.html" aria-current="page">13 · Reading a disclosed platform as an integration case</a></nav></details></aside></div></div></main><footer class="site-footer"><div class="container footer-wrap"><p>An independent engineering textbook in the My Library collection.</p><p>Related independent textbooks: <a href="https://frbread7.github.io/pmicbook/">PMICBook</a> · <a href="https://frbread7.github.io/watbook/">WATBook</a></p><p class="license-note"><a href="../license.html">License</a> · 0.1.0</p></div></footer></body></html>

@@ -1,0 +1,51 @@
+<section aria-labelledby="learning-qualification">
+  <h2 id="learning-qualification">Learning, qualification, and controlled change</h2>
+  <p>Integration learning turns a plausible cross-module mechanism into a decision supported by evidence. Qualification then asks whether the chosen change remains acceptable over the defined operating, material, and manufacturing envelope. A successful experiment at one condition is not qualification; a qualified baseline does not make every later change safe.</p>
+
+  <section aria-labelledby="c12-objectives">
+    <h3 id="c12-objectives">Learning objectives</h3>
+    <ul>
+      <li>Convert an integration concern into competing, testable hypotheses.</li>
+      <li>Choose an experiment that separates hypotheses while preserving traceability and controls.</li>
+      <li>Distinguish mechanism learning, engineering qualification, and authorization to release a controlled change.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c12-evidence">
+    <h3 id="c12-evidence">From concern to evidence gate</h3>
+    <p>A learning plan should name the changed input, the intended mechanism, an alternative explanation, the expected observable for each, the test structure or analysis, and the decision threshold owner. Include material genealogy and the sequence state at each relevant interface. If a test cannot observe the proposed mechanism, a null result is inconclusive rather than evidence of no effect.</p>
+    <p>Designed experiments can reveal main effects and interactions when factors, ranges, randomization, replication, and measurement capability are chosen appropriately. A factorial design's estimated interaction is conditional on its tested levels, structure, and noise model; extrapolation requires additional evidence. Measurement-system uncertainty must be small enough for the decision being made, a topic treated in detail by WATBook.</p>
+    <p>Keep the gate explicit: <strong>mechanism learning</strong> supports or rejects a hypothesis; <strong>qualification</strong> demonstrates that requirements are met over a predeclared envelope with an appropriate sample and reliability plan; <strong>controlled change approval</strong> confirms documentation, process controls, affected products, rollback criteria, and responsible sign-offs. Exact qualification protocols depend on product, application, and governing customer/industry requirements; none are prescribed here.</p>
+  </section>
+
+  <section aria-labelledby="c12-worked">
+    <h3 id="c12-worked">Worked decision: an interface clean is proposed for change</h3>
+    <p><strong>Illustrative assumption:</strong> An integration review suspects that a pre-contact surface condition contributes to contact variability. A proposed clean modification could address it, but might also change a neighboring dielectric interface. These are hypotheses, not claims about a real process.</p>
+    <p>One hypothesis predicts that the modification improves the targeted contact observable; the competing hypothesis predicts no meaningful contact benefit or an adverse dielectric/reliability response. The learning experiment should compare a controlled baseline and candidate on traceable material, measure a contact-sensitive structure plus a dielectric-sensitive response, and include enough replication to estimate repeatability and wafer/lot variability for the chosen decision. It should also verify the surface state or a suitable proxy if that state is central to the mechanism.</p>
+    <p>If the contact metric improves but dielectric reliability evidence is incomplete, mechanism learning may be positive while qualification remains open. The change is not ready for release. The record should name the missing stress evidence, acceptance owner, affected module interfaces, and stop/rollback conditions.</p>
+  </section>
+
+  <section aria-labelledby="c12-limits">
+    <h3 id="c12-limits">Evidence labels and limits</h3>
+    <dl>
+      <dt>Illustrative assumption</dt><dd>The clean-change example is fictional; it specifies no chemistry, recipe, measurement value, or product result.</dd>
+      <dt>Engineering inference</dt><dd>A change may improve its target response while harming a neighboring interface; test both when the proposed mechanism crosses that boundary.</dd>
+    </dl>
+    <p>This framework is not a substitute for a site's change-control system, safety review, reliability standards, customer notification obligations, or release authority. Internal peer review in this book is educational and is not fab qualification or professional certification.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c12-check">
+    <h3 id="c12-check">Knowledge check</h3>
+    <p>A controlled split improves the target contact metric, but the proposed change's dielectric stress test is not complete. What status is justified?</p>
+    <details><summary>Answer and explanation</summary><p>The experiment may support mechanism learning for the contact response, but qualification and controlled release remain open. Complete the predeclared cross-interface reliability gate and required change approvals before claiming the change is qualified.</p></details>
+  </section>
+
+  <section aria-labelledby="c12-reading">
+    <h3 id="c12-reading">Further reading</h3>
+    <ul>
+      <li><a href="https://frbread7.github.io/watbook/">WATBook</a> — measurement conditions, uncertainty, and evidence-to-decision practice.</li>
+      <li><a href="https://doi.org/10.1049/iet-cdt.2015.0210">Aitken et al. (2016)</a> — challenges in relating technology assumptions to future design outcomes.</li>
+      <li><a href="https://github.com/geniuskey/yieldbook/blob/2acd8844633274ebea91e808c4a22ed4035549b8/README.md">YieldBook (audited revision)</a> — distinct scope in yield analysis; this chapter focuses on learning and evidence gates.</li>
+    </ul>
+  </section>
+</section>

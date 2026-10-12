@@ -1,0 +1,58 @@
+<section aria-labelledby="chapter-title">
+  <h2 id="chapter-title">Gate-stack architecture and process order</h2>
+  <p><strong>Decision question.</strong> How should gate dielectric and electrode formation be ordered relative to channel definition, source/drain formation, and thermal processing so that the required device portfolio is feasible and its remaining risks are testable?</p>
+
+  <h3>Learning objectives</h3>
+  <ul>
+    <li>Distinguish a gate-stack material choice from the sequence architecture that makes that choice manufacturable.</li>
+    <li>Compare gate-first and replacement-metal-gate (RMG) integration at the level of thermal exposure, patterning, fill, planarization, and interface risk.</li>
+    <li>Use public technology disclosures with their platform context, without turning one implementation into a universal recipe.</li>
+  </ul>
+
+  <h3>The stack is coupled to the flow</h3>
+  <p>A transistor gate stack couples the channel interface, dielectric, electrode, geometry, and subsequent process history. The integration question is therefore not merely which dielectric constant or work function is desirable. It is whether the target electrical behavior can survive the complete sequence while the gate remains patternable, electrically controlled, and compatible with the neighboring device and interconnect modules.</p>
+  <p>In a gate-first architecture, the functional gate stack is formed and patterned before many later device-formation steps. Its materials and interfaces must tolerate the thermal and chemical exposures that follow. The architecture can avoid the specific cavity-replacement operations used by RMG, while placing a stronger compatibility burden on the already formed stack. These statements describe trade-off categories; actual sequence details vary.</p>
+  <p>In a replacement-metal-gate architecture, a sacrificial or dummy gate defines the gate location through selected earlier operations; a later sequence replaces it with the functional gate stack. This can separate some high-temperature operations from final electrode formation and can support work-function choices for different device polarities. It also introduces its own interface contract: preserve the channel and gate cavity, remove temporary material selectively, prepare the surface, form continuous dielectric/electrode layers in a constrained geometry, and planarize or connect the result without unacceptable damage or variability. RMG is a family of flows, not one fixed sequence; high-k placement and replacement details must be checked in each disclosed implementation.</p>
+
+  <h3>Architecture comparison</h3>
+  <table>
+    <caption>Questions for a gate integration review; these are not universal rankings.</caption>
+    <thead><tr><th scope="col">Decision axis</th><th scope="col">Gate first</th><th scope="col">Replacement metal gate</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Thermal history</th><td>Can the functional stack and interfaces tolerate downstream activation and other thermal steps?</td><td>Which steps occur before replacement, and what thermal budget remains after functional stack formation?</td></tr>
+      <tr><th scope="row">Patterning and geometry</th><td>Can the functional materials be patterned with acceptable control and compatibility?</td><td>Can cavity dimensions and surface condition support the intended replacement stack and fill?</td></tr>
+      <tr><th scope="row">Device portfolio</th><td>Can work-function and threshold targets be met within the selected material/sequence options?</td><td>Can multiple gate options be formed reproducibly without unacceptable cavity, clean, or fill differences?</td></tr>
+      <tr><th scope="row">Evidence needed</th><td>Electrical drift and interface integrity after representative process exposures.</td><td>Across-device uniformity, interface integrity, fill/planarization defects, and electrical distributions after replacement.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Worked architecture decision</h3>
+  <p><strong>Publicly reported:</strong> Intel's 2007 IEDM paper describes a 45 nm logic technology using high-k plus metal-gate transistors. That statement is specific to the paper's reported platform and date; it does not establish a universal node-independent sequence or prove that its choices are appropriate for another device portfolio.</p>
+  <p><strong>Illustrative assumption:</strong> a fictional technology team needs n- and p-channel devices with distinct target gate behavior and has a late thermal operation that is not yet fixed. No work-function values, material recipes, or measured performance are assumed.</p>
+  <ol>
+    <li>Write constraints before selecting a flow: electrical targets and distributions, maximum downstream thermal exposure, gate geometry, patterning capability, contamination rules, and integration cost.</li>
+    <li>For gate first, ask whether each candidate stack and its channel interface remain within drift and reliability limits after the full planned thermal sequence. The test must reproduce relevant exposure, not infer compatibility from a material datasheet alone.</li>
+    <li>For RMG, ask whether the proposed cavity, selective removal, surface preparation, multi-material fill, and planarization can meet geometry and electrical-uniformity requirements. A feasible material pair does not by itself prove a feasible cavity process.</li>
+    <li>Run a staged comparison using matched device structures and explicit acceptance criteria. If the late thermal operation can move earlier, record that as a sequence alternative and assess its consequences for junctions and other modules rather than treating it as a free change.</li>
+  </ol>
+  <p><strong>Engineering inference:</strong> RMG may be attractive when separating final gate materials from some earlier high-temperature steps is valuable, while cavity formation and fill become additional integration risks. Gate first may simplify that replacement boundary while tightening stack thermal compatibility. These are hypotheses to evaluate against the actual platform's process window and electrical evidence.</p>
+
+  <h3>Evidence labels and limits</h3>
+  <ul>
+    <li><strong>Publicly reported:</strong> Mistry et al. (IEDM 2007) report a high-k/metal-gate 45 nm logic platform. The cited paper is evidence for that reported implementation only.</li>
+    <li><strong>Publicly reported:</strong> Yeo (2004) reviews metal-gate material selection and process-integration issues; it provides context for trade-offs, not a contemporary process specification.</li>
+    <li><strong>Illustrative assumption:</strong> the n/p device portfolio and unfixed late thermal operation above are fictional.</li>
+    <li><strong>Engineering inference:</strong> the comparison table lists decision questions; it makes no claim that one architecture always wins.</li>
+  </ul>
+
+  <h3>Knowledge check</h3>
+  <p><strong>Question:</strong> A candidate metal electrode has the desired electrical work function. Is that enough to select an RMG flow?</p>
+  <p><strong>Answer:</strong> No. The electrode must be integrated in the actual cavity and sequence. Surface preparation, layer continuity, fill, pattern-dependent geometry, planarization, contamination compatibility, and device-to-device variation all require evidence. A material-level result is necessary input, not an integration qualification.</p>
+
+  <h3>Further reading</h3>
+  <ul>
+    <li><a href="https://doi.org/10.1109/IEDM.2007.4418914">K. Mistry et al. (IEDM 2007), “A 45nm Logic Technology with High-k + Metal Gate Transistors, Strained Silicon, 9 Cu Interconnect Layers, 193nm Dry Patterning, and 100% Pb-free Packaging”</a>.</li>
+    <li><a href="https://doi.org/10.1016/j.tsf.2004.05.039">Y.-C. Yeo (2004), “Metal gate technology for nanoscale transistors—material selection and process integration issues”</a>.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/advanced.html">ProcessBook, advanced integration chapter (audited revision)</a> — a concise link to broader HKMG/RMG architecture context.</li>
+  </ul>
+</section>

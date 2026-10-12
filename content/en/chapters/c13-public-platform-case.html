@@ -1,0 +1,62 @@
+<section aria-labelledby="public-platform-case">
+  <h2 id="public-platform-case">Reading a disclosed platform as an integration case</h2>
+  <p>A public technology paper is a bounded evidence source. It can show that authors reported a particular combination of modules and can help readers ask integration questions. It rarely publishes every interface condition, process order, distribution, failure mode, or qualification criterion needed to reproduce or generalize the platform. This chapter practices disciplined reading rather than reconstructing a proprietary flow.</p>
+
+  <section aria-labelledby="c13-objectives">
+    <h3 id="c13-objectives">Learning objectives</h3>
+    <ul>
+      <li>Extract only claims directly supported by a public platform disclosure.</li>
+      <li>Separate a paper's stated implementation from engineering inferences about cross-module dependencies.</li>
+      <li>Identify which missing evidence would be needed before transferring a reported choice to another technology.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="c13-source">
+    <h3 id="c13-source">What the cited paper reports</h3>
+    <p><strong>Publicly reported:</strong> The title and paper by K. Mistry et al. describe a 45 nm logic technology and explicitly identify high-k/metal-gate transistors, strained silicon, nine copper interconnect layers, 193 nm dry patterning, and lead-free packaging among its platform attributes. The cited disclosure is a 2007 IEDM paper. Those words establish the combination presented by the authors in that historical platform context; they do not disclose a generally reusable recipe or prove that each element caused a particular product metric. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007</a>.</p>
+    <p>The chapter uses the list as a prompt for questions, not as an asserted process sequence. The title alone does not tell us the exact ordering, interface specifications, process-window margins, complete electrical distributions, or qualification data. Any such claim requires inspection of the paper's full text and a directly supporting passage or figure. The DOI reference is the source; no figure or copyrighted text is reproduced here.</p>
+  </section>
+
+  <section aria-labelledby="c13-integration-questions">
+    <h3 id="c13-integration-questions">Turn a platform list into integration questions</h3>
+    <p>A platform inventory becomes an integration case only when dependencies and decision evidence are made explicit. The following are <strong>engineering inferences</strong> to investigate, not claims that Mistry et al. reported these specific interactions:</p>
+    <ul>
+      <li>For high-k/metal gate and strained-silicon choices, which thermal, chemical, and patterning interfaces would have to remain compatible? What device and reliability evidence would bound the trade-off?</li>
+      <li>For 193 nm dry patterning and the reported device geometries, what pattern-transfer, overlay, and design-rule evidence would support manufacturable layout choices?</li>
+      <li>For copper interconnect and lead-free packaging, what thermal and materials compatibility requirements span back-end and package assembly? Which are paper-reported and which remain questions for another source?</li>
+      <li>What characterization, variability, and qualification evidence would connect the module choices to the intended logic product requirements?</li>
+    </ul>
+    <p>These questions identify evidence needs across process, device, design, interconnect, and assembly boundaries. They do not authorize an inferred flow order or causal explanation. A rigorous review keeps “paper reports” and “reviewer infers” in separate columns.</p>
+  </section>
+
+  <section aria-labelledby="c13-worked">
+    <h3 id="c13-worked">Worked reading exercise: can this choice transfer?</h3>
+    <p><strong>Illustrative assumption:</strong> A team considers whether a metal-gate integration concept mentioned in a historical logic platform could inform a different device family. It has only the bibliographic record and platform description, not a complete evidence package for the new application.</p>
+    <p>First record the narrow public fact: Mistry et al. report a platform whose title includes high-k/metal-gate transistors. Then list the transfer question's missing conditions: target device architecture, material stack, full thermal and chemical history, geometry, electrical/reliability criteria, and evidence that the interfaces remain acceptable in the new context. A separate review such as Yeo's addresses material selection and process-integration issues for metal gates, but it is not a substitute for target-specific data. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
+    <p>The decision is “use the paper to formulate a candidate and test plan; do not claim the implementation transfers.” That boundary preserves the value of public literature without presenting it as confidential process knowledge or universal guidance.</p>
+  </section>
+
+  <section aria-labelledby="c13-evidence-limits">
+    <h3 id="c13-evidence-limits">Evidence status and limits</h3>
+    <dl>
+      <dt>Publicly reported</dt><dd>The technology descriptors named above are attributed to the paper title and its 2007 platform context. Detailed outcome claims are intentionally omitted here.</dd>
+      <dt>Illustrative assumption</dt><dd>The transfer scenario is hypothetical and specifies no process values or measured results.</dd>
+      <dt>Engineering inference</dt><dd>The interface questions are a review framework, not evidence of the authors' specific sequence or failure mechanisms.</dd>
+    </dl>
+    <p>Before using any more detailed result, inspect the full paper and cite the precise source passage. A historical public disclosure is not a current commercial specification, process recipe, independent replication, or proof of applicability to another node or product.</p>
+  </section>
+
+  <section class="knowledge-check" aria-labelledby="c13-check">
+    <h3 id="c13-check">Knowledge check</h3>
+    <p>The paper title names several technologies in one platform. Does that establish their exact process order and prove that one caused the platform's performance?</p>
+    <details><summary>Answer and explanation</summary><p>No. The title supports that the authors presented those elements as attributes of the platform. Exact sequence or causality needs direct evidence in the paper, and transferring either conclusion needs evidence for the target process and product context.</p></details>
+  </section>
+
+  <section aria-labelledby="c13-reading">
+    <h3 id="c13-reading">Further reading</h3>
+    <ul>
+      <li><a href="https://doi.org/10.1109/IEDM.2007.4418914">K. Mistry et al., “A 45nm Logic Technology with High-k + Metal Gate Transistors, Strained Silicon, 9 Cu Interconnect Layers, 193nm Dry Patterning, and 100% Pb-free Packaging” (IEDM 2007)</a>.</li>
+      <li><a href="https://doi.org/10.1016/j.tsf.2004.05.039">Y.-C. Yeo, “Metal gate technology for nanoscale transistors—material selection and process integration issues” (2004)</a>.</li>
+    </ul>
+  </section>
+</section>

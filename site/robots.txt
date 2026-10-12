@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://frbread7.github.io/processintegrationbook/sitemap.xml

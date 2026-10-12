@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta name="theme-color" content="#f5f4ef"><link rel="canonical" href="https://frbread7.github.io/processintegrationbook/ko/chapters/c02-requirements-to-architecture.html"><link rel="alternate" hreflang="en" href="https://frbread7.github.io/processintegrationbook/"><link rel="alternate" hreflang="ko" href="https://frbread7.github.io/processintegrationbook/ko/"><meta property="og:type" content="website"><meta property="og:title" content="요구사항에서 공정 아키텍처까지 · ProcessIntegrationBook"><meta property="og:description" content="모듈 간 의존성, 통합 아키텍처, 누적 공정 예산, 증거 기반 기술 절충을 다루는 공학 교재입니다."><meta property="og:image" content="https://frbread7.github.io/processintegrationbook/assets/covers/processintegrationbook.svg"><title>요구사항에서 공정 아키텍처까지 · ProcessIntegrationBook</title><link rel="icon" href="../../assets/covers/processintegrationbook.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/styles.css"><script defer src="../../assets/site.js"></script></head><body><a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav-wrap"><a class="brand" href="../index.html"><img src="../../assets/covers/processintegrationbook.svg" alt=""><span>ProcessIntegrationBook</span></a><button class="button menu-toggle" type="button" data-menu-toggle aria-controls="main-navigation" aria-expanded="false" aria-label="탐색 메뉴 열기">☰</button><nav id="main-navigation" class="main-nav" aria-label="책 소개"><a href="../index.html">책 소개</a><a href="../index.html#chapters" aria-current="page">장 목록</a><a href="../lab.html">실습실</a><a href="../references.html">참고 문헌</a></nav><div class="nav-actions"><a class="nav-action" href="../../index.html" hreflang="en" lang="en" aria-label="English">EN</a><button class="nav-action" type="button" data-theme-toggle data-dark-label="다크 테마" data-light-label="라이트 테마" aria-label="테마"><span data-theme-label>다크 테마</span></button></div></div></header><main id="main" class="page-main"><div class="container"><p class="breadcrumb"><a href="../index.html#chapters">장 목록</a> / 장 02</p><div class="chapter-layout"><article class="chapter-content"><p class="eyebrow">장 02</p><h1>요구사항에서 공정 아키텍처까지</h1><section aria-labelledby="architecture-question">
+  <h2 id="architecture-question">엔지니어링 질문</h2>
+  <p>익숙한 공정 흐름을 성급하게 선택하지 않으면서 시스템과 소자 목표를 공정 아키텍처로 어떻게 바꿀 수 있을까요? 먼저 <em>기술이 무엇을 해야 하는가</em>와 <em>후보 아키텍처가 어떤 방식으로 구현할 것인가</em>를 분리해야 합니다. 요구사항은 소자군과 동작 맥락에 속하고, 아키텍처는 그 요구사항을 구조, 재료, 인터페이스, 마스크, 공정 역량에 배분합니다.</p>
+</section>
+
+<section aria-labelledby="objectives">
+  <h2 id="objectives">학습 목표</h2>
+  <ul>
+    <li>시스템 수준의 필요를 측정 가능한 소자 및 제조 요구사항으로 변환한다.</li>
+    <li>여러 소자군을 서로 고립된 모듈 목록이 아니라 공유 자원과 제약의 관점에서 나타낸다.</li>
+    <li>아키텍처 후보를 하드 제약, 증거 공백, 제품 수명주기 요구에 맞춰 비교한다.</li>
+    <li>공개 플랫폼 사례를 보고된 범위 안에서 해석하고, 사실과 추론을 구분한다.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="requirements-stack">
+  <h2 id="requirements-stack">모듈을 선택하기 전에 요구사항 계층을 만든다</h2>
+  <p>요구사항은 명시적인 계층을 따라야 합니다. 에너지 효율, 전압 범위, 집적도, 수명 같은 시스템 요구는 회로 동작을 제한합니다. 회로 동작은 소자 특성과 동작 조건을 제약하고, 소자는 형상·재료·인터페이스·변동성을 제한합니다. 마지막으로 제조 제약을 고려해 제안 아키텍처가 제어 및 검증 가능한지 판단합니다.</p>
+  <p>각 요구사항에는 수량, 단위, 조건, 수용 방법, 담당자를 기록합니다. “누설이 낮을 것”은 바이어스, 온도, 소자 모집단, 한계가 정의되지 않았다면 아직 공학 요구사항이 아닙니다. 이 책은 제품 사양을 제시하지 않습니다. 실제 설계와 프로그램의 권한자가 정해야 합니다.</p>
+  <p>다음으로 제약을 분류합니다.</p>
+  <ul>
+    <li><strong>하드 제약:</strong> 의도한 제품 또는 플랫폼에서 충족해야 하는 조건. 전압 호환성, 절연, 열 한계, 신뢰성 검증 등이 해당할 수 있습니다.</li>
+    <li><strong>절충 가능한 목표:</strong> 면적, 성능, 전력, 공정 복잡도, 설계 유연성처럼 균형을 맞출 수 있는 목표.</li>
+    <li><strong>증거 기준:</strong> 후보를 선택하기 전에 측정, 모델링 또는 검증이 필요한 미해결 질문.</li>
+  </ul>
+  <p>이렇게 분류하면 서로 비교할 수 없는 목표를 근거 없이 하나의 점수로 합치는 일을 피할 수 있습니다. 가중 점수를 사용한다면 가중치와 민감도를 드러내야 합니다. 점수는 하드 제약이나 증거를 대신하지 않습니다.</p>
+</section>
+
+<section aria-labelledby="architecture-portfolio">
+  <h2 id="architecture-portfolio">소자 포트폴리오를 공유 아키텍처에 배치하기</h2>
+  <p>하나의 기술에서 전압, 누설, 구동력, 매칭, 노이즈, 신뢰성 요구가 다른 소자들이 필요할 수 있습니다. 이 요구들은 기판과 절연 선택, 게이트 스택, 열 예산, 콘택트 형성, 배선 자원, 설계 규칙을 두고 경쟁할 수 있습니다. 포트폴리오 표로 공유 의존성을 드러낼 수 있습니다.</p>
+  <ul>
+    <li>소자군별 필수 동작 조건과 전기적·신뢰성 목표를 적습니다.</li>
+    <li>다른 소자군과 공유하는 물리적 또는 공정 자원을 식별합니다.</li>
+    <li>공유 선택이 유리한지, 중립적인지, 제약이 될 수 있는지 증거 상태와 함께 표시합니다.</li>
+    <li>아키텍처에서 비롯되는 레이아웃 및 마스크 요구를 기록합니다.</li>
+  </ul>
+  <p><strong>공개 보고:</strong> Mistry 등은 고유전율/금속 게이트 트랜지스터, 스트레인드 실리콘, 여러 구리 배선층 등을 포함한 특정 45 nm 로직 플랫폼을 설명합니다. 이 논문은 한 시점의 한 플랫폼을 기록한 것이며, 다른 제품의 요구사항이나 아키텍처를 규정하지 않습니다. <a href="https://doi.org/10.1109/IEDM.2007.4418914">IEDM 2007 논문</a>.</p>
+  <p><strong>엔지니어링 추론:</strong> 한 소자군이 다른 소자와 공유하는 재료 또는 열 제약을 도입한다면, 전체 포트폴리오를 다시 평가해야 합니다. 구체적인 영향은 대상 공정 조건과 소자 구조를 이용해 시험해야 합니다. 포트폴리오 표는 질문을 드러낼 뿐 답을 주지는 않습니다.</p>
+</section>
+
+<section aria-labelledby="worked-architecture">
+  <h2 id="worked-architecture">아키텍처 비교 예제</h2>
+  <p><strong>설명용 가정:</strong> 한 팀이 코어 로직 소자와 별도의 동작 전압 요구를 가진 두 번째 소자군을 포함하는 혼합 전압 플랫폼을 계획합니다. 이 시나리오는 구체적인 전압, 공정 모듈, 제품 성능을 주장하지 않습니다.</p>
+  <p>두 소자군의 동작 및 신뢰성 요구사항을 각각 정의합니다. 그런 다음 최소 두 가지 아키텍처 후보를 만듭니다. 한 후보는 추가 설계 또는 소자 선택지를 활용해 플랫폼을 공유할 수 있고, 다른 후보는 특수 소자 요구를 별도의 모듈 경로에 더 많이 분리할 수 있습니다. 이는 아키텍처 가설이지 실제 공정의 지침이 아닙니다.</p>
+  <p>제약 목록을 사용해 소자 동작, 절연과 기생 성분, 게이트/계면 호환성, 열 이력, 콘택트와 배선, 마스크/레이아웃 영향, 공정창 증거, 검증 부담, 미해결 위험을 비교합니다. 각 항목에 “근거 있음”, “미해결”, “해당 없음”을 표시하고 근거 자료 또는 계획된 실험에 연결합니다. 측정되지 않은 호환성 우려에 임의의 확률을 부여하지 마십시오.</p>
+  <p>다음 단계는 핵심 인터페이스에서 후보를 가장 잘 구분하는 실험입니다. 예를 들어 누적 열 이력이 소자 목표를 바꾸는지가 불확실하다면, 열 이력을 분리하고 관련 소자 결과를 통제된 조건에서 측정하는 분할 실험을 정의합니다. 측정 유효성과 해석은 WATBook을 참고합니다. 이 책이 담당하는 것은 모니터 설계 설명이 아니라 아키텍처 질문과 증거 계획입니다.</p>
+</section>
+
+<section aria-labelledby="architecture-limits">
+  <h2 id="architecture-limits">가정과 한계</h2>
+  <p>아키텍처 비교는 소자 시뮬레이션, 공정 통합 실험, 설계 규칙 개발, 신뢰성 검증, 제조 역량 분석을 대체하지 않습니다. 공개 논문은 보고된 구현에 대한 증거이지, 다른 플랫폼에 무조건 적용할 수 있는 변환식이 아닙니다. 정성적 목록은 미지수를 정리할 수 있지만 수율이나 공정 확률을 예측하지 못합니다.</p>
+</section>
+
+<section aria-labelledby="knowledge-check">
+  <h2 id="knowledge-check">확인 문제</h2>
+  <ol>
+    <li><strong>요구사항에 조건과 수용 방법이 포함되어야 하는 이유는 무엇입니까?</strong><br><strong>답:</strong> 동작 조건에 따라 소자 결과가 달라지고, 정성적 목표는 팀마다 다르게 해석될 수 있기 때문입니다. 단위, 동작 조건, 모집단, 수용 측정이 정의되어야 요구사항을 시험할 수 있습니다.</li>
+    <li><strong>공개 플랫폼 논문에서 아키텍처가 성공적으로 구현되었다고 보고합니다. 이것으로 우리 포트폴리오의 실현 가능성이 증명됩니까?</strong><br><strong>답:</strong> 아닙니다. 해당 공개 플랫폼과 맥락에 대한 증거입니다. 새로운 포트폴리오는 자체 소자군, 인터페이스, 공정 제약을 요구사항에 연결하고 증거를 확보해야 합니다.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="further-reading">
+  <h2 id="further-reading">더 읽을거리</h2>
+  <ul>
+    <li><a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry 등, IEDM 2007</a> — 적용 범위를 분명히 하며 읽기 좋은 공개 통합 플랫폼 사례.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/advanced.html">ProcessBook, 첨단 기술 개요</a> — 기술 사례의 간략한 배경. 이 장에서는 요구사항 배분과 비교를 다룹니다.</li>
+    <li><a href="https://github.com/frbread7/pmicbook/blob/da37b183c559d35fcb7f6471c86c513b104a7020/chapters/integration.html">PMICBook, BCD 통합</a> — 제품별 통합 사례이며 다른 포트폴리오의 템플릿은 아닙니다.</li>
+  </ul>
+</section>
+<nav class="chapter-footer" aria-label="장 목록"><a href="c01-integration-as-decision.html">← 이전 장: 엔지니어링 의사결정으로서의 공정 통합</a><a href="c03-sequence-interface-contracts.html">다음 장: 공정 순서 의존성과 인터페이스 계약 →</a></nav></article><aside class="chapter-aside"><details><summary>전체 장</summary><nav aria-label="전체 장"><a href="c01-integration-as-decision.html">01 · 엔지니어링 의사결정으로서의 공정 통합</a><a href="c02-requirements-to-architecture.html" aria-current="page">02 · 요구사항에서 공정 아키텍처까지</a><a href="c03-sequence-interface-contracts.html">03 · 공정 순서 의존성과 인터페이스 계약</a><a href="c04-isolation-substrate-choices.html">04 · 공통 인터페이스로서의 절연과 기판</a><a href="c05-gate-stack-architecture.html">05 · 게이트 스택 아키텍처와 공정 순서</a><a href="c06-junction-thermal-history.html">06 · 열 이력과 접합 진화의 절충</a><a href="c07-pattern-transfer-chain.html">07 · 모듈 경계를 넘는 패턴 전사</a><a href="c08-contact-mol-interface.html">08 · 콘택트와 MOL 인터페이스 통합</a><a href="c09-beol-compatibility.html">09 · 후속 소자와의 BEOL 호환성</a><a href="c10-variation-propagation.html">10 · 통합 선택에 따른 변동 전파</a><a href="c11-design-technology-cooptimization.html">11 · 설계-기술 공동 최적화</a><a href="c12-integration-learning-qualification.html">12 · 학습·품질 인증·변경 관리</a><a href="c13-public-platform-case.html">13 · 공개 플랫폼을 통합 사례로 읽기</a></nav></details></aside></div></div></main><footer class="site-footer"><div class="container footer-wrap"><p>My Library 컬렉션의 독립 공학 교재입니다.</p><p>관련 독립 교재: <a href="https://frbread7.github.io/pmicbook/">PMICBook</a> · <a href="https://frbread7.github.io/watbook/">WATBook</a></p><p class="license-note"><a href="../license.html">라이선스</a> · 0.1.0</p></div></footer></body></html>

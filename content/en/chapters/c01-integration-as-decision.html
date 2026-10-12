@@ -1,0 +1,65 @@
+<section aria-labelledby="decision-question">
+  <h2 id="decision-question">The engineering question</h2>
+  <p>When two process architectures can both produce functioning devices, what makes one the defensible technology choice? Integration is the discipline of deciding whether device, material, patterning, thermal, and interconnect choices can coexist across the complete sequence—and of recording what evidence would change that decision.</p>
+  <p>This chapter treats an integration choice as a reviewable argument, not as a preferred flow diagram. A proposal should connect a requirement to an architecture, identify interfaces and constraints, compare alternatives, state the evidence behind each claim, and expose residual risk. A public technology paper reports a particular implementation in its own platform and time context; it does not establish a universal recipe. For example, the 45 nm logic platform reported by Mistry et al. combined high-k/metal-gate transistors, strained silicon, copper interconnect, and other technology elements. Its value here is as evidence that a platform is a coordinated set of choices, not as a template to copy. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007</a>.</p>
+</section>
+
+<section aria-labelledby="objectives">
+  <h2 id="objectives">Learning objectives</h2>
+  <ul>
+    <li>Separate a technology requirement from a proposed process solution.</li>
+    <li>Trace a choice through its upstream assumptions, interfaces, and downstream consequences.</li>
+    <li>Compare candidate architectures using explicit evidence and uncertainty rather than preference.</li>
+    <li>State a decision, its unresolved risks, and the next discriminating measurement or experiment.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="decision-record">
+  <h2 id="decision-record">A decision record that can be challenged</h2>
+  <p>A useful integration record contains six linked elements:</p>
+  <ol>
+    <li><strong>Requirement:</strong> a measurable device, circuit, reliability, layout, or manufacturing outcome, with operating conditions and acceptance owner.</li>
+    <li><strong>Architecture:</strong> the candidate device and module arrangement, with alternatives retained long enough for comparison.</li>
+    <li><strong>Interface contract:</strong> what each neighboring module assumes about material, geometry, surface state, thermal history, contamination, and allowed variation.</li>
+    <li><strong>Constraint path:</strong> precedence rules and budgets that can make a locally attractive step incompatible with later or earlier steps.</li>
+    <li><strong>Evidence and model:</strong> the observation, public disclosure, measurement, or calculation supporting a claim, including its conditions and limits.</li>
+    <li><strong>Decision and residual risk:</strong> selected option, rejected alternatives, open questions, verification owner, and a trigger for reopening the decision.</li>
+  </ol>
+  <p>These elements prevent a common reasoning error: treating a module's local success as proof of platform compatibility. A gate material can meet its own electrical target yet be incompatible with a later thermal exposure or neighboring material. Conversely, an apparent conflict may be resolved by changing the order or interface condition. The specific mechanism must be supported by device and materials evidence; the decision method itself does not predict physical outcomes.</p>
+  <p><strong>Engineering inference:</strong> If a proposed option changes the state presented to a downstream module, then that downstream module's acceptance conditions should be rechecked before claiming the option is feasible. A split-lot experiment, interface characterization, or calibrated process/device model may test the concern, depending on the failure mechanism. The inference is a planning rule, not a claim that a particular integration conflict exists.</p>
+</section>
+
+<section aria-labelledby="worked-decision">
+  <h2 id="worked-decision">Worked decision: retain an alternative until the interface is proven</h2>
+  <p><strong>Illustrative assumption:</strong> A technology team is evaluating two gate-stack sequences for a new device family. Candidate A places the final gate materials before a later high-temperature operation; Candidate B delays formation of those materials until after that operation. No temperatures, recipes, materials, or measured performance are specified here.</p>
+  <p>The decision is not “which sequence is modern?” First translate the device target into requirements for threshold behavior, leakage, variability, reliability, and manufacturability. Then identify the evidence needed to establish whether Candidate A's gate stack tolerates the complete thermal and chemical history, and whether Candidate B's later formation is compatible with patterning, interface preparation, and device geometry. A failure to establish the first condition does not prove Candidate B is better; it identifies a comparison gap.</p>
+  <p>For each candidate, the integration review should map affected interfaces, list plausible consequences, and assign a discriminating test. Gate-material selection and process order are coupled topics in the literature, but any specific materials compatibility claim must be traced to evidence for the materials and conditions at issue. See Yeo's review for the scope of metal-gate material-selection and process-integration concerns: <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo, Thin Solid Films 462–463 (2004)</a>.</p>
+  <p>The review can conclude “defer selection pending interface and reliability evidence.” That is a valid engineering outcome when neither architecture yet meets the evidence gate. It is more informative than assigning an unsupported score or selecting the option with the simplest diagram.</p>
+</section>
+
+<section aria-labelledby="evidence-labels">
+  <h2 id="evidence-labels">Evidence labels and limits</h2>
+  <dl>
+    <dt>Publicly reported</dt><dd>A result or implementation detail explicitly attributed to a public source, with its platform and publication context.</dd>
+    <dt>Illustrative assumption</dt><dd>A teaching scenario or simplification that is not a claim about any production flow.</dd>
+    <dt>Engineering inference</dt><dd>A reasoned consequence drawn from stated facts; identify what evidence would test it.</dd>
+  </dl>
+  <p>A paper, model, or internal review has a defined scope. Do not convert a paper's platform-specific result into a general process rule, or an internal review into fab acceptance, silicon validation, or professional certification.</p>
+</section>
+
+<section aria-labelledby="knowledge-check">
+  <h2 id="knowledge-check">Knowledge check</h2>
+  <ol>
+    <li><strong>A module meets its standalone specification. Is the complete architecture therefore feasible?</strong><br><strong>Answer:</strong> No. The module must also meet the interface contract and remain compatible with the full upstream and downstream sequence. The review needs evidence at the relevant interfaces and conditions.</li>
+    <li><strong>Two candidate flows have incomplete reliability evidence. What is a defensible decision?</strong><br><strong>Answer:</strong> Preserve the alternatives, state the unresolved risk, and define a discriminating qualification or characterization gate. Choosing a winner without evidence hides uncertainty rather than resolving it.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="further-reading">
+  <h2 id="further-reading">Further reading</h2>
+  <ul>
+    <li><a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., “A 45nm Logic Technology with High-k + Metal Gate Transistors…” (IEDM 2007)</a> — a dated, platform-specific example of coordinated technology choices.</li>
+    <li><a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo, “Metal gate technology for nanoscale transistors—material selection and process integration issues” (2004)</a> — background on gate-material and integration concerns.</li>
+    <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/integration.html">ProcessBook, CMOS integration overview</a> — a representative flow introduction; this chapter extends it with explicit decision and evidence structure.</li>
+  </ul>
+</section>
