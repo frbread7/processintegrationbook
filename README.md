@@ -38,7 +38,7 @@ The dependency explorer and case challenge are qualitative learning activities. 
 
 ## Book Factory registration
 
-Use the My Library Book Factory contract. The starter schema and registration commands are documented in the central repository's [Book Factory guide](https://github.com/frbread7/books/blob/main/docs/BOOK_FACTORY.md). This repository's manifest remains in-progress until the release, deployment, content, route, and experiment evidence gates succeed.
+Use the My Library Book Factory contract. The starter schema and registration commands are documented in the central repository's [Book Factory guide](https://github.com/frbread7/books/blob/main/docs/BOOK_FACTORY.md). This repository's `library-manifest.json` intentionally remains `in-progress` as a registration submission input, including after its release, deployment, content, route, and experiment gates pass. The published catalog record in My Library is authoritative for the book's publication status in the portal.
 
 ## Licensing and attribution
 
