@@ -13,8 +13,27 @@
 
   <section aria-labelledby="c13-source">
     <h3 id="c13-source">인용 논문이 보고한 내용</h3>
-    <p><strong>공개 보고:</strong> K. Mistry 등의 2007년 IEDM 논문 그림 5(247–248쪽)는 트랜지스터 통합을 “high-k first, metal gate last”로 표시합니다. 그 공정 흐름은 ALD로 Hf계 고유전율막과 패턴된 더미 폴리실리콘을 먼저 형성한 뒤 소스·드레인, Ni 실리사이드, 층간 절연막(ILD) 공정을 진행합니다. 이어 ILD 연마와 더미 폴리 제거, PMOS 및 NMOS 일함수 금속의 순차 증착·패터닝, Al 트렌치 충전·연마, 식각 정지막 증착이 표시됩니다. 저자들은 일함수 유지를 위해 이 흐름을 선택했다고 밝히고, 호환 가능한 열 예산을 통합 과제로 지적합니다. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry 등, IEDM 2007, 그림 5</a>.</p>
+    <p><strong>공개 보고:</strong> K. Mistry 등의 2007년 IEDM 논문 그림 5(247–248쪽)는 트랜지스터 통합을 “high-k first, metal gate last”로 표시합니다. 그 공정 흐름은 ALD로 Hf계 고유전율막과 패턴된 더미 폴리실리콘을 먼저 형성한 뒤 소스·드레인, Ni 실리사이드, 층간 절연막(ILD) 공정을 진행합니다. 이어 ILD 연마와 더미 폴리 제거, PMOS 일함수 금속 증착, NMOS 영역에서 그 PMOS 금속을 패턴 제거, NMOS 일함수 금속 증착, Al 게이트 트렌치 충전·연마, 콘택트 식각 정지막(CESL) 증착이 표시됩니다. 저자들은 일함수 유지를 위해 이 흐름을 선택했다고 밝히고, 호환 가능한 열 예산을 통합 과제로 지적합니다. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry 등, IEDM 2007, 그림 5</a>.</p>
     <p>초록은 45 nm 양산 로직 기술을 설명하고 SRAM 어레이와 여러 마이크로프로세서에서의 시연을 보고합니다. 이는 해당 역사적 플랫폼에서 저자들이 보고한 결과이며, 독립 재현이나 특정 모듈 하나가 제품 지표를 일으켰다는 주장이 아닙니다. 이 논문은 공개된 순서와 명시된 동기에 대한 구체적 근거이지, 일반적으로 재사용할 수 있는 레시피가 아닙니다.</p>
+    <figure class="process-sequence-figure" tabindex="0" aria-label="인용한 2007년 트랜지스터 공정 순서의 가로 스크롤 개략도">
+      <svg viewBox="0 0 960 360" role="img" aria-labelledby="c13-flow-title c13-flow-desc">
+        <title id="c13-flow-title">Mistry 등 2007년 그림 5에 나타난 순서</title>
+        <desc id="c13-flow-desc">출처 범위를 명시한 개략적 순서: ALD Hf계 고유전율막 및 패턴된 더미 폴리실리콘; 소스·드레인 형성; Ni 실리사이드화; 층간 절연막 증착과 연마; 더미 폴리실리콘 제거; PMOS 일함수 금속 증착 및 NMOS 영역에서 그 금속의 패턴 제거; NMOS 일함수 금속 증착; 알루미늄 게이트 트렌치 충전과 연마; 콘택트 식각 정지막 증착.</desc>
+        <defs><marker id="c13-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#334155"/></marker></defs>
+        <g fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" font-family="sans-serif" font-size="16" text-anchor="middle">
+          <rect x="20" y="28" width="208" height="66" rx="9"/><text x="124" y="55" fill="#0f172a" stroke="none"><tspan x="124">ALD Hf계 고유전율막</tspan><tspan x="124" dy="22">+ 패턴된 더미 폴리</tspan></text>
+          <rect x="268" y="28" width="190" height="66" rx="9"/><text x="363" y="55" fill="#0f172a" stroke="none"><tspan x="363">소스·드레인 형성</tspan><tspan x="363" dy="22">후 Ni 실리사이드화</tspan></text>
+          <rect x="498" y="28" width="190" height="66" rx="9"/><text x="593" y="55" fill="#0f172a" stroke="none"><tspan x="593">층간 절연막</tspan><tspan x="593" dy="22">증착 및 연마</tspan></text>
+          <rect x="728" y="28" width="208" height="66" rx="9"/><text x="832" y="55" fill="#0f172a" stroke="none"><tspan x="832">더미 폴리실리콘</tspan><tspan x="832" dy="22">제거</tspan></text>
+          <rect x="728" y="184" width="208" height="76" rx="9"/><text x="832" y="211" fill="#0f172a" stroke="none" font-size="13"><tspan x="832">PMOS 금속 증착 →</tspan><tspan x="832" dy="19">NMOS 영역에서 제거 →</tspan><tspan x="832" dy="19">NMOS 금속 증착</tspan></text>
+          <rect x="498" y="184" width="190" height="76" rx="9"/><text x="593" y="211" fill="#0f172a" stroke="none"><tspan x="593">Al 게이트 트렌치</tspan><tspan x="593" dy="22">충전 및 연마</tspan></text>
+          <rect x="268" y="184" width="190" height="76" rx="9"/><text x="363" y="211" fill="#0f172a" stroke="none"><tspan x="363">콘택트 식각 정지막</tspan><tspan x="363" dy="22">(CESL) 증착</tspan></text>
+          <text x="480" y="326" fill="#475569" stroke="none" font-size="14">개략적 순서이며 완전한 공정 레시피가 아님. 출처: 그림 5, 247–248쪽.</text>
+        </g>
+        <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#c13-arrow)"><path d="M228 61 H258"/><path d="M458 61 H488"/><path d="M688 61 H718"/><path d="M832 94 V174"/><path d="M728 222 H698"/><path d="M498 222 H468"/></g>
+      </svg>
+      <figcaption>그림 5에 나타난 순서를 바탕으로 새로 그린 개략도이며 원문 그림을 복제하지 않았습니다. 인용한 트랜지스터 통합 순서를 요약하며 보편적인 CMOS 흐름을 주장하지 않습니다. 작은 화면에서는 개략도를 좌우로 스크롤해 각 단계를 읽으세요.</figcaption>
+    </figure>
   </section>
 
   <section aria-labelledby="c13-integration-questions">
@@ -30,15 +49,15 @@
   </section>
 
   <section aria-labelledby="c13-worked">
-    <h3 id="c13-worked">통합 의사결정 예제: 공정 흐름에서 일함수 보존하기</h3>
+    <h3 id="c13-worked">분석 예제: 공정 흐름에서 일함수 보존하기</h3>
     <p><strong>의사결정 제약(논문 보고):</strong> 해당 팀은 고유전율 적층을 통한 스케일링과 트랜지스터 공정 중 선택한 금속 일함수의 보존을 함께 요구했습니다. Mistry 등은 열 예산 호환성을 과제로 언급하며, 일함수 유지를 위해 이 흐름을 선택했다고 명시합니다.</p>
     <ol>
-      <li><strong>선택한 순서(논문 보고):</strong> Hf계 고유전율막을 먼저 형성하고 패턴된 폴리실리콘을 임시 게이트로 사용합니다. 소스·드레인 및 Ni 실리사이드 공정과 ILD 증착을 마친 뒤, 연마와 더미 폴리 제거를 진행합니다. 그 다음 PMOS와 NMOS 일함수 금속을 각각 증착·패터닝하고 게이트 트렌치를 충전·평탄화합니다. 이는 그림 5에 표시된 순서이며, 일반 흐름을 재구성한 것이 아닙니다.</li>
+      <li><strong>선택한 순서(논문 보고):</strong> Hf계 고유전율막을 먼저 형성하고 패턴된 폴리실리콘을 임시 게이트로 사용합니다. 소스·드레인 및 Ni 실리사이드 공정과 ILD 증착을 마친 뒤, 연마와 더미 폴리 제거를 진행합니다. 그 다음 PMOS 일함수 금속을 증착하고 NMOS 영역에서 그 금속을 패턴 제거한 뒤 NMOS 일함수 금속을 증착합니다. 게이트 트렌치를 충전·평탄화한 후 콘택트 식각 정지막을 증착합니다. 이는 그림 5에 표시된 순서이며, 일반 흐름을 재구성한 것이 아닙니다.</li>
       <li><strong>목표한 이점(논문 보고):</strong> 최종 일함수 금속을 늦게 넣는 방식은 논문이 명시한 일함수 보존 제약을 다룹니다. 논문은 통합 플랫폼의 소자 및 제조 결과를 보고하지만, 해당 순서의 효과만 분리하는 통제된 게이트-퍼스트 비교는 제공하지 않습니다.</li>
       <li><strong>통합 부담(엔지니어링 추론):</strong> 이 순서는 호환성 질문을 없애지 않고 옮깁니다. 고유전율막은 앞선 열·화학 이력을 견뎌야 하고, 후반 게이트 모듈은 더미 제거, n/p 일함수 재료의 분리, 트렌치 충전, 평탄화에서 계면이나 소자 변동이 허용되지 않는지 확인해야 합니다. 논문은 이 공정 모듈을 설명하지만 다른 플랫폼의 공정 여유를 입증하지는 않습니다.</li>
       <li><strong>의사결정 경계:</strong> 공개된 플랫폼에서 출처가 뒷받침하는 선택은 저자들의 일함수·열 예산 논리에 따른 고유전율막 우선/금속 게이트 후공정입니다. 다른 목표에서는 후보 아키텍처로만 취급해야 합니다. 선택을 이전하기 전에 목표 공정의 열 이력 분할을 비교하고 유효 일함수 또는 문턱 전압, 게이트 누설, 신뢰성, 대체 게이트 건전성을 측정해야 합니다. 이는 제안하는 증거 항목이지 인용 사례가 보고한 결과가 아닙니다.</li>
     </ol>
-    <p>보고된 제약, 공정 순서, 남은 통합 부담을 연결했기 때문에 이는 실제 의사결정 예제입니다. 게이트-라스트가 언제나 우월하다는 결론은 아닙니다. Yeo의 리뷰는 금속 게이트 재료와 통합의 넓은 맥락을 제공하지만, 목표 플랫폼의 증거를 대신하지는 않습니다. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
+    <p>이 분석은 논문에 보고된 제약과 순서를 남은 통합 질문에 연결합니다. 저자들이 이 검토 예제를 문서화했다고 주장하지 않으며 게이트-라스트가 언제나 우월하다는 결론도 아닙니다. Yeo의 리뷰는 금속 게이트 재료와 통합의 넓은 맥락을 제공하지만, 목표 플랫폼의 증거를 대신하지는 않습니다. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
   </section>
 
   <section aria-labelledby="c13-evidence-limits">

@@ -101,7 +101,7 @@
         '<button type="button" data-remove-hold>' + rootEl.dataset.removeLabel + '</button>';
       row.querySelectorAll("input").forEach(function (field) { field.addEventListener("input", calculate); });
       row.querySelector("[data-remove-hold]").addEventListener("click", function () {
-        if (holdList.children.length > 1) row.remove();
+        row.remove();
         updateHoldLimit();
         calculate();
       });
@@ -112,12 +112,12 @@
     function currentInput() {
       const fields = {};
       rootEl.querySelectorAll("[data-profile-input]").forEach(function (field) {
-        fields[field.dataset.profileInput] = Number(field.value);
+        fields[field.dataset.profileInput] = field.value.trim() === "" ? NaN : Number(field.value);
       });
       fields.holds = Array.from(holdList.querySelectorAll(".hold-row")).map(function (row) {
         return {
-          tempC: Number(row.querySelector("[data-hold-temp]").value),
-          timeS: Number(row.querySelector("[data-hold-time]").value)
+          tempC: row.querySelector("[data-hold-temp]").value.trim() === "" ? NaN : Number(row.querySelector("[data-hold-temp]").value),
+          timeS: row.querySelector("[data-hold-time]").value.trim() === "" ? NaN : Number(row.querySelector("[data-hold-time]").value)
         };
       });
       return fields;
@@ -135,11 +135,14 @@
         if (result.surfaceTruncationLikely) notices.push(rootEl.dataset.surfaceWarning);
         if (result.highConcentrationCaution) notices.push(rootEl.dataset.concentrationWarning);
         status.textContent = [rootEl.dataset.modelStatus].concat(notices).join(" ");
-        drawChart(chart, input, result, model, rootEl.dataset.chartXLabel, rootEl.dataset.chartYLabel, rootEl.dataset.backgroundLabel);
+        const chartDescription = result.rightCrossingNm === null ? rootEl.dataset.noCrossingChartLabel : rootEl.dataset.backgroundLabel;
+        chart.closest("figure").querySelector("figcaption").textContent = chartDescription;
+        drawChart(chart, input, result, model, rootEl.dataset.chartXLabel, rootEl.dataset.chartYLabel, chartDescription);
       } catch (error) {
         output.textContent = rootEl.dataset.invalidResult;
         status.textContent = document.documentElement.lang === "ko" ? rootEl.dataset.invalidResult : error.message;
         chart.replaceChildren();
+        chart.closest("figure").querySelector("figcaption").textContent = rootEl.dataset.invalidResult;
       }
     }
 
@@ -188,18 +191,33 @@
     const plotWidth = width - left - right;
     const plotHeight = height - top - bottom;
     const sigma = result.sigmaFinalNm;
-    const maxX = Math.max(220, input.projectedRangeNm + 4.5 * sigma);
-    const maxXBounded = Math.min(maxX, 1000);
+    const maxX = result.rightCrossingNm === null
+      ? Math.max(220, input.projectedRangeNm + 5 * sigma)
+      : Math.max(220, input.projectedRangeNm + 5 * sigma, result.rightCrossingNm * 1.15);
+    const sampleXs = new Set();
+    for (let i = 0; i <= 120; i += 1) sampleXs.add(maxX * i / 120);
+    [0.25, 0.5, 1, 2].forEach(function (multiple) {
+      const offset = multiple * sigma;
+      [result.modeNm - offset, result.modeNm + offset].forEach(function (x) {
+        if (x >= 0 && x <= maxX) sampleXs.add(x);
+      });
+    });
+    [result.modeNm, result.rightCrossingNm].forEach(function (x) {
+      if (x !== null && x >= 0 && x <= maxX) sampleXs.add(x);
+    });
+    const sortedXs = Array.from(sampleXs).sort(function (a, b) { return a - b; });
     const points = [];
-    for (let i = 0; i <= 120; i += 1) {
-      const x = maxXBounded * i / 120;
+    sortedXs.forEach(function (x, index) {
       const c = model.concentrationAtNm(x, input, result);
       const normalized = Math.min(1, c / result.peakCm3);
-      const px = left + plotWidth * x / maxXBounded;
+      const px = left + plotWidth * x / maxX;
       const py = top + plotHeight * (1 - normalized);
-      points.push((i === 0 ? "M" : "L") + px.toFixed(2) + " " + py.toFixed(2));
-    }
+      points.push((index === 0 ? "M" : "L") + px.toFixed(2) + " " + py.toFixed(2));
+    });
     const thresholdY = top + plotHeight * (1 - Math.min(1, input.backgroundCm3 / result.peakCm3));
+    const crossingX = result.rightCrossingNm === null ? null : left + plotWidth * result.rightCrossingNm / maxX;
+    const crossingTextX = crossingX === null ? null : crossingX < left + 65 ? crossingX + 6 : crossingX - 6;
+    const crossingTextAnchor = crossingX !== null && crossingX < left + 65 ? "start" : "end";
     svg.innerHTML =
       '<title>' + yLabel + '</title><desc>' + backgroundLabel + '</desc>' +
       '<line x1="' + left + '" y1="' + (top + plotHeight) + '" x2="' + (width - right) + '" y2="' + (top + plotHeight) + '" stroke="currentColor" opacity=".35"/>' +
@@ -207,9 +225,11 @@
       '<line x1="' + left + '" y1="' + (top + plotHeight / 2) + '" x2="' + (width - right) + '" y2="' + (top + plotHeight / 2) + '" stroke="currentColor" opacity=".14"/>' +
       '<path d="' + points.join(" ") + '" fill="none" stroke="#b94f32" stroke-width="3" stroke-linecap="round"/>' +
       (result.rightCrossingNm === null ? "" :
-        '<line x1="' + left + '" y1="' + thresholdY.toFixed(2) + '" x2="' + (width - right) + '" y2="' + thresholdY.toFixed(2) + '" stroke="#236c68" stroke-dasharray="6 5" stroke-width="1.5"/>') +
+        '<line x1="' + left + '" y1="' + thresholdY.toFixed(2) + '" x2="' + (width - right) + '" y2="' + thresholdY.toFixed(2) + '" stroke="#236c68" stroke-dasharray="6 5" stroke-width="1.5"/>' +
+        '<line data-crossing-marker x1="' + crossingX.toFixed(2) + '" y1="' + top + '" x2="' + crossingX.toFixed(2) + '" y2="' + (top + plotHeight) + '" stroke="#236c68" stroke-dasharray="3 4" stroke-width="1.5"/>' +
+        '<text x="' + crossingTextX.toFixed(2) + '" y="' + (top + 30) + '" text-anchor="' + crossingTextAnchor + '" fill="#236c68" font-size="13">x*</text>') +
       '<text x="' + left + '" y="' + (height - 10) + '" fill="currentColor" font-size="12">' + xLabel + ' 0</text>' +
-      '<text x="' + (width - right - 62) + '" y="' + (height - 10) + '" fill="currentColor" font-size="12">' + maxXBounded.toFixed(0) + ' nm</text>' +
+      '<text x="' + (width - right - 62) + '" y="' + (height - 10) + '" fill="currentColor" font-size="12">' + maxX.toPrecision(3) + ' nm</text>' +
       '<text x="' + (left + 8) + '" y="' + (top + 15) + '" fill="currentColor" font-size="12">100%</text>' +
       '<text x="8" y="' + (top + 8) + '" fill="currentColor" font-size="12">' + yLabel + '</text>';
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
@@ -221,6 +241,7 @@
     const select = rootEl.querySelector("select");
     const output = rootEl.querySelector("[data-dependency-output]");
     const nodes = Array.from(rootEl.querySelectorAll("[data-dependency-node]"));
+    const relations = Array.from(rootEl.querySelectorAll("[data-relation-case]"));
     const cases = {
       gate: {
         active: ["device", "gate", "thermal", "contact"],
@@ -239,6 +260,7 @@
       const choice = cases[select.value];
       nodes.forEach(function (node) { node.dataset.active = String(choice.active.includes(node.dataset.dependencyNode)); });
       output.textContent = choice.text;
+      relations.forEach(function (list) { list.hidden = list.dataset.relationCase !== select.value; });
     }
     select.addEventListener("change", update);
     update();

@@ -38,6 +38,32 @@
   <p>First state the uncertainty as a testable question: does the later operation leave the material/interface state within the downstream device and reliability requirements? Map the potential path: material properties before exposure → state after exposure → measurable device/interface response → acceptance decision. Mark every arrow as reported evidence, model result, or hypothesis.</p>
   <p>Then compare options: retain the order and characterize the resulting interface; change the order if architecture permits; or select a different material/sequence candidate. For each, document new compatibility questions introduced by the change, including patterning, surface preparation, contact formation, and reliability. The evidence plan should include a control and a measurement sensitive to the suspected mechanism. If a simple model is used, document its valid range and calibrate it for the relevant materials before using it as a decision basis.</p>
   <p>Yeo's review discusses metal-gate material selection and process-integration issues and can orient the reader to the coupled nature of such decisions. It is not evidence that a given stack will tolerate a particular undisclosed thermal or chemical exposure. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
+  <h3>Typed contract example: verify the state after the operation that changes it</h3>
+  <p><strong>Synthetic interface case; no recipe or fab data.</strong> Suppose a downstream module requires a surface property to fall within a product-defined acceptance interval before it begins. An upstream treatment can change that property. The physical chain is treatment → changed surface chemistry or residue state → downstream nucleation/adhesion or electrical interface response → measurable acceptance evidence and manufacturing decision. Which surface metric and downstream observable matter must come from the actual module contract; no universal limit is implied here.</p>
+  <div class="table-scroll" role="region" aria-label="Illustrative state contract table" tabindex="0"><table>
+    <caption>Illustrative state contract for an abstract treatment and downstream module.</caption>
+    <thead><tr><th scope="col">Typed relation</th><th scope="col">Contract statement</th><th scope="col">Evidence / owner</th><th scope="col">Failure consequence or disposition</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Precedence</th><td>Perform treatment before the downstream module, if that is the selected architecture.</td><td>Architecture owner records the intended order and the reason it is required.</td><td>Changing order invalidates the reviewed interface assumption; reopen the review.</td></tr>
+      <tr><th scope="row">Compatibility</th><td>At downstream entry, the specified surface metric and allowable queue/environment condition meet the product-defined interval.</td><td>Module owners define a method sensitive to the relevant surface state, sampling, and acceptance rule.</td><td>If unknown or outside interval, hold the sequence decision; do not infer compatibility from module names.</td></tr>
+      <tr><th scope="row">Measurement</th><td>Measure after the last operation that can change the contracted surface property and before the downstream module.</td><td>Metrology owner ties the result to wafer/sample identity, method, calibration status, and uncertainty.</td><td>A measurement made before the treatment is invalid evidence for the post-treatment entry state.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="focus-note">On a narrow screen, swipe the table horizontally or focus it and use arrow keys to read all columns.</p>
+  <figure class="technical-figure" tabindex="0">
+    <svg viewBox="0 0 760 188" role="img" aria-labelledby="c03-graph-title c03-graph-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="c03-graph-title">Typed dependency graph with an invalid measurement ordering</title>
+      <desc id="c03-graph-desc">The valid evidence path is treatment, measurement of the resulting entry state, then the downstream module, subject to a compatibility gate. A dashed red path shows that measuring before the state-changing treatment cannot verify the downstream entry state.</desc>
+      <defs><marker id="c03-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#315b7d"/></marker><marker id="c03-bad-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#a12b2b"/></marker></defs>
+      <g fill="#eef4fa" stroke="#315b7d" stroke-width="2"><rect x="25" y="70" width="155" height="62" rx="8"/><rect x="300" y="70" width="155" height="62" rx="8"/><rect x="580" y="70" width="155" height="62" rx="8"/></g>
+      <g fill="#142b3c" font-family="sans-serif" font-size="15" text-anchor="middle"><text x="102" y="96"><tspan x="102">State-changing</tspan><tspan x="102" dy="20">treatment</tspan></text><text x="377" y="96"><tspan x="377">Post-treatment</tspan><tspan x="377" dy="20">entry-state measure</tspan></text><text x="657" y="96"><tspan x="657">Downstream</tspan><tspan x="657" dy="20">module</tspan></text></g>
+      <g stroke="#315b7d" stroke-width="2" fill="none" marker-end="url(#c03-arrow)"><path d="M180 101h112M455 101h112"/></g>
+      <g fill="#315b7d" font-family="sans-serif" font-size="12" text-anchor="middle"><text x="236" y="88">precedence</text><text x="511" y="88">evidence + compatibility gate</text></g>
+      <path d="M365 65 C300 10 180 10 102 69" stroke="#a12b2b" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#c03-bad-arrow)"/><text x="232" y="28" fill="#8a2020" font-family="sans-serif" font-size="13" text-anchor="middle">Invalid: measure before treatment</text>
+    </svg>
+    <figcaption>Figure 1. The red dashed path is not valid evidence for the post-treatment state because the operation occurs after the measurement. The contract must name the relevant metric and method for the actual platform. On a narrow screen, scroll the diagram horizontally by touch or with arrow keys after focusing it.</figcaption>
+  </figure>
+  <p>The valid order is treatment → measurement gate → downstream operation. If architecture requires a different order, the contract needs another measurement or a justified model that establishes the entry state. This is a logical evidence rule, not a claim that every treatment requires the same metrology step.</p>
 </section>
 
 <section aria-labelledby="sequence-limits">

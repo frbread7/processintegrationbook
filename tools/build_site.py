@@ -35,15 +35,17 @@ TEXT = {
         "chapter": "Chapter", "all_chapters": "All chapters", "previous": "Previous chapter", "next": "Next chapter", "back": "Chapter guide",
         "lab_title": "Integration laboratory", "lab_copy": "Explore one bounded quantitative model and two qualitative decision activities. Each activity states what it can and cannot conclude.",
         "model_checked": "Analytically checked · model-limited", "qualitative": "Qualitative activity · no physical model", "synthetic": "Synthetic teaching scenario",
-        "thermal_title": "Thermal history and a Gaussian junction estimate", "thermal_copy": "Accumulate a simple one-dimensional diffusion integral across constant-temperature holds. The output is a chemical-profile threshold crossing, not an activated or measured junction depth.",
-        "profile_inputs": "Initial profile and background", "sigma0": "Initial sigma (nm)", "rp": "Projected range (nm)", "dose": "Areal dose (cm⁻²)", "background": "Background (cm⁻³)",
-        "holds": "Thermal holds", "temp": "Temperature (°C)", "duration": "Duration (s)", "remove": "Remove", "add_hold": "Add a hold", "hold_limit": "Up to 30 holds; remove a hold to add another.", "reset": "Reset reference case",
-        "results": "Model output", "sigma_final": "Final sigma", "peak": "Gaussian peak", "crossing": "Right-side crossing", "no_crossing": "No crossing", "chart_x": "Depth", "chart_y": "Relative chemical concentration", "chart_bg": "Dashed line is the uniform background threshold, when it intersects the profile.",
-        "model_status": "Illustrative model output. Not silicon validation or a process recipe.", "surface_warning": "Caution: Rp is less than three final sigmas; surface truncation may materially change the assumed profile.", "concentration_warning": "Literature caution: Fair (1975) reports concentration-dependent profiles for high-concentration boron diffusions (> about 2 × 10¹⁹ cm⁻³) in neutral ambients. This is only a heuristic trigger; this synthetic scenario does not reproduce those conditions and still uses constant dilute diffusivity.", "invalid_result": "No result: check each value and its stated range.",
+        "thermal_title": "Thermal history and a reflected Gaussian profile estimate", "thermal_copy": "Accumulate a one-dimensional diffusion integral across constant-temperature holds. The model reflects an idealized Gaussian implant lobe at a no-flux surface, preserving the stated dose in silicon. Rp is the lobe center near the surface. This is not implant boundary chemistry, an activated profile, a measured junction depth, or a process recipe.",
+        "profile_inputs": "Initial profile and background", "sigma0": "Initial Gaussian-component σ (nm)", "rp": "Profile center Rp (nm)", "dose": "Areal dose (cm⁻²)", "background": "Background (cm⁻³)",
+        "holds": "Thermal holds", "temp": "Temperature (°C)", "duration": "Duration (s)", "remove": "Remove", "add_hold": "Add a hold", "hold_limit": "0–30 holds; zero holds shows the initial profile without thermal broadening.", "reset": "Reset reference case",
+        "results": "Model output", "sigma_final": "Final Gaussian-component σ", "peak": "Profile peak", "crossing": "Right-side crossing", "no_crossing": "No crossing", "chart_x": "Depth", "chart_y": "Normalized chemical concentration", "chart_aria": "Normalized chemical concentration profile", "chart_bg": "The curve is normalized to its true peak. The horizontal dashed line is the uniform background; the vertical x* marker locates the right-side crossing even when that threshold is too low to resolve on this linear scale.", "chart_bg_no_crossing": "The curve is normalized to its true peak. The background is at or above that peak, so there is no descending right-side crossing and no threshold line or x* marker is drawn.",
+        "model_status": "Illustrative model output. Not silicon validation or a process recipe.", "surface_warning": "The reflected Gaussian is an idealized no-flux surface model. Real implant boundary chemistry and near-surface profile formation are not represented.", "concentration_warning": "Literature caution: Fair (1975) reports concentration-dependent profiles for high-concentration boron diffusions (> about 2 × 10¹⁹ cm⁻³) in neutral ambients. This is only a heuristic trigger; this synthetic scenario does not reproduce those conditions and still uses constant dilute diffusivity.", "invalid_result": "No result: check each value and its stated range.",
         "dependency_title": "Process dependency explorer", "dependency_copy": "Select an integration question to highlight the interfaces worth reviewing. The map is qualitative bookkeeping, not a process simulator or recipe checker.",
         "choose_question": "Review focus", "gate_option": "Gate-stack choice", "contact_option": "Contact formation", "beol_option": "Interconnect compatibility",
         "node_device": "Device target", "node_gate": "Gate/material", "node_thermal": "Thermal history", "node_pattern": "Pattern transfer", "node_etch": "Etch interface", "node_contact": "Contact/MOL", "node_metal": "Interconnect", "node_reliability": "Reliability evidence",
         "gate_text": "Ask whether the selected gate materials and sequence are compatible with the device target, later thermal steps, and contact integration. Identify the measurement or model needed at each interface.",
+        "relation_type_precedence": "Declared precedence", "relation_type_compatibility": "Compatibility question", "relation_type_inference": "Engineering inference",
+        "relation_status_assumption": "Illustrative assumption · confirm sequence against the intended architecture.", "relation_status_measurement": "Engineering inference · ask which measurement or model can test this interface.", "relation_status_open": "Open compatibility question · evidence is needed before accepting the relationship.",
         "contact_text": "Trace the contact opening from pattern definition through etch, pre-contact surface state, fill, and local routing. Do not infer contact resistance from geometry alone.",
         "beol_text": "List the thermal, chemical, mechanical, and reliability constraints that a back-end stack imposes on earlier devices and later interconnect levels. The highlighted connections are prompts, not validated causality.",
         "challenge_title": "Integration evidence challenge", "challenge_copy": "A fictional split suggests a contact monitor shifted after a process change, while a neighboring dielectric-sensitive structure is not yet measured. Choose a useful next evidence step.",
@@ -77,15 +79,17 @@ TEXT = {
         "chapter": "장", "all_chapters": "전체 장", "previous": "이전 장", "next": "다음 장", "back": "장 안내",
         "lab_title": "통합 실습실", "lab_copy": "범위를 한정한 정량 모델 하나와 정성적 의사결정 활동 두 가지를 제공합니다. 각 활동은 가능한 결론과 한계를 설명합니다.",
         "model_checked": "해석식 확인 · 모델 한정", "qualitative": "정성적 활동 · 물리 모델 없음", "synthetic": "합성 학습 시나리오",
-        "thermal_title": "열 이력과 가우시안 접합 추정", "thermal_copy": "일정 온도 유지 구간에 대한 단순한 1차원 확산 적분을 누적합니다. 출력은 화학 농도 프로파일의 임계 교차점이며, 활성화 또는 실측 접합 깊이가 아닙니다.",
-        "profile_inputs": "초기 프로파일과 배경 농도", "sigma0": "초기 시그마 (nm)", "rp": "투영 거리 (nm)", "dose": "면적 선량 (cm⁻²)", "background": "배경 농도 (cm⁻³)",
-        "holds": "열 유지 구간", "temp": "온도 (°C)", "duration": "시간 (s)", "remove": "삭제", "add_hold": "유지 구간 추가", "hold_limit": "유지 구간은 최대 30개입니다. 다른 구간을 추가하려면 기존 구간을 삭제하세요.", "reset": "기준 사례로 초기화",
-        "results": "모델 출력", "sigma_final": "최종 시그마", "peak": "가우시안 최대값", "crossing": "오른쪽 교차점", "no_crossing": "교차 없음", "chart_x": "깊이", "chart_y": "상대 화학 농도", "chart_bg": "점선은 프로파일과 교차할 경우 균일 배경 농도 임계값을 나타냅니다.",
-        "model_status": "설명용 모델 결과입니다. 실리콘 검증이나 공정 레시피가 아닙니다.", "surface_warning": "주의: 투영 거리가 최종 시그마의 3배보다 작아 표면 잘림이 가정 프로파일을 크게 바꿀 수 있습니다.", "concentration_warning": "문헌상 주의: Fair(1975)는 중성 분위기의 고농도 보론 확산(약 2 × 10¹⁹ cm⁻³ 초과)에서 농도 의존 프로파일을 보고했습니다. 이 시나리오는 해당 조건을 재현하지 않으며, 이 값은 휴리스틱 경고 기준일 뿐입니다. 계산은 계속 일정한 희석 확산계수를 사용합니다.", "invalid_result": "결과가 없습니다. 각 값과 표시 범위를 확인하세요.",
+        "thermal_title": "열 이력과 반사 가우시안 프로파일 추정", "thermal_copy": "일정 온도 유지 구간의 1차원 확산 적분을 누적합니다. 모델은 이상화된 가우시안 이온 주입 로브를 무유량 표면에서 반사하여 실리콘 내부 선량을 보존합니다. 표면 부근에서 Rp는 로브 중심입니다. 실제 주입 경계 화학, 활성화 프로파일, 측정 접합 깊이 또는 공정 레시피를 나타내지 않습니다.",
+        "profile_inputs": "초기 프로파일과 배경 농도", "sigma0": "초기 가우시안 성분 σ (nm)", "rp": "프로파일 중심 Rp (nm)", "dose": "면적 선량 (cm⁻²)", "background": "배경 농도 (cm⁻³)",
+        "holds": "열 유지 구간", "temp": "온도 (°C)", "duration": "시간 (s)", "remove": "삭제", "add_hold": "유지 구간 추가", "hold_limit": "유지 구간은 0~30개입니다. 0개이면 열적 확산이 없는 초기 프로파일을 표시합니다.", "reset": "기준 사례로 초기화",
+        "results": "모델 출력", "sigma_final": "최종 가우시안 성분 σ", "peak": "프로파일 최대값", "crossing": "오른쪽 교차점", "no_crossing": "교차 없음", "chart_x": "깊이", "chart_y": "최대값 정규화 화학 농도", "chart_aria": "최대값 정규화 화학 농도 프로파일", "chart_bg": "곡선은 실제 최대 농도로 정규화했습니다. 가로 점선은 균일 배경 농도이며, 세로 x* 표지는 선형 눈금에서 임계값을 분해하기 어려울 때에도 오른쪽 교차점의 위치를 나타냅니다.", "chart_bg_no_crossing": "곡선은 실제 최대 농도로 정규화했습니다. 배경 농도가 최대 농도 이상이므로 하강하는 오른쪽 교차점이 없고 임계값 선과 x* 표지도 표시하지 않습니다.",
+        "model_status": "설명용 모델 결과입니다. 실리콘 검증이나 공정 레시피가 아닙니다.", "surface_warning": "반사 가우시안은 이상화된 무유량 표면 모델입니다. 실제 주입 경계 화학과 표면 근처 프로파일 형성은 표현하지 않습니다.", "concentration_warning": "문헌상 주의: Fair(1975)는 중성 분위기의 고농도 보론 확산(약 2 × 10¹⁹ cm⁻³ 초과)에서 농도 의존 프로파일을 보고했습니다. 이 시나리오는 해당 조건을 재현하지 않으며, 이 값은 휴리스틱 경고 기준일 뿐입니다. 계산은 계속 일정한 희석 확산계수를 사용합니다.", "invalid_result": "결과가 없습니다. 각 값과 표시 범위를 확인하세요.",
         "dependency_title": "공정 의존성 탐색기", "dependency_copy": "통합 질문을 선택하면 검토할 인터페이스를 강조합니다. 물리적 공정 시뮬레이터나 레시피 검증기가 아니라 정성적 기록 도구입니다.",
         "choose_question": "검토 초점", "gate_option": "게이트 적층 선택", "contact_option": "콘택트 형성", "beol_option": "배선 호환성",
         "node_device": "소자 목표", "node_gate": "게이트·재료", "node_thermal": "열 이력", "node_pattern": "패턴 전사", "node_etch": "식각 인터페이스", "node_contact": "콘택트·MOL", "node_metal": "배선", "node_reliability": "신뢰성 증거",
         "gate_text": "선택한 게이트 재료와 순서가 소자 목표, 후속 열 단계, 콘택트 통합과 호환되는지 질문합니다. 각 인터페이스에서 필요한 측정 또는 모델을 정합니다.",
+        "relation_type_precedence": "선언된 순서 관계", "relation_type_compatibility": "호환성 질문", "relation_type_inference": "공학적 추론",
+        "relation_status_assumption": "설명용 가정 · 대상 아키텍처의 공정 순서로 확인하세요.", "relation_status_measurement": "공학적 추론 · 이 인터페이스를 검증할 측정 또는 모델을 질문하세요.", "relation_status_open": "미해결 호환성 질문 · 관계를 받아들이기 전에 증거가 필요합니다.",
         "contact_text": "패턴 정의에서 식각, 콘택트 전 표면 상태, 충전, 로컬 배선까지 콘택트 개구를 추적합니다. 형상만으로 콘택트 저항을 추정하지 않습니다.",
         "beol_text": "후공정 적층이 초기 소자와 이후 배선층에 부과하는 열·화학·기계·신뢰성 제약을 정리합니다. 강조된 연결은 질문일 뿐 인과관계가 검증된 것은 아닙니다.",
         "challenge_title": "통합 증거 판단 실습", "challenge_copy": "가상의 분할 실험에서 공정 변경 후 콘택트 모니터가 이동한 것으로 보이지만 인접 유전체 민감 구조는 아직 측정하지 않았습니다. 다음 증거 단계를 선택하세요.",
@@ -326,18 +330,25 @@ def render_chapter(manifest, chapter, lang):
 def render_lab(manifest, lang):
     t = TEXT[lang]
     current = "lab.html" if lang == "en" else "ko/lab.html"
+    thermal_sources = (
+        'Method background: <a href="https://www.math.toronto.edu/ivrii/PDE-textbook/Chapter3/S3.1.V.html">Neumann image solution for a reflecting half-line</a>; '
+        '<a href="https://ocw.mit.edu/courses/6-021j-quantitative-physiology-cells-and-tissues-fall-2004/2dec3d0ac557365b9b31de361b77e3ad_macro.pdf">MIT OpenCourseWare diffusion model</a>.'
+        if lang == "en" else
+        '경계 조건 방법 참고 자료: <a href="https://www.math.toronto.edu/ivrii/PDE-textbook/Chapter3/S3.1.V.html">반사 반직선의 노이만 이미지 해</a>; '
+        '<a href="https://ocw.mit.edu/courses/6-021j-quantitative-physiology-cells-and-tissues-fall-2004/2dec3d0ac557365b9b31de361b77e3ad_macro.pdf">MIT OpenCourseWare 확산 모델</a>.'
+    )
     thermal = '<section id="thermal-lab" class="lab-card wide" data-thermal-lab ' + \
         'data-temp-label="' + e(t["temp"]) + '" data-time-label="' + e(t["duration"]) + '" data-remove-label="' + e(t["remove"]) + '" ' + \
         'data-sigma-label="' + e(t["sigma_final"]) + '" data-peak-label="' + e(t["peak"]) + '" data-crossing-label="' + e(t["crossing"]) + '" data-no-crossing-label="' + e(t["no_crossing"]) + '" ' + \
         'data-surface-warning="' + e(t["surface_warning"]) + '" data-concentration-warning="' + e(t["concentration_warning"]) + '" data-model-status="' + e(t["model_status"]) + '" data-invalid-result="' + e(t["invalid_result"]) + '" ' + \
-        'data-chart-x-label="' + e(t["chart_x"]) + '" data-chart-y-label="' + e(t["chart_y"]) + '" data-background-label="' + e(t["chart_bg"]) + '">' + \
-        '<span class="evidence-label">' + e(t["model_checked"]) + '</span><h2>' + e(t["thermal_title"]) + '</h2><p>' + e(t["thermal_copy"]) + '</p>' + \
+        'data-chart-x-label="' + e(t["chart_x"]) + '" data-chart-y-label="' + e(t["chart_y"]) + '" data-background-label="' + e(t["chart_bg"]) + '" data-no-crossing-chart-label="' + e(t["chart_bg_no_crossing"]) + '">' + \
+        '<span class="evidence-label">' + e(t["model_checked"]) + '</span><h2>' + e(t["thermal_title"]) + '</h2><p>' + e(t["thermal_copy"]) + '</p><p class="status-line">' + thermal_sources + '</p>' + \
         '<h3>' + e(t["profile_inputs"]) + '</h3><div class="lab-form">' + \
         field("sigma0Nm", t["sigma0"], 20, 0.5, 100, "0.5", "data-profile-input") + field("projectedRangeNm", t["rp"], 80, 0, 500, "1", "data-profile-input") + \
         field("doseCm2", t["dose"], 2e13, 1e11, 1e15, "1", "data-profile-input") + field("backgroundCm3", t["background"], 1e16, 1e14, 1e19, "1", "data-profile-input") + '</div>' + \
         '<h3>' + e(t["holds"]) + '</h3><div class="hold-list" data-hold-list></div><div class="button-row"><button class="button" type="button" data-add-hold aria-describedby="hold-limit-note">' + e(t["add_hold"]) + '</button><button class="button" type="button" data-reset-thermal>' + e(t["reset"]) + '</button></div><p class="status-line" id="hold-limit-note">' + e(t["hold_limit"]) + '</p>' + \
         '<h3>' + e(t["results"]) + '</h3><div class="result-grid" data-thermal-output aria-live="polite"></div><p class="status-line" data-thermal-status role="status"></p>' + \
-        '<figure class="chart-wrap"><svg data-profile-chart role="img" aria-label="' + e(t["chart_y"]) + '" viewBox="0 0 720 260"></svg><figcaption class="chart-caption">' + e(t["chart_bg"]) + '</figcaption></figure>' + \
+        '<figure class="chart-wrap"><svg data-profile-chart role="img" aria-label="' + e(t["chart_aria"]) + '" viewBox="0 0 720 260"></svg><figcaption class="chart-caption">' + e(t["chart_bg"]) + '</figcaption></figure>' + \
         '<p class="status-line">' + e(t["model_status"]) + ' <a href="' + e(relative(current, "references.html" if lang == "en" else "references.html")) + '">' + e(t["references"]) + '</a></p></section>'
     dependency = '<section id="dependency-explorer" class="lab-card" data-dependency-explorer ' + \
         'data-gate-text="' + e(t["gate_text"]) + '" data-contact-text="' + e(t["contact_text"]) + '" data-interconnect-text="' + e(t["beol_text"]) + '">' + \
@@ -346,12 +357,28 @@ def render_lab(manifest, lang):
         '<div class="dependency-map" aria-label="' + e(t["dependency_title"]) + '">' + \
         node("device", t["node_device"]) + node("gate", t["node_gate"]) + node("thermal", t["node_thermal"]) + node("pattern", t["node_pattern"]) + \
         node("etch", t["node_etch"]) + node("contact", t["node_contact"]) + node("metal", t["node_metal"]) + node("reliability", t["node_reliability"]) + '</div>' + \
-        '<p class="decision-output" data-dependency-output aria-live="polite"></p></section>'
+        '<p class="decision-output" data-dependency-output aria-live="polite"></p>' + render_dependency_relations(t) + '</section>'
     challenge = '<section id="integration-review" class="lab-card" data-evidence-challenge><span class="evidence-label">' + e(t["synthetic"]) + '</span><h2>' + e(t["challenge_title"]) + '</h2><p>' + e(t["challenge_copy"]) + '</p><div class="choice-list">' + \
         choice("a", t["choice_a"], t["feedback_a"]) + choice("b", t["choice_b"], t["feedback_b"]) + choice("c", t["choice_c"], t["feedback_c"]) + '</div>' + \
         '<p class="decision-output" data-evidence-feedback aria-live="polite"></p><p class="status-line">' + e(t["challenge_note"]) + '</p></section>'
     body = '<section class="section-heading"><div><p class="kicker">' + e(t["eyebrow"]) + '</p><h1>' + e(t["lab_title"]) + '</h1><p>' + e(t["lab_copy"]) + '</p></div></section><div class="lab-grid">' + thermal + dependency + challenge + '</div>'
     return shell(manifest, lang, current, t["lab_title"] + " · ProcessIntegrationBook", t["lab_copy"], "lab", body, ("labs/thermal-model.js",))
+
+
+def render_dependency_relations(t):
+    cases = {
+        "gate": [("device", "gate", "compatibility", "open"), ("gate", "thermal", "precedence", "assumption"), ("thermal", "contact", "inference", "measurement")],
+        "contact": [("pattern", "etch", "precedence", "assumption"), ("etch", "contact", "compatibility", "measurement"), ("contact", "metal", "inference", "open")],
+        "interconnect": [("thermal", "metal", "compatibility", "open"), ("gate", "thermal", "precedence", "assumption"), ("metal", "reliability", "inference", "measurement")],
+    }
+    labels = {key: t["node_" + key] for key in ("device", "gate", "thermal", "pattern", "etch", "contact", "metal", "reliability")}
+    output = []
+    for case, rows in cases.items():
+        items = []
+        for source, target, kind, status in rows:
+            items.append('<li class="dependency-relation"><span class="relation-path"><span>' + e(labels[source]) + '</span><span class="relation-arrow" aria-hidden="true">→</span><span>' + e(labels[target]) + '</span></span><span class="relation-type">' + e(t["relation_type_" + kind]) + '</span><span class="relation-evidence">' + e(t["relation_status_" + status]) + '</span></li>')
+        output.append('<ul class="relation-list" data-relation-case="' + case + '"' + ('' if case == "gate" else ' hidden') + '>' + ''.join(items) + '</ul>')
+    return '<div class="dependency-relations" aria-label="' + e(t["dependency_title"]) + '">' + ''.join(output) + '</div>'
 
 
 def field(name, label, value, minimum, maximum, step, marker):

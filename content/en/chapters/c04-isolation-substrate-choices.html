@@ -2,44 +2,67 @@
   <h2 id="chapter-title">Isolation and substrate as shared interfaces</h2>
   <p><strong>Decision question.</strong> Given a device portfolio and a sequence of later modules, what isolation and substrate architecture provides adequate electrical separation while preserving the required area, body behavior, parasitics, and process compatibility?</p>
 
-  <h3>Learning objectives</h3>
+  <h3 id="learning-objectives">Learning objectives</h3>
   <ul>
     <li>Translate isolation needs into explicit interface requirements rather than selecting a structure by name alone.</li>
     <li>Trace how substrate choice and isolation geometry can affect neighboring devices, routing, thermal history, and characterization.</li>
     <li>Separate reported platform facts from engineering inference and identify the evidence needed to decide between alternatives.</li>
   </ul>
 
-  <h3>Isolation is an integration boundary</h3>
+  <h3 id="isolation-boundary">Isolation is an integration boundary</h3>
   <p>Isolation partitions active regions, but its engineering function is broader than preventing a direct conductive path. The design must specify which terminals can couple, the voltage and temperature conditions of interest, allowed leakage, body or well connections, latch-up-related constraints where applicable, and how isolation is formed and exposed to later operations. These requirements differ across logic, high-voltage, memory, and sensor devices. A structure that is sufficient for one device family cannot be presumed sufficient for every device sharing the substrate.</p>
   <p>Shallow-trench isolation (STI) is a common planar CMOS isolation approach: a patterned trench is filled with dielectric and planarized. The integration decision is not simply “use STI.” It includes trench placement and depth, corner and interface behavior, fill and planarization compatibility, active-area definition, and the subsequent thermal and cleaning history. LOCOS and other isolation approaches remain useful historical or specialized comparisons, but their suitability is platform- and generation-dependent. This chapter does not prescribe dimensions, materials, or a production sequence.</p>
-  <p>Substrate and well architecture set additional shared conditions. A bulk substrate permits body and well engineering but couples devices through finite substrate impedance and shared processing. A more electrically isolated substrate architecture can reduce some coupling paths, yet may impose different cost, thermal, mechanical, or integration constraints. These are categories of trade-off, not universal rankings: quantify the product's actual isolation and parasitic budgets before claiming one architecture is superior.</p>
+  <p>Separate three choices that are often conflated. <em>Wells</em> establish local conductivity and body-bias regions within a substrate. The <em>substrate architecture</em> determines the deeper shared electrical and mechanical boundary, such as bulk silicon versus an electrically isolated substrate construction. An <em>epitaxial layer</em> adds a grown semiconductor layer with specified composition and doping and creates a buried interface; it may support a device or well design but is not, by itself, proof of lateral isolation. Each choice has different coupling paths and qualification needs. A bulk substrate permits body and well engineering but couples devices through finite substrate impedance and shared processing. A more electrically isolated substrate architecture can reduce some coupling paths, yet may impose different cost, thermal, mechanical, or integration constraints. These are categories of trade-off, not universal rankings: quantify the product's actual isolation and parasitic budgets before claiming one architecture is superior.</p>
 
-  <h3>Make interfaces reviewable</h3>
+  <h3 id="interface-contract">Make interfaces reviewable</h3>
   <p>For each neighboring module, record an interface contract: incoming material and geometry; allowed voltage and thermal exposure; required cleanliness or surface condition; the feature that defines alignment; electrical acceptance observables; and the owner of each assumption. For isolation, include at least active-area dimensions, well/substrate bias conditions, isolation leakage/coupling observables, topography limits for the next patterning step, and the test structure that can reveal edge or substrate effects.</p>
   <p>A useful dependency chain is: substrate and well definition → active-area boundary → isolation formation and planarization → gate and junction placement → contact/routing geometry → electrical isolation and parasitic measurements. Each arrow is a question to resolve, not proof of causality. For instance, a changed isolation edge may alter local layout or device perimeter; whether that changes an electrical parameter materially depends on geometry, process details, and measurement context.</p>
 
-  <h3>Worked decision example</h3>
+  <figure class="technical-figure" tabindex="0" aria-labelledby="isolation-map-title isolation-map-desc">
+    <svg viewBox="0 0 840 250" role="img" aria-labelledby="isolation-map-title isolation-map-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="isolation-map-title">Isolation architecture decision and evidence path</title>
+      <desc id="isolation-map-desc">Requirements constrain well, substrate, epitaxial layer, and isolation choices. Those choices create testable electrical and topography observables that inform a provisional disposition.</desc>
+      <rect x="12" y="12" width="816" height="226" rx="12" fill="#f5f8fc" stroke="#6b7b91"/>
+      <g font-family="sans-serif" font-size="16" fill="#182538" text-anchor="middle">
+        <rect x="30" y="83" width="150" height="82" rx="8" fill="#fff" stroke="#52739a"/><text x="105" y="112">Requirements</text><text x="105" y="137" font-size="13">bias · leakage · area</text>
+        <rect x="224" y="42" width="192" height="164" rx="8" fill="#e9f1fb" stroke="#52739a"/><text x="320" y="69">Architecture choices</text><text x="320" y="101" font-size="13">wells and body ties</text><text x="320" y="128" font-size="13">substrate boundary</text><text x="320" y="155" font-size="13">epi and buried interface</text><text x="320" y="182" font-size="13">isolation geometry</text>
+        <rect x="460" y="83" width="174" height="82" rx="8" fill="#fff" stroke="#52739a"/><text x="547" y="111">Evidence</text><text x="547" y="136" font-size="13">I–V · coupling · topography</text>
+        <rect x="680" y="83" width="126" height="82" rx="8" fill="#fff4df" stroke="#a07120"/><text x="743" y="111">Disposition</text><text x="743" y="136" font-size="13">advance · hold · split</text>
+      </g>
+      <g fill="none" stroke="#445b76" stroke-width="2"><path d="M180 124h36"/><path d="M416 124h38"/><path d="M634 124h42"/></g>
+      <g fill="#445b76"><path d="m216 124-8-5v10z"/><path d="m454 124-8-5v10z"/><path d="m676 124-8-5v10z"/></g>
+      <text x="420" y="226" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#40536b">Conceptual review map; arrows identify questions to test, not proven causal links.</text>
+    </svg>
+    <figcaption>Trace product requirements through the selected well, substrate, epitaxy, and isolation interfaces to comparable measurements. A changed leakage result is an observation; attribution still requires discriminating evidence. On a narrow screen, scroll the diagram horizontally by touch or with arrow keys after focusing it.</figcaption>
+  </figure>
+
+  <h3 id="worked-isolation-decision">Worked decision example</h3>
   <p><strong>Illustrative assumption:</strong> a fictional platform must place a low-voltage logic device beside a higher-voltage device. No numerical voltage rating, trench dimension, leakage limit, or foundry capability is assumed. Candidate A uses one shared bulk/well architecture with an isolation design intended to serve both device classes. Candidate B separates the high-voltage region using a distinct well/substrate strategy and its own isolation constraints.</p>
   <ol>
     <li>Translate the requirement into checks: maximum differential bias, leakage and coupling limits, substrate-current path, permitted area, and required device spacing.</li>
     <li>Map downstream dependencies: which masks define active and well boundaries; whether later thermal steps change junction placement; whether the isolation topography and surface condition remain acceptable for gate formation and contact processing.</li>
     <li>Compare evidence burden: test structures should distinguish junction leakage, edge-related behavior, and substrate coupling under the relevant bias and temperature conditions. A single room-temperature DC measurement is not evidence for every operating condition.</li>
-    <li>Keep residual risk visible: if the candidate architectures cannot yet be compared on the same extraction method or geometry, the decision is provisional and the missing experiment is part of the record.</li>
+    <li>Separate observation from cause. If leakage rises after an isolation change, check whether the shift follows perimeter, well bias, substrate return, or temperature. Use matched geometry, guarded measurements where appropriate, and structures that isolate junction, edge, and substrate paths; a correlation with the changed module alone does not identify which mechanism moved.</li>
+    <li>Disposition: keep architecture selection provisional until both candidates are compared with the same extraction method and representative geometry over the required bias and temperature range. Advance the lower-area option only if its measured isolation and parasitic margins meet the product limits; otherwise retain a targeted split to test the suspected path. Record the missing experiment and its owner.</li>
   </ol>
   <p><strong>Engineering inference:</strong> Candidate B may improve controllability of some high-voltage interactions at the expense of area and additional interface complexity. This is a hypothesis, not a general property of all separated-well designs; compare extracted electrical observables and layout cost on representative test structures.</p>
 
-  <h3>Evidence labels and limits</h3>
+  <h3 id="epi-defect-handoff">Epitaxy defect-state handoff</h3>
+  <p><strong>Synthetic evidence case:</strong> after silicon epitaxy, inspection reports pit-like and particle-like surface signatures near a device region. Those describe appearance, not origin or crystal structure. Preserve registered maps before substrate preparation, immediately after growth, and after later processing; compare the same coordinates, inspection sensitivity, crystal orientation, and sampling area. A matching pre-growth site supports an inherited-substrate hypothesis. A site first detected immediately after growth raises preparation, growth, and contamination hypotheses; a site first detected only after a later step also raises that step's contribution. Neither temporal association alone proves a mechanism, because detection and appearance can change between steps.</p>
+  <p>A stacking fault is a <em>planar</em> disruption of crystal stacking; a dislocation is a <em>line</em> defect, and partial dislocations can bound a stacking fault. A surface pit or particle-like signal cannot establish either one. At selected sites, use suitable cross-sectional or plan-view structural characterization, such as TEM with diffraction where feasible, to distinguish crystal defects, buried inclusions, and surface material. Then compare relevant electrical structures and controls before assigning a device effect. Hold causal attribution and define the next discriminating sample; do not choose a substrate or epi recipe from shape alone. A <a href="https://doi.org/10.1016/S0042-207X(76)80006-1">silicon-epi stacking-fault study (abstract)</a> reports substrate, interface, and growth-related origins under its own conditions; an <a href="https://doi.org/10.1016/S0022-0248(99)00638-7">optical/TEM study (abstract)</a> illustrates the need for structural checks. The <a href="https://dictionary.iucr.org/Stacking_fault">IUCr definition</a> supplies the planar classification.</p>
+
+  <h3 id="evidence-limits">Evidence labels and limits</h3>
   <ul>
     <li><strong>Publicly reported:</strong> the audited ProcessBook treats representative integration, isolation, and module sequencing as related topics; consult it for module-level background, not as evidence for a particular production platform.</li>
     <li><strong>Illustrative assumption:</strong> the adjacent low-voltage/high-voltage example is fictional and supplies no recipe or specification.</li>
     <li><strong>Engineering inference:</strong> the proposed coupling among geometry, substrate path, topography, and downstream measurements is a set of testable integration hypotheses. It requires platform-specific layout, process, and electrical evidence.</li>
   </ul>
 
-  <h3>Knowledge check</h3>
+  <h3 id="knowledge-check">Knowledge check</h3>
   <p><strong>Question:</strong> A team observes increased isolation leakage after changing an isolation module. Is the isolation module itself established as the cause?</p>
   <p><strong>Answer:</strong> No. The observation is associated with the change, but causality is not established. Confirm comparable structures and measurement conditions, inspect relevant interfaces and thermal history, then use discriminating structures or split experiments to separate edge, junction, surface, and substrate paths. WATBook's chapters on measurement validity and bounded electrical hypotheses provide complementary guidance.</p>
 
-  <h3>Further reading</h3>
+  <h3 id="further-reading">Further reading</h3>
   <ul>
     <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/integration.html">ProcessBook, integration chapter (audited revision)</a> — representative flow and selected ordering effects.</li>
     <li><a href="https://github.com/geniuskey/processbook/blob/f583bc33c5dfdd31292f7ef6826ce24a2c8b7fed/chapters/advanced.html">ProcessBook, advanced integration chapter (audited revision)</a> — platform context and architectural examples.</li>

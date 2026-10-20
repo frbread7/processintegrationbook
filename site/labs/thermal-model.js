@@ -52,10 +52,22 @@
     const sigmaFinalCm = Math.sqrt(sigma0Cm * sigma0Cm + 2 * thetaCm2);
     const sigmaFinalNm = sigmaFinalCm * CM_TO_NM;
     const projectedRangeCm = projectedRangeNm / CM_TO_NM;
-    const peakCm3 = doseCm2 / (SQRT_2_PI * sigmaFinalCm);
-    const crossingNm = peakCm3 > backgroundCm3
-      ? (projectedRangeCm + sigmaFinalCm * Math.sqrt(2 * Math.log(peakCm3 / backgroundCm3))) * CM_TO_NM
-      : null;
+    // Reflect the initial Gaussian lobe at x=0 (Neumann/no-flux boundary).
+    // Rp is the lobe center, not the mean depth when the surface is nearby.
+    const modeCm = foldedMode(projectedRangeCm, sigmaFinalCm);
+    const peakCm3 = foldedConcentration(modeCm, projectedRangeCm, sigmaFinalCm, doseCm2);
+    let crossingCm = null;
+    if (peakCm3 > backgroundCm3) {
+      let lo = modeCm;
+      let hi = projectedRangeCm + 10 * sigmaFinalCm;
+      while (foldedConcentration(hi, projectedRangeCm, sigmaFinalCm, doseCm2) > backgroundCm3) hi = 2 * hi + sigmaFinalCm;
+      for (let i = 0; i < 100; i += 1) {
+        const mid = (lo + hi) / 2;
+        if (foldedConcentration(mid, projectedRangeCm, sigmaFinalCm, doseCm2) > backgroundCm3) lo = mid;
+        else hi = mid;
+      }
+      crossingCm = (lo + hi) / 2;
+    }
 
     return {
       parameters: { d0Cm2PerS: D0_CM2_PER_S, activationEnergyEv: EA_EV, boltzmannEvPerK: K_B_EV_PER_K },
@@ -63,22 +75,46 @@
       thetaCm2: thetaCm2,
       sigmaFinalNm: sigmaFinalNm,
       peakCm3: peakCm3,
-      rightCrossingNm: crossingNm,
+      rightCrossingNm: crossingCm === null ? null : crossingCm * CM_TO_NM,
+      modeNm: modeCm * CM_TO_NM,
+      surfaceBoundaryMatters: projectedRangeNm < 3 * sigmaFinalNm,
+      // Backward-compatible name; this now flags where the reflected boundary
+      // assumption matters, not literal loss by truncating the profile.
       surfaceTruncationLikely: projectedRangeNm < 3 * sigmaFinalNm,
+      reflectingBoundaryIdealization: true,
       highConcentrationCaution: peakCm3 > CONCENTRATION_EFFECTS_CAUTION_CM3
     };
   }
 
   function concentrationAtNm(xNm, input, result) {
-    requireFinite("Depth (nm)", xNm, 0, 10000);
+    requireFinite("Depth (nm)", xNm, 0, Number.MAX_VALUE);
     if (!input || !result || !Number.isFinite(result.sigmaFinalNm)) {
       throw new TypeError("Calculate a valid profile before sampling it.");
     }
     const sigmaCm = result.sigmaFinalNm / CM_TO_NM;
     const xCm = xNm / CM_TO_NM;
     const rpCm = input.projectedRangeNm / CM_TO_NM;
-    const q = input.doseCm2;
-    return q / (SQRT_2_PI * sigmaCm) * Math.exp(-Math.pow(xCm - rpCm, 2) / (2 * sigmaCm * sigmaCm));
+    return foldedConcentration(xCm, rpCm, sigmaCm, input.doseCm2);
+  }
+
+  function foldedConcentration(xCm, rpCm, sigmaCm, doseCm2) {
+    const scale = doseCm2 / (SQRT_2_PI * sigmaCm);
+    const a = Math.exp(-Math.pow(xCm - rpCm, 2) / (2 * sigmaCm * sigmaCm));
+    const b = Math.exp(-Math.pow(xCm + rpCm, 2) / (2 * sigmaCm * sigmaCm));
+    return scale * (a + b);
+  }
+
+  function foldedMode(rpCm, sigmaCm) {
+    if (rpCm <= sigmaCm) return 0;
+    let lo = 0;
+    let hi = rpCm;
+    for (let i = 0; i < 100; i += 1) {
+      const mid = (lo + hi) / 2;
+      // Stationary point: x = Rp tanh(x Rp / sigma^2).
+      if (rpCm * Math.tanh(mid * rpCm / (sigmaCm * sigmaCm)) > mid) lo = mid;
+      else hi = mid;
+    }
+    return (lo + hi) / 2;
   }
 
   return Object.freeze({

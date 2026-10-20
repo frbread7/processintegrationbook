@@ -9,13 +9,13 @@
 </section>
 
 <section>
-  <h2>A shared history is an integration constraint</h2>
+  <h2 id="thermal-history-constraint">A shared history is an integration constraint</h2>
   <p>A junction is affected by the thermal sequence that follows dopant introduction, not by one anneal considered in isolation. A later oxidation, contact treatment, or material cure can add diffusion exposure; the same step can also serve another module's purpose. Integration therefore asks two linked questions: what profile change does the accumulated history permit, and what other device or material constraints limit a change to that history?</p>
-  <p>The thermal-history laboratory below is a deliberately narrow calculation. It combines diffusion from a selected initial Gaussian profile. Its inputs are synthetic teaching values except for the cited reference Arrhenius pair. The result is a scenario estimate, not a production recipe or a calibrated silicon prediction.</p>
+  <p>The thermal-history laboratory below is a deliberately narrow calculation. It combines diffusion from a selected reflected-Gaussian initial profile. Its inputs are synthetic teaching values except for a historically reported Arrhenius pair whose original textbook provenance was not independently confirmed. The result is a scenario estimate, not a production recipe or a calibrated silicon prediction.</p>
 </section>
 
 <section>
-  <h2>Accumulate diffusivity over time</h2>
+  <h2 id="diffusion-exposure">Accumulate diffusivity over time</h2>
   <p>For a dilute equilibrium species in a homogeneous region, an Arrhenius approximation is</p>
   <div class="equation" role="math" aria-label="D of T equals D zero times exponential of negative activation energy divided by Boltzmann constant times absolute temperature">
     <code>D(T) = D₀ exp(−Eₐ / (kB T))</code>
@@ -24,28 +24,29 @@
   <div class="equation" role="math" aria-label="Theta equals the sum of diffusivity times duration for each hold">
     <code>Θ = Σᵢ D(Tᵢ) tᵢ</code>
   </div>
-  <p><code>Θ</code> has units of cm². Under Fickian diffusion with concentration-independent <code>D</code>, an initially Gaussian profile with standard deviation <code>σ₀</code> broadens to <code>σf² = σ₀² + 2Θ</code>. The factor of two is the one-dimensional variance relation; it is not a three-dimensional radial distance.</p>
+  <p><code>Θ</code> has units of cm². Under Fickian diffusion with concentration-independent <code>D(T)</code> at each temperature, each Gaussian component with initial standard deviation <code>σ₀</code> broadens to <code>σf² = σ₀² + 2Θ</code>. The factor of two is the one-dimensional variance relation; it is not a three-dimensional radial distance.</p>
+  <p><strong>Two-hold check:</strong> this selected Arrhenius pair gives <code>D(950 °C) ≈ 4.2119 × 10⁻¹⁵ cm²/s</code> and <code>D(1050 °C) ≈ 5.0343 × 10⁻¹⁴ cm²/s</code>. A synthetic 200 s hold at 950 °C contributes <code>8.4239 × 10⁻¹³ cm²</code>; a 20 s hold at 1050 °C contributes <code>1.0069 × 10⁻¹² cm²</code>. Their sum, <code>1.8492 × 10⁻¹² cm²</code>, is unchanged when the two holds are swapped <em>within this model</em>. This follows because a shared linear diffusion operator depends only on integrated exposure. It does not imply real process-order equivalence: if one hold oxidizes the surface, injects point defects, changes the phase, or shifts the boundary condition, the assumed operator and initial/interface state change. Compare orders with measurements or a validated state-dependent model before treating them as interchangeable.</p>
 </section>
 
 <section>
-  <h2>From a profile to a threshold crossing</h2>
-  <p>For the laboratory's assumed implanted profile, the initial areal dose <code>Q</code> is Gaussian about projected range <code>Rp</code>. It uses a uniform opposite-type background <code>NB</code> and assumes the dose is far enough below the surface that truncation at the silicon surface is small:</p>
-  <div class="equation" role="math" aria-label="Gaussian concentration profile and right hand background crossing">
-    <code>C(x) = Q / (√(2π) σf) · exp(−(x − Rp)² / (2σf²))</code><br>
-    <code>x* = Rp + σf √(2 ln(Cpeak / NB)), when Cpeak &gt; NB</code>
+  <h2 id="reflected-profile">From a profile to a threshold crossing</h2>
+  <p>The laboratory now treats <code>Q</code> as the dose retained in the silicon half-space <code>x ≥ 0</code>. It assumes a reflecting, zero-flux surface, <code>∂C/∂x = 0</code> at <code>x = 0</code>, and an idealized symmetric image of the initial Gaussian. Its parameter <code>Rp</code> is the Gaussian-lobe center: far from the surface it approximates the projected range, but near the surface it is <strong>not</strong> the mean depth of a measured implant. With a uniform opposite-type background <code>NB</code>, the assumed chemical concentration is</p>
+  <div class="equation" role="math" aria-label="Half-space reflected Gaussian concentration: dose divided by square root of two pi times sigma, multiplied by the sum of exponentials centered at positive and negative R p">
+    <code>C(x) = Q / (√(2π) σf) · [exp(−(x − Rp)² / (2σf²)) + exp(−(x + Rp)² / (2σf²))], x ≥ 0</code>
   </div>
-  <p>Use <code>Q</code> in cm⁻², <code>Rp</code> and <code>σf</code> in cm inside the equation, and <code>NB</code> in cm⁻³. The page accepts and reports lengths in nanometers. <code>x*</code> is the right-side crossing in this assumed concentration profile. It is <strong>not</strong> a measured or electrically activated junction depth: activation, compensation, profile asymmetry, surface boundary conditions, and device electrostatics are omitted.</p>
+  <p>The two image terms give <code>∫₀∞ C(x) dx = Q</code> and cancel the surface gradient. Fick's equation <code>∂C/∂t = D(t) ∂²C/∂x²</code> broadens both terms by <code>σf² = σ₀² + 2Θ</code> under the stated shared-material, concentration-independent model. This is the half-line Neumann image construction, not a model of dopant segregation or loss through a real interface. <a href="https://www.math.toronto.edu/ivrii/PDE-textbook/Chapter3/S3.1.V.html">Ivrii, <em>Partial Differential Equations</em>, heat equation on a half-line</a>.</p>
+  <p>Use <code>Q</code> in cm⁻², <code>Rp</code> and <code>σf</code> in cm inside the equation, and <code>NB</code> in cm⁻³; the page accepts and reports lengths in nanometers. The reported peak is the maximum of this two-term profile on <code>x ≥ 0</code>, which can move to the surface. The right-side crossing <code>x*</code> is found from <code>C(x*) = NB</code> on the descending side when the peak exceeds <code>NB</code>; there is no general single-Gaussian closed form. It is <strong>not</strong> a measured or electrically activated junction depth: activation, compensation, realistic implant asymmetry, surface exchange, and device electrostatics are omitted.</p>
 </section>
 
 <section>
-  <h2>Reference calculation and interpretation</h2>
+  <h2 id="thermal-reference-check">Reference calculation and interpretation</h2>
   <p>The calculator uses <code>D₀ = 0.76 cm²/s</code> and <code>Eₐ = 3.46 eV</code>. Esser, Hobart, and Kub print this boron-in-silicon pair in an illustrative diffusion calculation and cite S. M. Sze's edited <em>VLSI Technology</em> (1983). Mostafa and Medraj's review also prints the equation and cites W. J. Scotten's <em>Diffusion in Silicon</em> (2000). Neither historical source's original page or table was independently verified, so the pair's original provenance remains unresolved. We use the values as reported in accessible publications: a historical dilute-equilibrium parameterization, not a universal constant or process-calibrated value. <a href="https://doi.org/10.1149/1.1731558">Esser et al. (2004, p. G387)</a>; <a href="https://doi.org/10.3390/ma10060676">Mostafa and Medraj (2017, boron–silicon section)</a>.</p>
   <p>Diffusion studies bound how far to generalize this simple pair. Bracht et al. report boron, phosphorus, and arsenic diffusion in silicon isotope multilayers from 850–1100 °C and analyze native-point-defect contributions; their abstract describes boron diffusion as mainly self-interstitial-mediated. Sadigh et al. use first-principles calculations, molecular dynamics, and kinetic Monte Carlo to study an interstitialcy mechanism. These are experimental and atomistic context, respectively; neither calibrates this calculator. <a href="https://doi.org/10.1103/PhysRevB.75.035211">Bracht et al. (2007)</a>; <a href="https://doi.org/10.1103/PhysRevLett.83.4341">Sadigh et al. (1999)</a>.</p>
   <p><strong>Illustrative check:</strong> with <code>σ₀ = 20 nm</code>, <code>Rp = 80 nm</code>, <code>Q = 2 × 10¹³ cm⁻²</code>, <code>NB = 10¹⁶ cm⁻³</code>, and one 1050 °C, 20 s hold, the model gives <code>D ≈ 5.0343 × 10⁻¹⁴ cm²/s</code>, <code>σf ≈ 24.5229 nm</code>, and <code>x* ≈ 163.413 nm</code>. The independent reference test reproduces these values from the displayed equations. All profile inputs in this example are synthetic.</p>
 </section>
 
 <section class="callout caution">
-  <h2>What this model cannot decide</h2>
+  <h2 id="thermal-model-limits">What this model cannot decide</h2>
   <ul>
     <li>It assumes one diffusivity law and one material region throughout every hold. Do not combine holds that change the dopant, ambient, phase, or dominant mechanism under one parameter set.</li>
     <li>It omits implantation damage and transient-enhanced diffusion, point-defect injection during oxidation, concentration- and charge-state-dependent transport, clustering, activation, segregation, moving interfaces, and two-dimensional geometry.</li>
@@ -56,8 +57,19 @@
   <p>Use this estimate to ask which later thermal steps deserve attention. Use TCADBook for detailed diffusion/implant physics, WATBook for measurement conditions and uncertainty, and the relevant integration team data to test the actual device.</p>
 </section>
 
+<section>
+  <h2 id="implant-evidence-case">Implant damage, activation, and junction evidence</h2>
+  <p><strong>Synthetic integration comparison:</strong> two implant/anneal splits have the same modeled <code>Θ</code> and similar measured total-dopant depth profiles, yet their sheet resistance and reverse-biased diode leakage differ. The reflected diffusion calculator predicts a chemical-profile width under one selected law; it does not predict electrically active dopant, carrier mobility, residual damage, or junction leakage. Therefore, equal calculated <code>σf</code> cannot qualify the two splits as equivalent.</p>
+  <ol>
+    <li>Compare dose- and depth-calibrated chemical profiles, for example with SIMS, on matched wafers. A profile difference beyond measurement uncertainty challenges the shared diffusion law, implant initial state, or boundary assumption; implant-induced point defects can cause transient enhanced diffusion.</li>
+    <li>Measure sheet resistance with comparable geometry and use a carrier-sensitive measurement such as Hall where valid. Sheet resistance alone mixes active carrier density and mobility, so a shift does not uniquely identify activation. Keep contact/access resistance and measurement uncertainty separate.</li>
+    <li>Compare defect-sensitive structural evidence at the relevant depth and reverse-bias leakage on matched junction structures. Structural methods have detection limits; leakage can also move with edge geometry, surface/interface traps, and contamination. Use controls or a targeted split before attributing a change to residual implant damage.</li>
+  </ol>
+  <p><strong>Disposition:</strong> reconcile the differences among the chemical, electrical, and defect observables with each method's uncertainty and remaining alternative explanations; compare each split separately against predeclared device and reliability limits. An accepted split need not have identical observables to the other, and no fictional result here establishes acceptance. Fiory et al. report separate SIMS depth, sheet resistance/Hall activation, and diode-leakage observables for shallow implanted silicon junctions <a href="https://web.njit.edu/~sirenko/PapersNJIT/Ravi_JEM_2002.pdf">(2002 paper, pp. 999–1001)</a>; a silicon implant-damage model describes point-defect populations relevant to TED <a href="https://doi.org/10.1109/16.678523">(IEEE abstract)</a>. Their reported conditions and outcomes are not assigned to this fictional split.</p>
+</section>
+
 <section class="knowledge-check" data-quiz data-correct-message="Correct. Read the explanation and connect the answer back to the chapter&#x27;s stated assumptions." data-incorrect-message="Review the explanation, then reconsider which assumptions and interfaces matter.">
-  <h2>Knowledge check</h2>
+  <h2 id="thermal-knowledge-check">Knowledge check</h2>
   <div class="quiz-question">
     <p>Two holds use the same dopant and material model. The second hold is cooler but much longer. Which conclusion is justified?</p>
     <button type="button" data-correct="false">The cooler hold contributes no diffusion because it is below the peak temperature.</button>

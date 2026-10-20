@@ -13,8 +13,27 @@
 
   <section aria-labelledby="c13-source">
     <h3 id="c13-source">What the cited paper reports</h3>
-    <p><strong>Publicly reported:</strong> Figure 5 (pp. 247–248) of K. Mistry et al.'s 2007 IEDM paper labels the transistor integration as “high-k first, metal gate last.” Its flow places ALD Hf-based high-k dielectric and patterned dummy polysilicon before source/drain formation, Ni salicidation, and interlayer dielectric (ILD) deposition. It then shows ILD polish, dummy-poly removal, sequential PMOS and NMOS workfunction-metal deposition/patterning, Al trench fill/polish, and contact-etch-stop-layer deposition. The authors state that the flow was chosen to maintain metal-gate workfunction and identify a compatible thermal budget as an integration challenge. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007, Fig. 5</a>.</p>
+    <p><strong>Publicly reported:</strong> Figure 5 (pp. 247–248) of K. Mistry et al.'s 2007 IEDM paper labels the transistor integration as “high-k first, metal gate last.” Its flow places ALD Hf-based high-k dielectric and patterned dummy polysilicon before source/drain formation, Ni salicidation, and interlayer dielectric (ILD) deposition. It then shows ILD polish and dummy-poly removal, PMOS workfunction-metal deposition, pattern removal of that PMOS metal from NMOS regions, NMOS workfunction-metal deposition, Al gate-trench fill/polish, and contact-etch-stop-layer deposition. The authors state that the flow was chosen to maintain metal-gate workfunction and identify a compatible thermal budget as an integration challenge. <a href="https://doi.org/10.1109/IEDM.2007.4418914">Mistry et al., IEDM 2007, Fig. 5</a>.</p>
     <p>The abstract reports a 45 nm high-volume-manufacturing logic technology and demonstrations on SRAM arrays and multiple microprocessors. These are the authors' reported results in that historical platform context, not an independent replication or a claim that any one module caused a product metric. The paper is specific evidence for its disclosed sequence and stated motivation; it is not a generally reusable recipe.</p>
+    <figure class="process-sequence-figure" tabindex="0" aria-label="Scrollable sequence diagram of the cited 2007 transistor flow">
+      <svg viewBox="0 0 960 360" role="img" aria-labelledby="c13-flow-title c13-flow-desc">
+        <title id="c13-flow-title">Sequence shown in Mistry et al. 2007 Figure 5</title>
+        <desc id="c13-flow-desc">A schematic, source-bounded sequence: ALD Hf-based high-k dielectric and patterned dummy polysilicon; source and drain formation; Ni salicidation; interlayer dielectric deposition and polish; dummy polysilicon removal; PMOS workfunction metal deposition and its pattern removal from NMOS regions; NMOS workfunction metal deposition; aluminum gate trench fill and polish; contact etch stop layer deposition.</desc>
+        <defs><marker id="c13-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#334155"/></marker></defs>
+        <g fill="#eff6ff" stroke="#1d4ed8" stroke-width="2" font-family="sans-serif" font-size="16" text-anchor="middle">
+          <rect x="20" y="28" width="208" height="66" rx="9"/><text x="124" y="55" fill="#0f172a" stroke="none"><tspan x="124">ALD Hf-based high-k</tspan><tspan x="124" dy="22">+ patterned dummy poly</tspan></text>
+          <rect x="268" y="28" width="190" height="66" rx="9"/><text x="363" y="55" fill="#0f172a" stroke="none"><tspan x="363">Source / drain</tspan><tspan x="363" dy="22">then Ni salicide</tspan></text>
+          <rect x="498" y="28" width="190" height="66" rx="9"/><text x="593" y="55" fill="#0f172a" stroke="none"><tspan x="593">ILD deposition</tspan><tspan x="593" dy="22">and polish</tspan></text>
+          <rect x="728" y="28" width="208" height="66" rx="9"/><text x="832" y="55" fill="#0f172a" stroke="none"><tspan x="832">Dummy-poly</tspan><tspan x="832" dy="22">removal</tspan></text>
+          <rect x="728" y="184" width="208" height="76" rx="9"/><text x="832" y="211" fill="#0f172a" stroke="none" font-size="13"><tspan x="832">PMOS metal → remove</tspan><tspan x="832" dy="19">from NMOS regions →</tspan><tspan x="832" dy="19">NMOS metal deposition</tspan></text>
+          <rect x="498" y="184" width="190" height="76" rx="9"/><text x="593" y="211" fill="#0f172a" stroke="none"><tspan x="593">Al gate-trench</tspan><tspan x="593" dy="22">fill and polish</tspan></text>
+          <rect x="268" y="184" width="190" height="76" rx="9"/><text x="363" y="211" fill="#0f172a" stroke="none"><tspan x="363">Contact etch</tspan><tspan x="363" dy="22">stop layer (CESL)</tspan><tspan x="363" dy="20">deposition</tspan></text>
+          <text x="480" y="326" fill="#475569" stroke="none" font-size="14">Schematic order only; not a complete process recipe. Source: Fig. 5, pp. 247–248.</text>
+        </g>
+        <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#c13-arrow)"><path d="M228 61 H258"/><path d="M458 61 H488"/><path d="M688 61 H718"/><path d="M832 94 V174"/><path d="M728 222 H698"/><path d="M498 222 H468"/></g>
+      </svg>
+      <figcaption>Original schematic of the order depicted in Figure 5, not a reproduced source figure. It summarizes the cited transistor-integration sequence and does not assert a universal CMOS flow. On a small screen, scroll the diagram horizontally to read each step.</figcaption>
+    </figure>
   </section>
 
   <section aria-labelledby="c13-integration-questions">
@@ -30,15 +49,15 @@
   </section>
 
   <section aria-labelledby="c13-worked">
-    <h3 id="c13-worked">Worked integration decision: preserve workfunction through the flow</h3>
+    <h3 id="c13-worked">Worked analysis: preserve workfunction through the flow</h3>
     <p><strong>Decision constraint (reported):</strong> The team needed high-k scaling while preserving the selected metal workfunctions through the transistor process. Mistry et al. identify thermal-budget compatibility as a challenge and explicitly say the flow was chosen to maintain workfunction.</p>
     <ol>
-      <li><strong>Chosen sequence (reported):</strong> Form the Hf-based high-k dielectric early, use patterned polysilicon as a temporary gate, complete source/drain and Ni-salicide processing, and deposit ILD. After polishing and removing the dummy poly, add and pattern the p- and n-type workfunction metals, then fill and planarize the gate trenches. This is the sequence shown in Fig. 5, not a reconstructed generic flow.</li>
+      <li><strong>Chosen sequence (reported):</strong> Form the Hf-based high-k dielectric early, use patterned polysilicon as a temporary gate, complete source/drain and Ni-salicide processing, and deposit ILD. After polishing and removing the dummy poly, deposit PMOS workfunction metal, pattern-remove it from NMOS regions, then deposit NMOS workfunction metal. Fill and planarize the gate trenches and deposit the contact etch stop layer (CESL). This is the sequence shown in Fig. 5, not a reconstructed generic flow.</li>
       <li><strong>Benefit targeted (reported):</strong> Delaying final workfunction-metal insertion addresses the paper's stated workfunction-preservation constraint. The paper reports the integrated platform's device and manufacturing results; it does not provide a controlled gate-first comparison that isolates the benefit of this sequence.</li>
       <li><strong>Integration burden (engineering inference):</strong> The sequence shifts the compatibility question rather than removing it. The high-k dielectric must tolerate the earlier thermal and chemical history; the late gate module must support dummy removal, separate n/p workfunction materials, cavity fill, and planarization without unacceptable interface or device variation. The paper describes these modules but does not establish their margins for another platform.</li>
       <li><strong>Decision boundary:</strong> For the disclosed platform, the source-supported decision is high-k first / metal gate last under the authors' workfunction and thermal-budget rationale. For a different target, treat that architecture as a candidate only. Compare target-specific thermal-history splits and measure effective workfunction or threshold voltage, gate leakage, reliability, and replacement-gate integrity before transferring the choice. These are proposed evidence needs, not results from the cited case.</li>
     </ol>
-    <p>This is a worked decision because the reported constraint, chosen sequence, and remaining integration burden are connected explicitly. It does not conclude that gate-last is universally superior. Yeo's review provides broader metal-gate material and integration context, but it is not a substitute for the target platform's evidence. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
+    <p>This analysis connects the paper-reported constraint and sequence to remaining integration questions; it does not claim that the authors documented this review exercise or conclude that gate-last is universally superior. Yeo's review provides broader metal-gate material and integration context, but it is not a substitute for the target platform's evidence. <a href="https://doi.org/10.1016/j.tsf.2004.05.039">Yeo (2004)</a>.</p>
   </section>
 
   <section aria-labelledby="c13-evidence-limits">

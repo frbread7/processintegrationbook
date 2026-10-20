@@ -23,7 +23,7 @@ test("reference case matches independently calculated analytical values", functi
 
 test("high-concentration literature caution has a boundary and regression check", function () {
   const threshold = model.constants.concentrationEffectsCautionCm3;
-  const denominator = Math.sqrt(2 * Math.PI) * (100 / 1e7);
+  const denominator = Math.sqrt(2 * Math.PI) * (100 / 1e7) / 2;
   const doseAtThreshold = threshold * denominator;
   const atThreshold = model.calculate({
     sigma0Nm: 100, projectedRangeNm: 0, doseCm2: doseAtThreshold,
@@ -74,12 +74,57 @@ test("the thermal model accepts exactly 30 holds and rejects a 31st", function (
 
 test("profile sampling returns the modeled peak at projected range", function () {
   const result = model.calculate(referenceInput);
-  const concentration = model.concentrationAtNm(referenceInput.projectedRangeNm, referenceInput, result);
+  const concentration = model.concentrationAtNm(result.modeNm, referenceInput, result);
   assert.ok(Math.abs(concentration / result.peakCm3 - 1) < 1e-14);
+});
+
+test("reflected profile conserves dose and has zero surface flux", function () {
+  for (const projectedRangeNm of [0, 10, 80]) {
+    const input = { ...referenceInput, projectedRangeNm, holds: [] };
+    const result = model.calculate(input);
+    const upper = projectedRangeNm + 12 * result.sigmaFinalNm;
+    const steps = 20000;
+    const dx = upper / steps;
+    let integral = 0;
+    for (let i = 0; i <= steps; i += 1) {
+      const weight = i === 0 || i === steps ? 1 : (i % 2 ? 4 : 2);
+      integral += weight * model.concentrationAtNm(i * dx, input, result);
+    }
+    integral *= (dx / 1e7) / 3;
+    assert.ok(Math.abs(integral / input.doseCm2 - 1) < 1e-8, `dose ratio at Rp=${projectedRangeNm}: ${integral / input.doseCm2}`);
+    const h = 1e-6;
+    const surfaceSlope = (model.concentrationAtNm(h, input, result) - model.concentrationAtNm(0, input, result)) / h;
+    assert.ok(Math.abs(surfaceSlope) / result.peakCm3 < 2e-9);
+  }
+});
+
+test("profile mode moves to the surface for Rp at or below sigma", function () {
+  for (const projectedRangeNm of [0, 19.999, 20, 20.001]) {
+    const result = model.calculate({ ...referenceInput, projectedRangeNm, holds: [] });
+    if (projectedRangeNm <= 20) assert.equal(result.modeNm, 0);
+    else assert.ok(result.modeNm > 0 && result.modeNm < projectedRangeNm);
+  }
+});
+
+test("right crossing includes a deep threshold root beyond the former chart limit", function () {
+  const input = {
+    sigma0Nm: 100, projectedRangeNm: 500, doseCm2: 1e15, backgroundCm3: 1e14,
+    holds: Array.from({ length: 30 }, () => ({ tempC: 1100, timeS: 3600 }))
+  };
+  const result = model.calculate(input);
+  assert.ok(result.rightCrossingNm > 8000 && result.rightCrossingNm < 9000);
+  assert.ok(Math.abs(model.concentrationAtNm(result.rightCrossingNm, input, result) / input.backgroundCm3 - 1) < 1e-12);
 });
 
 test("non-crossing profiles report null instead of a complex or misleading depth", function () {
   const result = model.calculate({ ...referenceInput, doseCm2: 1e11, backgroundCm3: 1e19 });
+  assert.equal(result.rightCrossingNm, null);
+});
+
+test("a background exactly at the profile maximum is a tangent, not a right crossing", function () {
+  const input = { ...referenceInput, projectedRangeNm: 0, holds: [] };
+  const peak = model.calculate(input).peakCm3;
+  const result = model.calculate({ ...input, backgroundCm3: peak });
   assert.equal(result.rightCrossingNm, null);
 });
 

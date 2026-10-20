@@ -134,6 +134,13 @@ h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 520; lette
 .chapter-content { min-width: 0; }
 .chapter-content > h1 { font-size: clamp(2.2rem, 5vw, 3.7rem); margin: .25rem 0 1.4rem; }
 .chapter-content h2 { margin-top: 2.2rem; font-size: clamp(1.45rem, 3vw, 2rem); }
+.chapter-content figure { margin: 1.4rem 0; }
+.chapter-content figure svg { display: block; width: 100%; height: auto; }
+.chapter-content figure figcaption { margin-top: .55rem; color: var(--muted); font-size: .9rem; line-height: 1.45; }
+.chapter-content figure:is(.process-sequence-figure, .technical-figure), .chapter-content .table-scroll { max-width: 100%; overflow-x: auto; }
+.chapter-content .portfolio-table table { min-width: 1000px; }
+.chapter-content figure:is(.process-sequence-figure, .technical-figure) svg { min-width: 900px; }
+.chapter-content :is(figure.process-sequence-figure, figure.technical-figure, .table-scroll):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .chapter-content p, .chapter-content li { max-width: 77ch; }
 .chapter-content li + li { margin-top: .42rem; }
 .chapter-aside { position: sticky; top: 5.5rem; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--surface); }
@@ -184,6 +191,14 @@ h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 520; lette
 .dependency-map { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin: 1rem 0; }
 .dependency-node { text-align: center; padding: .65rem .35rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--surface-2); font-size: .84rem; }
 .dependency-node[data-active="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-ink); }
+.dependency-relations { margin-top: .8rem; }
+.relation-list { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.relation-list[hidden] { display: none; }
+.dependency-relation { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(8rem, .8fr) minmax(0, 1.4fr); gap: .5rem; align-items: center; padding: .7rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--surface); font-size: .88rem; }
+.relation-path { display: flex; gap: .4rem; align-items: center; font-weight: 700; }
+.relation-arrow { color: var(--accent-ink); }
+.relation-type { font-weight: 650; }
+.relation-evidence { color: var(--muted); }
 .decision-output { padding: .85rem; border-radius: .65rem; background: var(--surface-2); min-height: 4rem; }
 .choice-list { display: grid; gap: .55rem; margin: 1rem 0; }
 .choice-list button { text-align: left; padding: .7rem .85rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--surface); color: var(--ink); cursor: pointer; }
@@ -221,6 +236,8 @@ h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 520; lette
   .lab-grid { grid-template-columns: 1fr; }
   .lab-card.wide { grid-column: auto; }
   .dependency-map { grid-template-columns: repeat(2, 1fr); }
+  .dependency-relation { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .relation-evidence { grid-column: 1 / -1; }
 }
 @media (max-width: 480px) {
   .container { width: min(100% - 1.1rem, 1120px); }
