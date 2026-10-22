@@ -1,6 +1,6 @@
-# ProcessIntegrationBook local reconstruction candidate
+# ProcessIntegrationBook Stage B reconstruction record
 
-This is the Stage B disposition for the 13 English/Korean chapter pairs and three laboratory activities audited in [SCIENTIFIC_RECONSTRUCTION_AUDIT_2026-10-19.md](SCIENTIFIC_RECONSTRUCTION_AUDIT_2026-10-19.md). It describes a **local candidate**, not a published revision, a process qualification, or a claim of human translation certification. The existing released version and catalog metadata remain unchanged. A proposed next version is 1.1.0, subject to publication approval.
+This is the prepublication Stage B disposition at candidate revision `c318f7067364850d050ecf17552825447f49aea0` for the 13 English/Korean chapter pairs and three laboratory activities audited in [SCIENTIFIC_RECONSTRUCTION_AUDIT_2026-10-19.md](SCIENTIFIC_RECONSTRUCTION_AUDIT_2026-10-19.md). Publication status and production evidence are recorded separately by the versioned GitHub release and My Library catalog. This record does not claim process qualification or human translation certification.
 
 ## Chapter dispositions
 
@@ -31,4 +31,4 @@ The paired source files are `content/{en,ko}/chapters/<chapter>.html`. Each row 
 
 ## Candidate verification boundary
 
-Final build, model, Python, browser/mobile/accessibility, bilingual, rights, and independent review outcomes must be recorded against the committed candidate HEAD. Pre-commit targeted checks and earlier frozen-source reviews are supporting evidence only. No silicon/fab benchmark, physical device, non-Chromium browser, or hosted CI validation is claimed.
+The committed Stage B candidate passed its recorded build, model, Python, browser/mobile/accessibility, bilingual, rights, and independent reviews. The release source revision requires its own final validation and deployment evidence. No silicon/fab benchmark, physical device, or non-Chromium browser validation is claimed.

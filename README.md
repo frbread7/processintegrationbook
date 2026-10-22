@@ -7,7 +7,7 @@ ProcessIntegrationBook focuses on the decisions that connect process modules. It
 
 ## Read the book
 
-- Released textbook v1.0.0: <https://frbread7.github.io/processintegrationbook/>
+- Released textbook v1.1.0: <https://frbread7.github.io/processintegrationbook/>
 - Korean edition: <https://frbread7.github.io/processintegrationbook/ko/>
 - Interactive laboratory: <https://frbread7.github.io/processintegrationbook/lab.html>
 - Scope and overlap audit: [docs/OVERLAP_AUDIT.md](docs/OVERLAP_AUDIT.md)
@@ -33,6 +33,8 @@ Then open <http://localhost:8000/>. Check both languages, chapter links, theme t
 ## Technical evidence
 
 The thermal-history laboratory is a one-dimensional dilute, constant-diffusivity educational model. Its equations, assumptions, input limits, analytical reference case, independently evaluated Python results, and explicit non-validation statements are documented in [docs/MODELS_AND_VALIDATION.md](docs/MODELS_AND_VALIDATION.md). It is analytically checked and model-limited; it is not calibrated against a foundry flow or validated against real silicon.
+
+Version 1.1.0 adds paired worked decisions and source-bounded examples across all 13 chapters. The laboratory now uses a dose-conserving reflected half-line profile and reports its actual mode and descending right-side background crossing. The Stage B [reconstruction record](docs/RECONSTRUCTION_CANDIDATE.md) and [claim register](docs/RECONSTRUCTION_CLAIM_REGISTER.md) describe the evidence and remaining limits.
 
 The dependency explorer and case challenge are qualitative learning activities. Neither calculates a recipe, risk probability, process capability, or root cause.
 
