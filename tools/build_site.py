@@ -405,6 +405,15 @@ REFERENCES = [
     ("Mostafa and Medraj (2017)", "Review reproducing the intrinsic boron diffusivity equation and units; cites Scotten (2000), whose source page was not independently checked", "https://doi.org/10.3390/ma10060676", "DOI / full text", "DOI / 원문"),
     ("Sze, ed. (1983)", "VLSI Technology; historical source cited by Esser et al., without an independently verified page locator", "https://openlibrary.org/books/OL3504531M/VLSI_technology", "Catalog record", "도서관 서지 기록"),
     ("Sze and Ng (2007)", "General semiconductor-device reference; not used as the source for the selected Arrhenius pair", "https://doi.org/10.1002/0470068329", "Publisher record", "출판사 서지 기록"),
+    ("Ivrii, Partial Differential Equations", "Neumann half-line heat-equation image construction; mathematical boundary model, not a physical implant-surface claim", "https://www.math.toronto.edu/ivrii/PDE-textbook/Chapter3/S3.1.V.html", "University of Toronto text", "토론토 대학교 교재"),
+    ("NIST CODATA (2018)", "Energy-equivalent Boltzmann constant used in the thermal model", "https://physics.nist.gov/cuu/pdf/all_2018.pdf", "NIST constants table", "NIST 상수 표"),
+    ("Li et al.", "Nanowire contact/path extraction and Kelvin method context; not validation of the synthetic planar-sheet example", "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=32634", "NIST-hosted paper", "NIST 공개 논문"),
+    ("Reeves and Harrison (1982)", "TLM contact-end and under-contact sheet-resistance caveat; metadata and abstract inspected", "https://doi.org/10.1109/EDL.1982.25502", "DOI / abstract", "DOI / 초록"),
+    ("Aharoni (1976)", "Silicon epitaxial stacking-fault origin alternatives; abstract inspected", "https://doi.org/10.1016/S0042-207X(76)80006-1", "DOI / abstract", "DOI / 초록"),
+    ("Minowa et al. (2000)", "Optical-defect and TEM observations in reported silicon wafers; abstract inspected", "https://doi.org/10.1016/S0022-0248(99)00638-7", "DOI / abstract", "DOI / 초록"),
+    ("IUCr Online Dictionary of Crystallography", "Stacking-fault definition as a planar defect", "https://dictionary.iucr.org/Stacking_fault", "Dictionary entry", "용어 사전"),
+    ("Fiory et al. (2002)", "Study distinguishing chemical profile, electrical activation, and leakage evidence; not calibration of this lab", "https://doi.org/10.1007/s11664-002-0034-6", "DOI / publisher", "DOI / 출판사"),
+    ("Tian et al. (1998)", "Implant-damage and transient-enhanced-diffusion model context; abstract inspected", "https://doi.org/10.1109/16.678523", "DOI / abstract", "DOI / 초록"),
 ]
 
 
